@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "913823549930",
+    "firebase_url": "https://polinema-pay.firebaseio.com",
+    "project_id": "polinema-pay",
+    "storage_bucket": "polinema-pay.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:913823549930:android:62c4d6f9cd316d01e84a93",
+        "android_client_info": {
+          "package_name": "com.example.polinemapay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "913823549930-efmjbe0r4kj3sbh8m3a3q43t3b5fagtk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.polinemapay",
+            "certificate_hash": "0bd7a1d6ac2792b42a0962966c974dd8d1d2b5b4"
+          }
+        },
+        {
+          "client_id": "913823549930-6225imttsjsjc3sqibvoii4vedtguac9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCszet4zfzMXB0lqr9GLXG7L6xXydaquZQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "913823549930-6225imttsjsjc3sqibvoii4vedtguac9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

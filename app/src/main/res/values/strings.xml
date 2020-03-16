@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Polinema Pay</string>
+    <string name="email">Email</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_name">Nama Lengkap</string>
+    <string name="btn_login">MASUK</string>
+    <string name="btn_link_to_register">Belum punya akun? Daftar disini!</string>
+    <string name="btn_link_to_login">Sudah punya akun? Masuk disini!</string>
+    <string name="btn_back"><![CDATA[<< Back]]></string>
+    <string name="hint_new_email">New Email</string>
+    <string name="btn_change">UBAH</string>
+    <string name="btn_send">KIRIM</string>
+    <string name="btn_remove">HAPUS</string>
+    <string name="btn_sign_out">Keluar</string>
+
+    <string name="hint_nohp">No. Handphone</string>
+    <string name="hint_IMEI">IMEI</string>
+    <string name="btn_register">DAFTAR</string>
+    <string name="welcome">Welcome</string>
+    <string name="btn_logout">KELUAR</string>
+    <string name="name">Nama Lengkap</string>
+
+    <string name="result_text_default">Fokuskan kamera pada QR Code</string>
+    <string name="navigation_view_item_1">Beranda</string>
+    <string name="navigation_view_item_2">History</string>
+    <string name="navigation_view_item_3">Profil</string>
+    <string name="navigation_view_item_4">Keluar</string>
+    <string name="openDrawer">Drawer dibuka</string>
+    <string name="closeDrawer">Drawer ditutup</string>
+
+    <string name="kec_prompt">Pilih Kecamatan</string>
+
+    <string-array name="dropdown_kec">
+        <item>Pilih Kecamatan</item>
+        <item>Blimbing</item>
+        <item>Kedungkandang</item>
+        <item>Klojen</item>
+        <item>Lowokwaru</item>
+        <item>Sukun</item>
+    </string-array>
+
+</resources>
