@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 	private CardView jemput, tukarSampah, tukarPoinUser, generate, tukarPoinMerchant, pesanan, tugas;
 
 	private TextView txtName, ttlPoin, ttlBeratSampah, ttlSampahKertas, ttlSampahPlastik;
-
+	public String idUser;
 	private SQLiteHandler db;
 	private SessionManager session;
 
@@ -93,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
 		txtName.setText("Hai! "+ name);
 
 		checkUserId(nohp, name);
+
+		Toast.makeText(getApplicationContext(), idUser, Toast.LENGTH_LONG).show();
 
 		if(level.equals("User")){
 			jemput.setVisibility(View.VISIBLE);
@@ -145,10 +147,12 @@ public class MainActivity extends AppCompatActivity {
 						return true;
 					case R.id.navigation2:
 						Intent intent1 = new Intent(MainActivity.this, HistoryActivity.class);
+						intent1.putExtra("idUser", idUser);
 						startActivity(intent1);
 						return true;
 					case R.id.navigation3:
 						Intent intent2 = new Intent(MainActivity.this, ProfilActivity.class);
+						intent2.putExtra("idUser", idUser);
 						startActivity(intent2);
 						return true;
 					case R.id.navigation4:
@@ -280,10 +284,10 @@ public class MainActivity extends AppCompatActivity {
 					// Check for error node in json
 					if (!error) {
 						JSONObject user = jObj.getJSONObject("user");
-						String id = user.getString("id");
-						Log.e(TAG, "Get Id : " + id);
+						idUser = user.getString("id");
+						Log.e(TAG, "Get Id : " + idUser);
 
-						checkPoints(id, nohp);
+						checkPoints(idUser, nohp);
 
 					} else {
 						// Error in login. Get the error message
@@ -352,21 +356,25 @@ public class MainActivity extends AppCompatActivity {
 
 	public void scanUser(View view) {
 		Intent intent = new Intent(MainActivity.this, ScannActivity.class);
+		intent.putExtra("idUser", idUser);
 		startActivity(intent);
 	}
 
 	public void tukarPoinUser(View view) {
 		Intent intent = new Intent(MainActivity.this, tukarpoin.class);
+		intent.putExtra("idUser", idUser);
 		startActivity(intent);
 	}
 
 	public void generateQrCode(View view) {
 		Intent intent = new Intent(MainActivity.this, Generateqr.class);
+		intent.putExtra("idUser", idUser);
 		startActivity(intent);
 	}
 
 	public void jemputSampahUser(View view) {
 		Intent intent = new Intent(MainActivity.this, JemputActivity.class);
+		intent.putExtra("idUser", idUser);
 		startActivity(intent);
 	}
 

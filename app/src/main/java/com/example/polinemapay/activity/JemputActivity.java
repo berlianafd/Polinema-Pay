@@ -15,6 +15,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,7 +28,18 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.polinemapay.R;
+import com.example.polinemapay.app.AppConfig;
+import com.example.polinemapay.app.AppController;
+import com.example.polinemapay.helper.SQLiteHandler;
+import com.example.polinemapay.helper.SessionManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -38,36 +51,29 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class JemputActivity extends AppCompatActivity {
+    private static final String TAG = JemputActivity.class.getSimpleName();
 
     private Spinner spinnerkec, spinnerkel;
     Calendar myCalendar;
     DatePickerDialog.OnDateSetListener date;
-    EditText txt_tgl, txt_jam;
+    EditText txt_tgl, txt_jam, namaAcara, notelp, alamat, perkiraanBeratSampah;
 
-    Button GetImageFromGalleryButton;
+    Button GetImageFromGalleryButton, buttonPesan;
     ImageView ShowSelectedImage;
-    EditText imageName;
     Bitmap FixBitmap;
-    String ImageTag = "image_tag" ;
-    String ImageName = "image_data" ;
-    ProgressDialog progressDialog ;
     ByteArrayOutputStream byteArrayOutputStream ;
-    byte[] byteArray ;
-    String ConvertImage ;
-    String GetImageNameFromEditText;
-    HttpURLConnection httpURLConnection ;
-    URL url;
-    OutputStream outputStream;
-    BufferedWriter bufferedWriter ;
-    int RC ;
-    BufferedReader bufferedReader ;
-    StringBuilder stringBuilder;
-    boolean check = true;
     private int GALLERY = 1, CAMERA = 2;
+
+    private ProgressDialog pDialog;
+
+    byte[] byteArray ;
+    String ConvertImage, idUser ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +81,19 @@ public class JemputActivity extends AppCompatActivity {
         setContentView(R.layout.activity_jemput);
 
         spinnerkec = (Spinner) findViewById(R.id.spinnerkec);
+        namaAcara = (EditText) findViewById(R.id.namaAcara);
+        notelp = (EditText) findViewById(R.id.editTextnotelp);
+        alamat = (EditText) findViewById(R.id.editTextalamat);
         txt_tgl = (EditText) findViewById(R.id.txt_tgl);
         txt_jam = (EditText) findViewById(R.id.txt_jam);
+        perkiraanBeratSampah = (EditText) findViewById(R.id.editTextPekiraanBerat);
         GetImageFromGalleryButton = (Button)findViewById(R.id.buttonSelect);
+        buttonPesan = (Button)findViewById(R.id.btnPesan);
         ShowSelectedImage = (ImageView)findViewById(R.id.imageView);
+
+        // Progress dialog
+        pDialog = new ProgressDialog(this);
+        pDialog.setCancelable(false);
 
         byteArrayOutputStream = new ByteArrayOutputStream();
 
@@ -154,6 +169,41 @@ public class JemputActivity extends AppCompatActivity {
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
 
+            }
+        });
+
+        buttonPesan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FixBitmap.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream);
+                byteArray = byteArrayOutputStream.toByteArray();
+                ConvertImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+                String namaAcaraa = namaAcara.getText().toString().trim();
+                String notelpp = notelp.getText().toString().trim();
+                String alamatt = alamat.getText().toString().trim();
+                String tanggall = txt_tgl.getText().toString().trim();
+                String waktuu = txt_jam.getText().toString().trim();
+                String perkiraanBS = perkiraanBeratSampah.getText().toString().trim();
+                String Kec = String.valueOf(spinnerkec.getSelectedItem());
+                String Kel = String.valueOf(spinnerkel.getSelectedItem());
+
+                Intent iin= getIntent();
+                Bundle b = iin.getExtras();
+
+                if(b!=null)
+                {
+                    idUser =(String) b.get("idUser");
+                }
+
+                if (!namaAcaraa.isEmpty() && !notelpp.isEmpty() && !alamatt.isEmpty() && !Kec.isEmpty()
+                        && !Kel.isEmpty()&& !tanggall.isEmpty()&& !waktuu.isEmpty()&& !perkiraanBS.isEmpty()&& !ConvertImage.isEmpty()) {
+                   jemputSampahUser(idUser, namaAcaraa, notelpp, alamatt, Kec, Kel, tanggall, waktuu, perkiraanBS, ConvertImage);
+                } else {
+                    Toast.makeText(getApplicationContext(),
+                            "Tidak boleh ada yang kosong", Toast.LENGTH_LONG)
+                            .show();
+                }
             }
         });
 
@@ -237,7 +287,7 @@ public class JemputActivity extends AppCompatActivity {
     }
 
     private void updateLabel() {
-        String myFormat = "dd-MM-yyyy";
+        String myFormat = "yyyy-MM-dd";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         txt_tgl.setText(sdf.format(myCalendar.getTime()));
     }
@@ -398,5 +448,104 @@ public class JemputActivity extends AppCompatActivity {
 
             }
         }
+    }
+
+    /**
+     * Function to store user in MySQL database will post params(tag, name,
+     * nohp, imei) to register url
+     * */
+    private void jemputSampahUser(final String idUser, final String namaAcara, final String nohp,
+                              final String alamat, final String kecamatan, final String kelurahan,
+                                  final String tanggal, final String waktu, final String perkiraanBerat,
+                                  final String convertImage  ) {
+        Toast.makeText(getApplicationContext(), idUser, Toast.LENGTH_LONG).show();
+
+        // Tag used to cancel the request
+        String tag_string_req = "req_register";
+
+        pDialog.setMessage("Sedang Proses ...");
+        showDialog();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_JEMPUTSAMPAHUSER, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Proses Response: " + response.toString());
+                hideDialog();
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    if (!error) {
+                        // User successfully stored in MySQL
+                        // Now store the user in sqlite
+                        JSONObject user = jObj.getJSONObject("user");
+                        String id = user.getString("id");
+
+                        Toast.makeText(getApplicationContext(), "Permintaan jemput sampah Anda sedang diproses!" + id, Toast.LENGTH_LONG).show();
+
+                        // Launch login activity
+                        Intent intent = new Intent(
+                                JemputActivity.this,
+                                MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+
+                        // Error occurred in registration. Get the error
+                        // message
+                        String errorMsg = jObj.getString("error_msg");
+                        Toast.makeText(getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Proses Gagal: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+                hideDialog();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting params to register url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idUser", idUser);
+                params.put("namaAcara", namaAcara);
+                params.put("nohp", nohp);
+                params.put("alamat", alamat);
+                params.put("kecamatan", kecamatan);
+                params.put("kelurahan", kelurahan);
+                params.put("tanggal", tanggal);
+                params.put("waktu", waktu);
+                params.put("perkiraanBeratSampah", perkiraanBerat);
+                params.put("namaImage", convertImage);
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    private void showDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hideDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
     }
 }
