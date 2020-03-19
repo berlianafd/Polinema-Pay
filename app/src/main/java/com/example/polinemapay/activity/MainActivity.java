@@ -41,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
 	private Toolbar toolbar;
 	private NavigationView navigationView;
 	private DrawerLayout drawerLayout;
-	private CardView jemput, tukarSampah, tukarPoinUser, generate, tukarPoinMerchant, pesanan, tugas;
+	private CardView jemput, tukarSampah, tukarPoinUser, generate, tukarPoinMerchant, pesanan, tugas, kertas, plastik;
 
-	private TextView txtName, ttlPoin, ttlBeratSampah, ttlSampahKertas, ttlSampahPlastik;
+	private TextView txtName, ttlPoin, ttlBeratSampah, ttlSampahKertas, ttlSampahPlastik, label, labelttl, labelkg;
 	public String idUser;
 	private SQLiteHandler db;
 	private SessionManager session;
@@ -62,6 +62,10 @@ public class MainActivity extends AppCompatActivity {
 		ttlBeratSampah = (TextView) findViewById(R.id.totalBeratSampah);
 		ttlSampahKertas = (TextView) findViewById(R.id.totalBeratKertas);
 		ttlSampahPlastik = (TextView) findViewById(R.id.totalBeratPlastik);
+		label = (TextView) findViewById(R.id.labelSampah);
+		labelttl = (TextView) findViewById(R.id.labelTotalSampah);
+		labelkg = (TextView) findViewById(R.id.labelKilogram);
+
 
 		jemput = (CardView) findViewById(R.id.jemputButton);
 		tukarSampah = (CardView) findViewById(R.id.tukarSampahButton);
@@ -70,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
 		tukarPoinMerchant = (CardView) findViewById(R.id.tukarPoinMerchantButton);
 		pesanan = (CardView) findViewById(R.id.pesananButton);
 		tugas = (CardView) findViewById(R.id.tugasButton);
+		kertas = (CardView) findViewById(R.id.cardViewKertas);
+		plastik = (CardView) findViewById(R.id.cardViewPlastik);
 
 		// SqLite database handler
 		db = new SQLiteHandler(getApplicationContext());
@@ -120,6 +126,11 @@ public class MainActivity extends AppCompatActivity {
 			tukarPoinMerchant.setVisibility(View.VISIBLE);
 			pesanan.setVisibility(View.GONE);
 			tugas.setVisibility(View.GONE);
+			label.setText("Statistik Penghasilanmu!");
+			labelttl.setText("Total Poin hari ini:");
+			labelkg.setText("Poin");
+			kertas.setVisibility(View.GONE);
+			plastik.setVisibility(View.GONE);
 		}
 
 		// Menginisiasi Toolbar dan mensetting sebagai actionbar
@@ -361,13 +372,13 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void tukarPoinUser(View view) {
-		Intent intent = new Intent(MainActivity.this, tukarpoin.class);
+		Intent intent = new Intent(MainActivity.this, TukarpoinActivity.class);
 		intent.putExtra("idUser", idUser);
 		startActivity(intent);
 	}
 
 	public void generateQrCode(View view) {
-		Intent intent = new Intent(MainActivity.this, Generateqr.class);
+		Intent intent = new Intent(MainActivity.this, GenerateqrActivity.class);
 		intent.putExtra("idUser", idUser);
 		startActivity(intent);
 	}

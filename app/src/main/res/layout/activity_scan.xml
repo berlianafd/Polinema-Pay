@@ -10,5 +10,13 @@
         android:layout_height="match_parent"
         android:id="@+id/zxscan"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_result"
+        android:text="......."
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:gravity="center"/>
 
 </RelativeLayout>
