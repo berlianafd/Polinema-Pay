@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -45,9 +46,13 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -56,13 +61,18 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.net.ssl.HttpsURLConnection;
+
 public class JemputActivity extends AppCompatActivity {
     private static final String TAG = JemputActivity.class.getSimpleName();
+    String GetImageNameFromEditText;
+    String ImageTag = "image_tag";
+    String ImageName = "image_data";
 
     private Spinner spinnerkec, spinnerkel;
     Calendar myCalendar;
     DatePickerDialog.OnDateSetListener date;
-    EditText txt_tgl, txt_jam, namaAcara, notelp, alamat, perkiraanBeratSampah;
+    EditText txt_tgl, txt_jam, namaAcara, notelp, alamat, perkiraanBeratSampah, imageName;
 
     Button GetImageFromGalleryButton, buttonPesan;
     ImageView ShowSelectedImage;
@@ -70,9 +80,26 @@ public class JemputActivity extends AppCompatActivity {
     ByteArrayOutputStream byteArrayOutputStream ;
     private int GALLERY = 1, CAMERA = 2;
 
-    private ProgressDialog pDialog;
-
+    ProgressDialog progressDialog;
     byte[] byteArray ;
+
+    HttpURLConnection httpURLConnection ;
+    URL url;
+    OutputStream outputStream;
+    BufferedWriter bufferedWriter ;
+    int RC ;
+    BufferedReader bufferedReader ;
+    StringBuilder stringBuilder;
+    boolean check = true;
+
+    private String namaAcaraa;
+    private String notelpp;
+    private String alamatt;
+    private String tanggall;
+    private String waktuu;
+    private String perkiraanBS;
+    private String Kec;
+    private String Kel;
     String ConvertImage, idUser ;
 
     @Override
@@ -87,23 +114,19 @@ public class JemputActivity extends AppCompatActivity {
         txt_tgl = (EditText) findViewById(R.id.txt_tgl);
         txt_jam = (EditText) findViewById(R.id.txt_jam);
         perkiraanBeratSampah = (EditText) findViewById(R.id.editTextPekiraanBerat);
+
+        imageName = (EditText) findViewById(R.id.imageName);
         GetImageFromGalleryButton = (Button)findViewById(R.id.buttonSelect);
         buttonPesan = (Button)findViewById(R.id.btnPesan);
         ShowSelectedImage = (ImageView)findViewById(R.id.imageView);
 
-        // Progress dialog
-        pDialog = new ProgressDialog(this);
-        pDialog.setCancelable(false);
 
         byteArrayOutputStream = new ByteArrayOutputStream();
 
         GetImageFromGalleryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 showPictureDialog();
-
-
             }
         });
 
@@ -175,18 +198,14 @@ public class JemputActivity extends AppCompatActivity {
         buttonPesan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FixBitmap.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream);
-                byteArray = byteArrayOutputStream.toByteArray();
-                ConvertImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
-
-                String namaAcaraa = namaAcara.getText().toString().trim();
-                String notelpp = notelp.getText().toString().trim();
-                String alamatt = alamat.getText().toString().trim();
-                String tanggall = txt_tgl.getText().toString().trim();
-                String waktuu = txt_jam.getText().toString().trim();
-                String perkiraanBS = perkiraanBeratSampah.getText().toString().trim();
-                String Kec = String.valueOf(spinnerkec.getSelectedItem());
-                String Kel = String.valueOf(spinnerkel.getSelectedItem());
+                namaAcaraa = namaAcara.getText().toString().trim();
+                notelpp = notelp.getText().toString().trim();
+                alamatt = alamat.getText().toString().trim();
+                tanggall = txt_tgl.getText().toString().trim();
+                waktuu = txt_jam.getText().toString().trim();
+                perkiraanBS = perkiraanBeratSampah.getText().toString().trim();
+                Kec = String.valueOf(spinnerkec.getSelectedItem());
+                Kel = String.valueOf(spinnerkel.getSelectedItem());
 
                 Intent iin= getIntent();
                 Bundle b = iin.getExtras();
@@ -196,9 +215,22 @@ public class JemputActivity extends AppCompatActivity {
                     idUser =(String) b.get("idUser");
                 }
 
+                imageName.setText(idUser + "_" + tanggall + "_" + namaAcaraa);
+                GetImageNameFromEditText = imageName.getText().toString();
+
                 if (!namaAcaraa.isEmpty() && !notelpp.isEmpty() && !alamatt.isEmpty() && !Kec.isEmpty()
-                        && !Kel.isEmpty()&& !tanggall.isEmpty()&& !waktuu.isEmpty()&& !perkiraanBS.isEmpty()&& !ConvertImage.isEmpty()) {
-                   jemputSampahUser(idUser, namaAcaraa, notelpp, alamatt, Kec, Kel, tanggall, waktuu, perkiraanBS, ConvertImage);
+                        && !Kel.isEmpty()&& !tanggall.isEmpty()&& !waktuu.isEmpty()&& !perkiraanBS.isEmpty()) {
+                    if(Integer.parseInt(perkiraanBS)<5){
+                        Toast.makeText(getApplicationContext(),
+                                "Perkiraan Berat Sampah minimal 5kg!", Toast.LENGTH_LONG)
+                                .show();
+                    }else {
+                        uploadToServer();
+
+                        Intent intent = new Intent(JemputActivity.this, MainActivity.class);
+                        startActivity(intent);
+
+                    }
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Tidak boleh ada yang kosong", Toast.LENGTH_LONG)
@@ -206,18 +238,97 @@ public class JemputActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
-//        btn_get_datetime.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(JemputActivity.this,
-//                        "Tanggal : " + txt_tgl.getText().toString() + "\n" +
-//                                "Jam : " + txt_jam.getText().toString()
-//                        , Toast.LENGTH_SHORT
-//                ).show();
-//            }
-//        });
+    private void uploadToServer() {
+        FixBitmap.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream);
+        byteArray = byteArrayOutputStream.toByteArray();
+        ConvertImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+        class AsyncTaskUploadClass extends AsyncTask<Void,Void,String> {
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = ProgressDialog.show(JemputActivity.this,"Sedang Memproses...","Please Wait",false,false);
+            }
+
+            @Override
+            protected void onPostExecute(String string1) {
+                super.onPostExecute(string1);
+                progressDialog.dismiss();
+                Toast.makeText(JemputActivity.this,string1,Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                ImageProcessClass imageProcessClass = new ImageProcessClass();
+                HashMap<String,String> HashMapParams = new HashMap<String,String>();
+                HashMapParams.put("idUser", idUser);
+                HashMapParams.put("namaAcara", namaAcaraa);
+                HashMapParams.put("nohp", notelpp);
+                HashMapParams.put("alamat", alamatt);
+                HashMapParams.put("kecamatan", Kec);
+                HashMapParams.put("kelurahan", Kel);
+                HashMapParams.put("tanggal", tanggall);
+                HashMapParams.put("waktu", waktuu);
+                HashMapParams.put("perkiraanBeratSampah", perkiraanBS);
+                HashMapParams.put(ImageTag, GetImageNameFromEditText);
+                HashMapParams.put(ImageName, ConvertImage);
+                String FinalData = imageProcessClass.ImageHttpRequest("http://192.168.43.10:8080/simple_api/jemputSampahUser.php", HashMapParams);
+                return FinalData;
+            }
+        }
+        AsyncTaskUploadClass AsyncTaskUploadClassOBJ = new AsyncTaskUploadClass();
+        AsyncTaskUploadClassOBJ.execute();
+    }
+
+    public class ImageProcessClass{
+        public String ImageHttpRequest(String requestURL,HashMap<String, String>PData) {
+            StringBuilder stringBuilder = new StringBuilder();
+            try {
+                url = new URL(requestURL);
+                httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setReadTimeout(20000);
+                httpURLConnection.setConnectTimeout(20000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.setDoOutput(true);
+                outputStream = httpURLConnection.getOutputStream();
+                bufferedWriter = new BufferedWriter(
+                        new OutputStreamWriter(outputStream, "UTF-8"));
+                bufferedWriter.write(bufferedWriterDataFN(PData));
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                RC = httpURLConnection.getResponseCode();
+                if (RC == HttpsURLConnection.HTTP_OK) {
+                    bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+                    stringBuilder = new StringBuilder();
+                    String RC2;
+                    while ((RC2 = bufferedReader.readLine()) != null){
+                        stringBuilder.append(RC2);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return stringBuilder.toString();
+        }
+
+        private String bufferedWriterDataFN(HashMap<String, String> HashMapParams) throws UnsupportedEncodingException {
+            stringBuilder = new StringBuilder();
+            for (Map.Entry<String, String> KEY : HashMapParams.entrySet()) {
+                if (check)
+                    check = false;
+                else
+                    stringBuilder.append("&");
+                stringBuilder.append(URLEncoder.encode(KEY.getKey(), "UTF-8"));
+                stringBuilder.append("=");
+                stringBuilder.append(URLEncoder.encode(KEY.getValue(), "UTF-8"));
+            }
+            return stringBuilder.toString();
+        }
     }
 
     private void showPictureDialog(){
@@ -266,11 +377,7 @@ public class JemputActivity extends AppCompatActivity {
                 Uri contentURI = data.getData();
                 try {
                     FixBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
-                    // String path = saveImage(bitmap);
-                    //Toast.makeText(MainActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
                     ShowSelectedImage.setImageBitmap(FixBitmap);
-//                    UploadImageOnServerButton.setVisibility(View.VISIBLE);
-
                 } catch (IOException e) {
                     e.printStackTrace();
                     Toast.makeText(JemputActivity.this, "Failed!", Toast.LENGTH_SHORT).show();
@@ -280,9 +387,6 @@ public class JemputActivity extends AppCompatActivity {
         } else if (requestCode == CAMERA) {
             FixBitmap = (Bitmap) data.getExtras().get("data");
             ShowSelectedImage.setImageBitmap(FixBitmap);
-//            UploadImageOnServerButton.setVisibility(View.VISIBLE);
-            //  saveImage(thumbnail);
-            //Toast.makeText(ShadiRegistrationPart5.this, "Image Saved!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -448,104 +552,5 @@ public class JemputActivity extends AppCompatActivity {
 
             }
         }
-    }
-
-    /**
-     * Function to store user in MySQL database will post params(tag, name,
-     * nohp, imei) to register url
-     * */
-    private void jemputSampahUser(final String idUser, final String namaAcara, final String nohp,
-                              final String alamat, final String kecamatan, final String kelurahan,
-                                  final String tanggal, final String waktu, final String perkiraanBerat,
-                                  final String convertImage  ) {
-        Toast.makeText(getApplicationContext(), idUser, Toast.LENGTH_LONG).show();
-
-        // Tag used to cancel the request
-        String tag_string_req = "req_register";
-
-        pDialog.setMessage("Sedang Proses ...");
-        showDialog();
-
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_JEMPUTSAMPAHUSER, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "Proses Response: " + response.toString());
-                hideDialog();
-
-                try {
-                    JSONObject jObj = new JSONObject(response);
-                    boolean error = jObj.getBoolean("error");
-                    if (!error) {
-                        // User successfully stored in MySQL
-                        // Now store the user in sqlite
-                        JSONObject user = jObj.getJSONObject("user");
-                        String id = user.getString("id");
-
-                        Toast.makeText(getApplicationContext(), "Permintaan jemput sampah Anda sedang diproses!" + id, Toast.LENGTH_LONG).show();
-
-                        // Launch login activity
-                        Intent intent = new Intent(
-                                JemputActivity.this,
-                                MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-
-                        // Error occurred in registration. Get the error
-                        // message
-                        String errorMsg = jObj.getString("error_msg");
-                        Toast.makeText(getApplicationContext(),
-                                errorMsg, Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Proses Gagal: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
-                hideDialog();
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-                // Posting params to register url
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("idUser", idUser);
-                params.put("namaAcara", namaAcara);
-                params.put("nohp", nohp);
-                params.put("alamat", alamat);
-                params.put("kecamatan", kecamatan);
-                params.put("kelurahan", kelurahan);
-                params.put("tanggal", tanggal);
-                params.put("waktu", waktu);
-                params.put("perkiraanBeratSampah", perkiraanBerat);
-                params.put("namaImage", convertImage);
-
-                return params;
-            }
-
-        };
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
-    }
-
-    private void showDialog() {
-        if (!pDialog.isShowing())
-            pDialog.show();
-    }
-
-    private void hideDialog() {
-        if (pDialog.isShowing())
-            pDialog.dismiss();
     }
 }
