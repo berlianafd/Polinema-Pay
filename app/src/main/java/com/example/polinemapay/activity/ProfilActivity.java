@@ -1,5 +1,6 @@
 package com.example.polinemapay.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,8 @@ import com.example.polinemapay.helper.SessionManager;
 import java.util.HashMap;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 
 public class ProfilActivity extends AppCompatActivity {
 
@@ -27,11 +30,13 @@ public class ProfilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        txtName = (EditText) findViewById(R.id.namaProfil);
-        txtnohp = (EditText) findViewById(R.id.nohpProfil);
-        btnLogout = (Button) findViewById(R.id.btnLogout);
-
+//        txtName = (EditText) findViewById(R.id.namaProfil);
+//        txtnohp = (EditText) findViewById(R.id.nohpProfil);
+//        btnLogout = (Button) findViewById(R.id.btnLogout);
+//
         // SqLite database handler
         db = new SQLiteHandler(getApplicationContext());
 
@@ -41,25 +46,25 @@ public class ProfilActivity extends AppCompatActivity {
         if (!session.isLoggedIn()) {
             logoutUser();
         }
-
-        // Fetching user details from SQLite
-        HashMap<String, String> user = db.getUserDetails();
-
-        String name = user.get("name");
-        String nohp = user.get("nohp");
-
-        // Displaying the user details on the screen
-        txtName.setText(name);
-        txtnohp.setText(nohp);
-
-        // Logout button click event
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                logoutUser();
-            }
-        });
+//
+//        // Fetching user details from SQLite
+//        HashMap<String, String> user = db.getUserDetails();
+//
+//        String name = user.get("name");
+//        String nohp = user.get("nohp");
+//
+//        // Displaying the user details on the screen
+//        txtName.setText(name);
+//        txtnohp.setText(nohp);
+//
+//        // Logout button click event
+//        btnLogout.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                logoutUser();
+//            }
+//        });
     }
 
     /**

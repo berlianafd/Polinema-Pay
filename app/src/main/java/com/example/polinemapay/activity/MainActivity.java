@@ -389,6 +389,12 @@ public class MainActivity extends AppCompatActivity {
 		startActivity(intent);
 	}
 
+	public void pesananJemputSampah(View view) {
+		Intent intent = new Intent(MainActivity.this, PesananActivity.class);
+		intent.putExtra("idUser", idUser);
+		startActivity(intent);
+	}
+
 	public static void start(Context context) {
 		Intent intent = new Intent(context, MainActivity.class);
 		context.startActivity(intent);
