@@ -1,11 +1,6 @@
-package com.example.polinemapay.activity;
+package com.example.polinemapay.activity.Tugas;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import android.os.AsyncTask;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -16,13 +11,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.os.AsyncTask;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
-public class FetchDataTaskPesanan extends AsyncTask<String, Void, String>{
+public class FetchDataTaskTugas extends AsyncTask<String, Void, String>{
     private final FetchDataListener listener;
     private String msg;
 
-    public FetchDataTaskPesanan(FetchDataListener listener) {
+    public FetchDataTaskTugas(FetchDataListener listener) {
         this.listener = listener;
     }
 
@@ -71,11 +71,11 @@ public class FetchDataTaskPesanan extends AsyncTask<String, Void, String>{
             // convert json string to json array
             JSONArray aJson = new JSONArray(sJson);
             // create apps list
-            List<ApplicationPesanan> apps = new ArrayList<ApplicationPesanan>();
+            List<ApplicationTugas> apps = new ArrayList<ApplicationTugas>();
 
             for(int i=0; i<aJson.length(); i++) {
                 JSONObject json = aJson.getJSONObject(i);
-                ApplicationPesanan app = new ApplicationPesanan();
+                ApplicationTugas app = new ApplicationTugas();
                 app.setNamaAcara(json.getString("namaAcara"));
                 app.setTanggalJemput(json.getString("tanggal"));
                 app.setWaktuJemput(json.getString("waktu"));
@@ -122,7 +122,6 @@ public class FetchDataTaskPesanan extends AsyncTask<String, Void, String>{
                 throw e;
             }
         }
-
         return sb.toString();
     }
 }

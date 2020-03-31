@@ -1,16 +1,12 @@
-package com.example.polinemapay.activity;
+package com.example.polinemapay.activity.Pesanan;
 
-import java.text.NumberFormat;
 import java.util.List;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.polinemapay.R;

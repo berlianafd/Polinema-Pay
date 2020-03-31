@@ -8,18 +8,18 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.polinemapay.R;
-import com.example.polinemapay.activity.Pesanan.ApplicationAdapterPesanan;
-import com.example.polinemapay.activity.Pesanan.ApplicationPesanan;
-import com.example.polinemapay.activity.Pesanan.FetchDataListener;
-import com.example.polinemapay.activity.Pesanan.FetchDataTaskPesanan;
+import com.example.polinemapay.activity.Tugas.ApplicationAdapterTugas;
+import com.example.polinemapay.activity.Tugas.ApplicationTugas;
+import com.example.polinemapay.activity.Tugas.FetchDataListener;
+import com.example.polinemapay.activity.Tugas.FetchDataTaskTugas;
 
-public class PesananActivity extends ListActivity implements FetchDataListener {
+public class TugasActivity extends ListActivity implements FetchDataListener {
     private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pesanan);
+        setContentView(R.layout.activity_tugas);
         initView();
     }
 
@@ -27,17 +27,17 @@ public class PesananActivity extends ListActivity implements FetchDataListener {
         // show progress dialog
         dialog = ProgressDialog.show(this, "", "Loading...");
 
-        String url = "http://192.168.43.10:8080/simple_api/ListPesanan.php";
-        FetchDataTaskPesanan task = new FetchDataTaskPesanan(this);
+        String url = "http://192.168.43.10:8080/simple_api/ListTugas.php";
+        FetchDataTaskTugas task = new FetchDataTaskTugas(this);
         task.execute(url);
     }
 
     @Override
-    public void onFetchComplete(List<ApplicationPesanan> data) {
+    public void onFetchComplete(List<ApplicationTugas> data) {
         // dismiss the progress dialog
         if(dialog != null)  dialog.dismiss();
         // create new adapter
-        ApplicationAdapterPesanan adapter = new ApplicationAdapterPesanan(this, data);
+        ApplicationAdapterTugas adapter = new ApplicationAdapterTugas(this, data);
         // set the adapter to list
         setListAdapter(adapter);
     }

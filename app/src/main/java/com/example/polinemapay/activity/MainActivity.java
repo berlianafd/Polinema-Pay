@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
 						startActivity(intent);
 						return true;
 					case R.id.navigation2:
-						Intent intent1 = new Intent(MainActivity.this, HistoryActivity.class);
+						Intent intent1 = new Intent(MainActivity.this, RiwayatActivity.class);
 						intent1.putExtra("idUser", idUser);
 						startActivity(intent1);
 						return true;
@@ -391,6 +391,12 @@ public class MainActivity extends AppCompatActivity {
 
 	public void pesananJemputSampah(View view) {
 		Intent intent = new Intent(MainActivity.this, PesananActivity.class);
+		intent.putExtra("idUser", idUser);
+		startActivity(intent);
+	}
+
+	public void tugasJemputSampah(View view) {
+		Intent intent = new Intent(MainActivity.this, TugasActivity.class);
 		intent.putExtra("idUser", idUser);
 		startActivity(intent);
 	}

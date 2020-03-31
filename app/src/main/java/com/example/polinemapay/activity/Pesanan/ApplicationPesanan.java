@@ -1,4 +1,4 @@
-package com.example.polinemapay.activity;
+package com.example.polinemapay.activity.Pesanan;
 
 public class ApplicationPesanan {
     private String namaAcara;
