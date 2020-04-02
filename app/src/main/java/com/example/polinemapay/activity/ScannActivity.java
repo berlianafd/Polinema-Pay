@@ -97,7 +97,39 @@ public class ScannActivity extends AppCompatActivity implements ZXingScannerView
             jenisSampah = splited[1];
             beratSampah = splited[2];
 
-            checkUserId(nohp, name);
+//            Mengambil data id dan harga sampah dari Main
+            Intent iin= getIntent();
+            Bundle b = iin.getExtras();
+            String idUser =(String) b.get("idUser");
+
+            if(jenisSampah.equals("1")){
+                 String hargasampah =(String) b.get("hargakertas");
+                 String poin = Double.toString(Double.parseDouble(beratSampah)*Double.parseDouble(hargasampah));
+
+                //            Mengirim data ke Detail
+                Intent ii=new Intent(ScannActivity.this, DetailScannActivity.class);
+                ii.putExtra("idUser", idUser);
+                ii.putExtra("hargasampah", hargasampah);
+                ii.putExtra("noMesin",noMesin);
+                ii.putExtra("jenisSampah",jenisSampah);
+                ii.putExtra("beratSampah",beratSampah);
+                ii.putExtra("poinSampah",poin);
+                startActivity(ii);
+            }else{
+                 String hargasampah =(String) b.get("hargaplastik");
+                 String poin = Double.toString(Double.parseDouble(beratSampah)*Double.parseDouble(hargasampah));
+                //            Mengirim data ke Detail
+                Intent ii=new Intent(ScannActivity.this, DetailScannActivity.class);
+                ii.putExtra("idUser", idUser);
+                ii.putExtra("hargasampah", hargasampah);
+                ii.putExtra("noMesin",noMesin);
+                ii.putExtra("jenisSampah",jenisSampah);
+                ii.putExtra("beratSampah",beratSampah);
+                ii.putExtra("poinSampah",poin);
+                startActivity(ii);
+            }
+
+
         }
     }
 
@@ -129,12 +161,7 @@ public class ScannActivity extends AppCompatActivity implements ZXingScannerView
                         String id = user.getString("id");
                         Log.e(TAG, "Get Id : " + id + jenisSampah + noMesin + beratSampah);
 
-                        Intent ii=new Intent(ScannActivity.this, DetailScannActivity.class);
-                        ii.putExtra("id", id);
-                        ii.putExtra("noMesin",noMesin);
-                        ii.putExtra("jenisSampah",jenisSampah);
-                        ii.putExtra("beratSampah",beratSampah);
-                        startActivity(ii);
+
 
                     } else {
                         // Error in login. Get the error message

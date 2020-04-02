@@ -17,6 +17,8 @@ public class AppConfig {
 	public static String URL_TRANSAKSIBUANG = "http://192.168.43.10:8080/simple_api/transaksiBuangUser.php";
 
 	// Server user permintaan jemput sampah
-	public static String URL_JEMPUTSAMPAHUSER = "http://192.168.43.10:8080/simple_api/jemputSampahUser.php";
+	public static String URL_CEKHARGAKERTAS = "http://192.168.43.10:8080/simple_api/CekHargaKertas.php";
+	// Server user permintaan jemput sampah
+	public static String URL_CEKHARGAPLASTIK = "http://192.168.43.10:8080/simple_api/CekHargaPlastik.php";
 
 }

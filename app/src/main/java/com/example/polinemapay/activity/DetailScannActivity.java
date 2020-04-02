@@ -29,7 +29,7 @@ public class DetailScannActivity extends AppCompatActivity{
     private ProgressDialog pDialog;
 
 
-    private TextView jnsSampah, brtSampah;
+    private TextView jnsSampah, brtSampah, harga, pSampah;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,9 @@ public class DetailScannActivity extends AppCompatActivity{
         setContentView(R.layout.activity_detailscan);
 
         jnsSampah = (TextView) findViewById(R.id.jenisSampah);
+        harga = (TextView) findViewById(R.id.hrgSampah);
         brtSampah = (TextView) findViewById(R.id.beratSampah);
+        pSampah = (TextView) findViewById(R.id.poinSampah);
 
         // Progress dialog
 		pDialog = new ProgressDialog(this);
@@ -55,8 +57,14 @@ public class DetailScannActivity extends AppCompatActivity{
                 jnsSampah.setText("Plastik");
             }
 
+            String hs =(String) b.get("hargasampah");
             String bs =(String) b.get("beratSampah");
+            String ps =(String) b.get("poinSampah");
+
+            String hargakg =  Double.toString(Double.parseDouble(hs) * 1000);
+            harga.setText(hargakg + " /kg");
             brtSampah.setText(bs + " g");
+            pSampah.setText(ps);
         }
     }
 
@@ -73,11 +81,14 @@ public class DetailScannActivity extends AppCompatActivity{
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
 
-        final String id =(String) b.get("id");
+        final String id =(String) b.get("idUser");
+        final String hargaSampah =(String) b.get("hargasampah");
         final String noMesin =(String) b.get("noMesin");
         final String jenisSampah =(String) b.get("jenisSampah");
         final String beratSampah =(String) b.get("beratSampah");
-        Log.e(TAG, "Cek Id : " + id + jenisSampah + noMesin + beratSampah);
+        final String poinSampah =(String) b.get("poinSampah");
+
+        Log.e(TAG, "Cek : " + id + jenisSampah + noMesin + beratSampah);
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.URL_TRANSAKSIBUANG, new com.android.volley.Response.Listener<String>() {

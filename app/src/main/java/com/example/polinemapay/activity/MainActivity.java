@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
 	private DrawerLayout drawerLayout;
 	private CardView jemput, tukarSampah, tukarPoinUser, generate, tukarPoinMerchant, pesanan, tugas, kertas, plastik;
 
-	private TextView txtName, ttlPoin, ttlBeratSampah, ttlSampahKertas, ttlSampahPlastik, label, labelttl, labelkg;
-	public String idUser;
+	private TextView txtName, ttlPoin, ttlBeratSampah, ttlSampahKertas, ttlSampahPlastik, label, labelttl, labelkg, hargaKrts, hargaPlstk;
+	public String idUser, HargaKertas, HargaPlastik;
 	private SQLiteHandler db;
 	private SessionManager session;
 
@@ -52,10 +52,6 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		// Progress dialog
-//		pDialog = new ProgressDialog(this);
-//		pDialog.setCancelable(false);
 
 		txtName = (TextView) findViewById(R.id.namaHome);
 		ttlPoin = (TextView) findViewById(R.id.totalPoin);
@@ -65,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
 		label = (TextView) findViewById(R.id.labelSampah);
 		labelttl = (TextView) findViewById(R.id.labelTotalSampah);
 		labelkg = (TextView) findViewById(R.id.labelKilogram);
-
+		hargaKrts = (TextView) findViewById(R.id.hargaKertas);
+		hargaPlstk = (TextView) findViewById(R.id.hargaPlastik);
 
 		jemput = (CardView) findViewById(R.id.jemputButton);
 		tukarSampah = (CardView) findViewById(R.id.tukarSampahButton);
@@ -99,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
 		txtName.setText("Hai! "+ name);
 
 		checkUserId(nohp, name);
+		checkHargaKertas("1");
+		checkHargaPlastik("2");
 
 		Toast.makeText(getApplicationContext(), idUser, Toast.LENGTH_LONG).show();
 
@@ -340,15 +339,126 @@ public class MainActivity extends AppCompatActivity {
 		AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
 	}
 
-//	private void showDialog() {
-//		if (!pDialog.isShowing())
-//			pDialog.show();
-//	}
-//
-//	private void hideDialog() {
-//		if (pDialog.isShowing())
-//			pDialog.dismiss();
-//	}
+	private void checkHargaKertas(final String id) {
+		// Tag used to cancel the request
+		String tag_string_req = "req_checkHarga";
+
+		StringRequest strReq = new StringRequest(Request.Method.POST,
+				AppConfig.URL_CEKHARGAKERTAS, new Response.Listener<String>() {
+
+			@Override
+			public void onResponse(String response) {
+				Log.d(TAG, "Check Harga Response: " + response.toString());
+//				hideDialog();
+
+				try {
+					JSONObject jObj = new JSONObject(response);
+					boolean error = jObj.getBoolean("error");
+
+					// Check for error node in json
+					if (!error) {
+						JSONObject user = jObj.getJSONObject("user");
+						HargaKertas = user.getString("harga");
+						String hargakg =  Double.toString(Double.parseDouble(HargaKertas) * 1000);
+						hargaKrts.setText(hargakg+"/Kg");
+					} else {
+						// Error in login. Get the error message
+						String errorMsg = jObj.getString("error_msg");
+						Toast.makeText(getApplicationContext(),
+								errorMsg, Toast.LENGTH_LONG).show();
+					}
+				} catch (JSONException e) {
+					// JSON error
+					e.printStackTrace();
+					Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+				}
+
+			}
+		}, new Response.ErrorListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				Log.e(TAG, "Get Data Error: " + error.getMessage());
+				Toast.makeText(getApplicationContext(),
+						error.getMessage(), Toast.LENGTH_LONG).show();
+//				hideDialog();
+			}
+		}) {
+
+			@Override
+			protected Map<String, String> getParams() {
+				// Posting parameters to login url
+				Map<String, String> params = new HashMap<String, String>();
+				params.put("id", id);
+				return params;
+			}
+
+		};
+
+		// Adding request to request queue
+		AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+	}
+
+	private void checkHargaPlastik(final String id) {
+		// Tag used to cancel the request
+		String tag_string_req = "req_checkHarga";
+
+		StringRequest strReq = new StringRequest(Request.Method.POST,
+				AppConfig.URL_CEKHARGAPLASTIK, new Response.Listener<String>() {
+
+			@Override
+			public void onResponse(String response) {
+				Log.d(TAG, "Check Harga Response: " + response.toString());
+//				hideDialog();
+
+				try {
+					JSONObject jObj = new JSONObject(response);
+					boolean error = jObj.getBoolean("error");
+
+					// Check for error node in json
+					if (!error) {
+						JSONObject user = jObj.getJSONObject("user");
+						HargaPlastik = user.getString("harga");
+						String hargakg =  Double.toString(Double.parseDouble(HargaPlastik) * 1000);
+						hargaPlstk.setText(hargakg+"/Kg");
+
+					} else {
+						// Error in login. Get the error message
+						String errorMsg = jObj.getString("error_msg");
+						Toast.makeText(getApplicationContext(),
+								errorMsg, Toast.LENGTH_LONG).show();
+					}
+				} catch (JSONException e) {
+					// JSON error
+					e.printStackTrace();
+					Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+				}
+
+			}
+		}, new Response.ErrorListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				Log.e(TAG, "Get Data Error: " + error.getMessage());
+				Toast.makeText(getApplicationContext(),
+						error.getMessage(), Toast.LENGTH_LONG).show();
+//				hideDialog();
+			}
+		}) {
+
+			@Override
+			protected Map<String, String> getParams() {
+				// Posting parameters to login url
+				Map<String, String> params = new HashMap<String, String>();
+				params.put("id", id);
+				return params;
+			}
+
+		};
+
+		// Adding request to request queue
+		AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+	}
 
 	/**
 	 * Logging out the user. Will set isLoggedIn flag to false in shared
@@ -368,6 +478,8 @@ public class MainActivity extends AppCompatActivity {
 	public void scanUser(View view) {
 		Intent intent = new Intent(MainActivity.this, ScannActivity.class);
 		intent.putExtra("idUser", idUser);
+		intent.putExtra("hargakertas", HargaKertas);
+		intent.putExtra("hargaplastik", HargaPlastik);
 		startActivity(intent);
 	}
 
@@ -399,10 +511,5 @@ public class MainActivity extends AppCompatActivity {
 		Intent intent = new Intent(MainActivity.this, TugasActivity.class);
 		intent.putExtra("idUser", idUser);
 		startActivity(intent);
-	}
-
-	public static void start(Context context) {
-		Intent intent = new Intent(context, MainActivity.class);
-		context.startActivity(intent);
 	}
 }

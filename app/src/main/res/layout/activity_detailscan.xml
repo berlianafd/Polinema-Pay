@@ -40,11 +40,57 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:text="Harga Sampah: "
+            android:textColor="@color/lbl_name"/>
+
+        <TextView
+            android:id="@+id/hrgSampah"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/lbl_name"
+            android:text="g"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="Berat Sampah: "
             android:textColor="@color/lbl_name"/>
 
         <TextView
             android:id="@+id/beratSampah"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/lbl_name"
+            android:text="g"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Poin Sampah: "
+            android:textColor="@color/lbl_name"/>
+
+        <TextView
+            android:id="@+id/poinSampah"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
