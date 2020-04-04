@@ -66,6 +66,15 @@ tools:context="${relativePackage}.${activityClass}">
                 android:text="Total poin saya sekarang"
                 android:padding="5dp"
                 android:textColor="@android:color/darker_gray"/>
+            <TextView
+                android:id="@+id/konversiPoin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="harga poin per rupiah"
+                android:visibility="gone"
+                android:padding="5dp"
+                android:textColor="@android:color/darker_gray"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
     </LinearLayout>

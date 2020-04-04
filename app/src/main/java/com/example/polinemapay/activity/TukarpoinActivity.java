@@ -110,28 +110,27 @@ public class TukarpoinActivity extends AppCompatActivity implements ZXingScanner
             String[] splited = result.split("\\s+");
 
             String idPenjual = splited[0];
-            String poin = splited[1];
-//            User user = PrefUtil.getUser(this, PrefUtil.USER_SESSION);
-//            int idUser = user.getData().getIdUser();
-//            txtResult.setText("Id Penjual: " + idPenjual + " " + "Poin : " + poin);
-//            TransaksiTukarPoinService transaksiTukarPoinService = new TransaksiTukarPoinService(this);
+            String idYgDijual = splited[1];
+            String harga = splited[2];
 
-//            transaksiTukarPoinService.doTransaksiTukarPoin(idUser, Integer.parseInt(idPenjual), Integer.parseInt(poin), new Callback() {
-//                @Override
-//                public void onResponse(Call call, Response response) {
-//
-//                    MainActivity.start(TukarpoinActivity.this);
-//                    TukarpoinActivity.this.finish();
-//                    Toast.makeText(TukarpoinActivity.this, "Transaksi Berhasill", Toast.LENGTH_SHORT).show();
-//
-//                }
-//
-//                @Override
-//                public void onFailure(Call call, Throwable t) {
-//                    Toast.makeText(TukarpoinActivity.this, "An error occurred!", Toast.LENGTH_SHORT).show();
-//                }
-//
-//            });
+            //            Mengambil data id dan harga sampah dari Main
+            Intent iin= getIntent();
+            Bundle b = iin.getExtras();
+            String idUser =(String) b.get("idUser");
+            String konversi =(String) b.get("konversi");
+
+            Double konv = Double.parseDouble(konversi);
+
+            String poin =  Integer.toString(Integer.parseInt(harga)* (konv.intValue()));
+
+            //            Mengirim data ke Detail
+            Intent ii=new Intent(TukarpoinActivity.this, DetailTukarPoinActivity.class);
+            ii.putExtra("idUser", idUser);
+            ii.putExtra("idPenjual", idPenjual);
+            ii.putExtra("idYgDijual", idYgDijual);
+            ii.putExtra("harga",harga);
+            ii.putExtra("poin",poin);
+            startActivity(ii);
         }
     }
 }

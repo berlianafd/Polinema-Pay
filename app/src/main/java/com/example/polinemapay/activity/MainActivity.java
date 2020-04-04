@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 	private CardView jemput, tukarSampah, tukarPoinUser, generate, tukarPoinMerchant, pesanan, tugas, kertas, plastik;
 
 	private TextView txtName, ttlPoin, ttlBeratSampah, ttlSampahKertas, ttlSampahPlastik, label, labelttl, labelkg, hargaKrts, hargaPlstk;
-	public String idUser, HargaKertas, HargaPlastik;
+	public String idUser, HargaKertas, HargaPlastik, KonversiPoin;
 	private SQLiteHandler db;
 	private SessionManager session;
 
@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
 		checkUserId(nohp, name);
 		checkHargaKertas("1");
 		checkHargaPlastik("2");
+		checkKoversiPoin("3");
 
 		Toast.makeText(getApplicationContext(), idUser, Toast.LENGTH_LONG).show();
 
@@ -460,6 +461,65 @@ public class MainActivity extends AppCompatActivity {
 		AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
 	}
 
+	private void checkKoversiPoin(final String id) {
+		// Tag used to cancel the request
+		String tag_string_req = "req_checkHarga";
+
+		StringRequest strReq = new StringRequest(Request.Method.POST,
+				AppConfig.URL_CEKKONVERSIPOIN, new Response.Listener<String>() {
+
+			@Override
+			public void onResponse(String response) {
+				Log.d(TAG, "Check Konversi Poin Response: " + response.toString());
+//				hideDialog();
+
+				try {
+					JSONObject jObj = new JSONObject(response);
+					boolean error = jObj.getBoolean("error");
+
+					// Check for error node in json
+					if (!error) {
+						JSONObject user = jObj.getJSONObject("user");
+						KonversiPoin = user.getString("harga");
+					} else {
+						// Error in login. Get the error message
+						String errorMsg = jObj.getString("error_msg");
+						Toast.makeText(getApplicationContext(),
+								errorMsg, Toast.LENGTH_LONG).show();
+					}
+				} catch (JSONException e) {
+					// JSON error
+					e.printStackTrace();
+					Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+				}
+
+			}
+		}, new Response.ErrorListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				Log.e(TAG, "Get Data Error: " + error.getMessage());
+				Toast.makeText(getApplicationContext(),
+						error.getMessage(), Toast.LENGTH_LONG).show();
+//				hideDialog();
+			}
+		}) {
+
+			@Override
+			protected Map<String, String> getParams() {
+				// Posting parameters to login url
+				Map<String, String> params = new HashMap<String, String>();
+				params.put("id", id);
+				return params;
+			}
+
+		};
+
+		// Adding request to request queue
+		AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+	}
+
+
 	/**
 	 * Logging out the user. Will set isLoggedIn flag to false in shared
 	 * preferences Clears the user data from sqlite users table
@@ -486,6 +546,7 @@ public class MainActivity extends AppCompatActivity {
 	public void tukarPoinUser(View view) {
 		Intent intent = new Intent(MainActivity.this, TukarpoinActivity.class);
 		intent.putExtra("idUser", idUser);
+		intent.putExtra("konversi", KonversiPoin);
 		startActivity(intent);
 	}
 

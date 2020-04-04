@@ -15,10 +15,13 @@ public class AppConfig {
 
 	// Server user cek id user url
 	public static String URL_TRANSAKSIBUANG = "http://192.168.43.10:8080/simple_api/transaksiBuangUser.php";
+	// Server user cek id user url
+	public static String URL_TRANSAKSITUKAR = "http://192.168.43.10:8080/simple_api/transaksiTukarUser.php";
 
 	// Server user permintaan jemput sampah
 	public static String URL_CEKHARGAKERTAS = "http://192.168.43.10:8080/simple_api/CekHargaKertas.php";
 	// Server user permintaan jemput sampah
 	public static String URL_CEKHARGAPLASTIK = "http://192.168.43.10:8080/simple_api/CekHargaPlastik.php";
-
+	// Server user permintaan jemput sampah
+	public static String URL_CEKKONVERSIPOIN = "http://192.168.43.10:8080/simple_api/CekKonversiPoin.php";
 }

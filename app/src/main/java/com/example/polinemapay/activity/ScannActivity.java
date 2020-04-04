@@ -104,7 +104,8 @@ public class ScannActivity extends AppCompatActivity implements ZXingScannerView
 
             if(jenisSampah.equals("1")){
                  String hargasampah =(String) b.get("hargakertas");
-                 String poin = Double.toString(Double.parseDouble(beratSampah)*Double.parseDouble(hargasampah));
+                 int poinInt = (int)(Double.parseDouble(beratSampah)*Double.parseDouble(hargasampah));
+                 String poin = Integer.toString(poinInt);
 
                 //            Mengirim data ke Detail
                 Intent ii=new Intent(ScannActivity.this, DetailScannActivity.class);

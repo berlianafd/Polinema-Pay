@@ -1,11 +1,12 @@
 package com.example.polinemapay.activity;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,75 +23,66 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class DetailScannActivity extends AppCompatActivity{
+public class DetailTukarPoinActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private ProgressDialog pDialog;
 
-    private TextView jnsSampah, brtSampah, harga, pSampah;
+    private TextView idPnjual, idPrdk, hrg, poinn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detailscan);
+        setContentView(R.layout.activity_detailtukarpoin);
 
-        jnsSampah = (TextView) findViewById(R.id.jenisSampah);
-        harga = (TextView) findViewById(R.id.hrgSampah);
-        brtSampah = (TextView) findViewById(R.id.beratSampah);
-        pSampah = (TextView) findViewById(R.id.poinSampah);
+        idPnjual = (TextView) findViewById(R.id.idPenjual);
+        idPrdk = (TextView) findViewById(R.id.idProduk);
+        hrg = (TextView) findViewById(R.id.idHarga);
+        poinn = (TextView) findViewById(R.id.idPoinTukar);
 
         // Progress dialog
-		pDialog = new ProgressDialog(this);
-		pDialog.setCancelable(false);
+        pDialog = new ProgressDialog(this);
+        pDialog.setCancelable(false);
 
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
 
         if(b!=null)
         {
-            String j =(String) b.get("jenisSampah");
-            if(j.equals("1")){
-                jnsSampah.setText("Kertas");
-            } else{
-                jnsSampah.setText("Plastik");
-            }
+            String iu =(String) b.get("idUser");
+            String ip =(String) b.get("idPenjual");
+            String iyd =(String) b.get("idYgDijual");
+            String h =(String) b.get("harga");
+            String p =(String) b.get("poin");
 
-            String hs =(String) b.get("hargasampah");
-            String bs =(String) b.get("beratSampah");
-            String ps =(String) b.get("poinSampah");
-
-            String hargakg =  Double.toString(Double.parseDouble(hs) * 1000);
-            harga.setText(hargakg + " /kg");
-            brtSampah.setText(bs + " g");
-            pSampah.setText(ps);
+            idPnjual.setText(ip);
+            idPrdk.setText(iyd);
+            hrg.setText(h);
+            poinn.setText(p);
         }
     }
 
-    /**
-     * function to save transaction in mysql db
-     * */
-    public void simpanTransaksiBuang(View view) {
+    public void simpanTransaksiTukar(View view) {
         // Tag used to cancel the request
-        String tag_string_req = "req_saveTrans";
+        String tag_string_req = "req_saveTransTukar";
 
-		pDialog.setMessage("Memproses ...");
-		showDialog();
+        pDialog.setMessage("Memproses ...");
+        showDialog();
 
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
 
         final String id =(String) b.get("idUser");
-        final String hargaSampah =(String) b.get("hargasampah");
-        final String noMesin =(String) b.get("noMesin");
-        final String jenisSampah =(String) b.get("jenisSampah");
-        final String beratSampah =(String) b.get("beratSampah");
-        final String poinSampah =(String) b.get("poinSampah");
+        final String ip =(String) b.get("idPenjual");
+        final String iyd =(String) b.get("idYgDijual");
+        final String h =(String) b.get("harga");
+        final String p =(String) b.get("poin");
 
-        Log.e(TAG, "Cek : " + id + jenisSampah + noMesin + beratSampah + poinSampah);
+//        Log.e(TAG, "Cek : " + id + ip + iyd + h + p);
+//        Toast.makeText(getApplicationContext(),
+//                "Cek : " + id + ip + iyd + h + p, Toast.LENGTH_LONG).show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_TRANSAKSIBUANG, new com.android.volley.Response.Listener<String>() {
+                AppConfig.URL_TRANSAKSITUKAR, new com.android.volley.Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -107,7 +99,7 @@ public class DetailScannActivity extends AppCompatActivity{
                         String id = user3.getString("id");
                         Log.e(TAG, "Get Info Transaction: " + id + "Sukses");
                         Toast.makeText(getApplicationContext(),
-                                "Tukar Sampahmu berhasil, poinmu telah bertambah !", Toast.LENGTH_LONG).show();
+                                "Tukar Poinmu berhasil, Jangan lupa mengumpulkan poin lagi ya!", Toast.LENGTH_LONG).show();
                     } else {
                         // Error in login. Get the error message
                         String errorMsg = jObj.getString("error_msg");
@@ -137,10 +129,10 @@ public class DetailScannActivity extends AppCompatActivity{
                 // Posting parameters to login url
                 HashMap<String, String> params = new HashMap<String, String>();
                 params.put("idUser", id);
-                params.put("noMesin", noMesin);
-                params.put("jenisSampah", jenisSampah);
-                params.put("beratSampah", beratSampah);
-                params.put("poinSampah", poinSampah);
+                params.put("idPenjual", ip);
+                params.put("idYgDijual", iyd);
+                params.put("harga", h);
+                params.put("poin", p);
 
                 return params;
             }
@@ -150,21 +142,21 @@ public class DetailScannActivity extends AppCompatActivity{
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
 
-        Intent intent = new Intent(DetailScannActivity.this, MainActivity.class);
+        Intent intent = new Intent(DetailTukarPoinActivity.this, MainActivity.class);
         startActivity(intent);
     }
 
     public void tombolBatal(View view) {
-        Intent intent = new Intent(DetailScannActivity.this, MainActivity.class);
+        Intent intent = new Intent(DetailTukarPoinActivity.this, MainActivity.class);
         startActivity(intent);
     }
-    	private void showDialog() {
-		if (!pDialog.isShowing())
-			pDialog.show();
-	}
+    private void showDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
 
-	private void hideDialog() {
-		if (pDialog.isShowing())
-			pDialog.dismiss();
-	}
+    private void hideDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
+    }
 }
