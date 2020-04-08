@@ -23,7 +23,7 @@
 
     <string name="result_text_default">Fokuskan kamera pada QR Code</string>
     <string name="navigation_view_item_1">Beranda</string>
-    <string name="navigation_view_item_2">History</string>
+    <string name="navigation_view_item_2">Riwayat</string>
     <string name="navigation_view_item_3">Profil</string>
     <string name="navigation_view_item_4">Keluar</string>
     <string name="openDrawer">Drawer dibuka</string>

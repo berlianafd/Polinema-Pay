@@ -6,6 +6,9 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.polinemapay.R;
@@ -13,9 +16,18 @@ import com.example.polinemapay.activity.Riwayat.ApplicationAdapterRiwayat;
 import com.example.polinemapay.activity.Riwayat.ApplicationRiwayat;
 import com.example.polinemapay.activity.Riwayat.FetchDataListener;
 import com.example.polinemapay.activity.Riwayat.FetchDataTaskRiwayat;
+import com.google.android.material.navigation.NavigationView;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 public class RiwayatActivity extends ListActivity implements FetchDataListener {
     private ProgressDialog dialog;
+
+    private Toolbar toolbar;
+    private NavigationView navigationView;
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +37,8 @@ public class RiwayatActivity extends ListActivity implements FetchDataListener {
     }
 
     private void initView() {
+        TextView tt = (TextView) findViewById(R.id.toolbarText);
+        tt.setText("Riwayat");
         // show progress dialog
         dialog = ProgressDialog.show(this, "", "Loading...");
 

@@ -63,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
 		labelkg = (TextView) findViewById(R.id.labelKilogram);
 		hargaKrts = (TextView) findViewById(R.id.hargaKertas);
 		hargaPlstk = (TextView) findViewById(R.id.hargaPlastik);
+		TextView tt = (TextView) findViewById(R.id.toolbarText);
+		tt.setText("Polinema-Pay");
+
 
 		jemput = (CardView) findViewById(R.id.jemputButton);
 		tukarSampah = (CardView) findViewById(R.id.tukarSampahButton);
@@ -551,7 +554,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void generateQrCode(View view) {
-		Intent intent = new Intent(MainActivity.this, GenerateqrActivity.class);
+		Intent intent = new Intent(MainActivity.this, KategoriGenerateActivity.class);
 		intent.putExtra("idUser", idUser);
 		startActivity(intent);
 	}

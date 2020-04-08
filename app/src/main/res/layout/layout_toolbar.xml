@@ -6,4 +6,12 @@
     android:background="@color/colorPrimaryDark"
     android:theme="@style/ThemeOverlay.AppCompat"
     app:titleTextColor="@color/white">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/toolbarText"
+        android:textColor="@color/white"
+        android:textSize="20dp"/>
+
 </androidx.appcompat.widget.Toolbar>
