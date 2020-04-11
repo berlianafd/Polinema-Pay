@@ -27,7 +27,7 @@ public class TugasActivity extends ListActivity implements FetchDataListener {
         // show progress dialog
         dialog = ProgressDialog.show(this, "", "Loading...");
 
-        String url = "http://192.168.43.10:8080/simple_api/ListTugas.php";
+        String url = "http://www.polinema-pay.online/android/ListTugas.php";
         FetchDataTaskTugas task = new FetchDataTaskTugas(this);
         task.execute(url);
     }

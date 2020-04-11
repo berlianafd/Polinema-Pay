@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="5dp"
+    android:layout_gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+62"
+            android:layout_marginRight="10dp"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/updateNohpProfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/hint_nohp"
+            android:textColor="@color/colorPrimaryDark"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnUpdateNohpProfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:layout_gravity="end"
+        android:text="SIMPAN"
+        android:textColor="@color/white" />
+</LinearLayout>

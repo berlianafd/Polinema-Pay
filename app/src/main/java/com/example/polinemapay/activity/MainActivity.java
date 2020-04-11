@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 	private CardView jemput, tukarSampah, tukarPoinUser, generate, tukarPoinMerchant, pesanan, tugas, kertas, plastik;
 
 	private TextView txtName, ttlPoin, ttlBeratSampah, ttlSampahKertas, ttlSampahPlastik, label, labelttl, labelkg, hargaKrts, hargaPlstk;
-	public String idUser, HargaKertas, HargaPlastik, KonversiPoin;
+	public String idUser, HargaKertas, HargaPlastik, KonversiPoin, namee, nohpp;
 	private SQLiteHandler db;
 	private SessionManager session;
 
@@ -90,9 +90,9 @@ public class MainActivity extends AppCompatActivity {
 		// Fetching user details from SQLite
 		HashMap<String, String> user = db.getUserDetails();
 
-		String name = user.get("name");
+		final String name = user.get("name");
 		String level = user.get("level");
-		String nohp = user.get("nohp");
+		final String nohp = user.get("nohp");
 
 
 		// Displaying the user details on the screen
@@ -167,6 +167,8 @@ public class MainActivity extends AppCompatActivity {
 					case R.id.navigation3:
 						Intent intent2 = new Intent(MainActivity.this, ProfilActivity.class);
 						intent2.putExtra("idUser", idUser);
+						intent2.putExtra("nama", namee);
+						intent2.putExtra("nohp", nohpp);
 						startActivity(intent2);
 						return true;
 					case R.id.navigation4:
@@ -299,6 +301,8 @@ public class MainActivity extends AppCompatActivity {
 					if (!error) {
 						JSONObject user = jObj.getJSONObject("user");
 						idUser = user.getString("id");
+						namee = user.getString("nama");
+						nohpp = user.getString("nohp");
 						Log.e(TAG, "Get Id : " + idUser);
 
 						checkPoints(idUser, nohp);
@@ -554,7 +558,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void generateQrCode(View view) {
-		Intent intent = new Intent(MainActivity.this, KategoriGenerateActivity.class);
+		Intent intent = new Intent(MainActivity.this, GenerateqrActivity.class);
 		intent.putExtra("idUser", idUser);
 		startActivity(intent);
 	}

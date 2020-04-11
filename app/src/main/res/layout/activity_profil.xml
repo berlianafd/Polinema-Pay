@@ -1,72 +1,103 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".activity.ProfilActivity">
+    android:orientation="vertical"
+    tools:context=".activity.ProfilActivity" >
+    <!--    tools:context="${relativePackage}.${activityClass}"-->
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="wrap_content">
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/layout_toolbar"
+            />
+    </LinearLayout>
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
+    <RelativeLayout
+        android:id="@+id/layoutPicture"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_centerInParent="true"
+            android:id="@+id/imageView"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:src="@drawable/user" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/buttonSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            app:srcCompat="@drawable/ic_picture"
+            app:fabSize="mini"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <EditText
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:contentScrim="@color/profilePrimaryDark"
-            app:expandedTitleMarginEnd="64dp"
-            app:expandedTitleMarginStart="48dp"
-            app:expandedTitleTextAppearance="@style/TransparentText"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:toolbarId="@+id/toolbar">
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:id="@+id/imageName"/>
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:paddingLeft="45dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@color/colorPrimaryDark"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_account"/>
 
+        <TextView
+            android:id="@+id/namaProfil"
+            android:onClick="ShowPopupName"
+            android:layout_width="266dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:textStyle="bold"
+            android:text="@string/hint_name"
+            android:textColor="@color/lbl_name"/>
 
-<!--                <RelativeLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="bottom"-->
-<!--                    android:layout_marginTop="20dp"-->
-<!--                    android:background="@color/profileBackground"-->
-<!--                    android:gravity="center">-->
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:paddingLeft="45dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_call_black_24dp"/>
 
-<!--                    <TextView-->
-<!--                        style="@style/profileStyledBackButton"-->
-<!--                        android:text="Back to\nHome" />-->
+        <TextView
+            android:id="@+id/nohpProfil"
+            android:onClick="ShowPopupNohp"
+            android:layout_width="266dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:textStyle="bold"
+            android:text="@string/hint_nohp"
+            android:textColor="@color/lbl_name"/>
 
-<!--                    <View-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="30dp"-->
-<!--                        android:layout_alignParentTop="true"-->
-<!--                        android:background="@drawable/profile_bk" />-->
-<!--                </RelativeLayout>-->
-<!--                -->
-            </LinearLayout>
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <include layout="@layout/content_profile" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
+</LinearLayout>

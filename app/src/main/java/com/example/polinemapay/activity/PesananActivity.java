@@ -27,7 +27,7 @@ public class PesananActivity extends ListActivity implements FetchDataListener {
         // show progress dialog
         dialog = ProgressDialog.show(this, "", "Loading...");
 
-        String url = "http://192.168.43.10:8080/simple_api/ListPesanan.php";
+        String url = "http://www.polinema-pay.online/android/ListPesanan.php";
         FetchDataTaskPesanan task = new FetchDataTaskPesanan(this);
         task.execute(url);
     }

@@ -108,7 +108,6 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnUpdateProfil"
             android:layout_width="100pt"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="5dp"
+    android:layout_gravity="center">
+
+
+    <EditText
+        android:id="@+id/updateNamaProfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textStyle="bold"
+        android:text="@string/hint_name"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    <Button
+        android:id="@+id/btnUpdateNameProfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:layout_gravity="end"
+        android:text="SIMPAN"
+        android:textColor="@color/white" />
+</LinearLayout>

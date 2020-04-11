@@ -120,7 +120,6 @@ public class JemputActivity extends AppCompatActivity {
         buttonPesan = (Button)findViewById(R.id.btnPesan);
         ShowSelectedImage = (ImageView)findViewById(R.id.imageView);
 
-
         byteArrayOutputStream = new ByteArrayOutputStream();
 
         GetImageFromGalleryButton.setOnClickListener(new View.OnClickListener() {
@@ -215,7 +214,8 @@ public class JemputActivity extends AppCompatActivity {
                     idUser =(String) b.get("idUser");
                 }
 
-                imageName.setText(idUser + "_" + tanggall + "_" + namaAcaraa);
+                String nmacr = namaAcaraa.replaceAll("\\s+", "-");
+                imageName.setText(idUser + "_" + tanggall + "_" + nmacr);
                 GetImageNameFromEditText = imageName.getText().toString();
 
                 if (!namaAcaraa.isEmpty() && !notelpp.isEmpty() && !alamatt.isEmpty() && !Kec.isEmpty()
