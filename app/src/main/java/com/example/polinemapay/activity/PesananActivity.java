@@ -27,10 +27,11 @@ public class PesananActivity extends ListActivity implements FetchDataListener {
         // show progress dialog
         dialog = ProgressDialog.show(this, "", "Loading...");
 
-        String url = "http://www.polinema-pay.online/android/ListPesanan.php";
+        String url = "https://www.polinema-pay.online/android/ListPesanan.php";
         FetchDataTaskPesanan task = new FetchDataTaskPesanan(this);
         task.execute(url);
     }
+
 
     @Override
     public void onFetchComplete(List<ApplicationPesanan> data) {
@@ -41,6 +42,7 @@ public class PesananActivity extends ListActivity implements FetchDataListener {
         // set the adapter to list
         setListAdapter(adapter);
     }
+
 
     @Override
     public void onFetchFailure(String msg) {

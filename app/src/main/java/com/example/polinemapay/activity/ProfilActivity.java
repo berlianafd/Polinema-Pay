@@ -49,6 +49,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -179,15 +182,8 @@ public class ProfilActivity extends AppCompatActivity {
         updtNohp = (EditText) myDialog.findViewById(R.id.updateNohpProfil);
         update = (Button) myDialog.findViewById(R.id.btnUpdateNohpProfil);
 
-        Intent iin= getIntent();
-        Bundle b = iin.getExtras();
+        updtNohp.setText(nohpp);
 
-        if(b!=null)
-        {
-            String nohp =(String) b.get("nohp");
-            // Displaying the user details on the screen
-            updtNohp.setText(nohp);
-        }
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -195,6 +191,21 @@ public class ProfilActivity extends AppCompatActivity {
                 checkUserId();
             }
         });
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+    }
+
+    public void ShowPopupPoto(View v) {
+        final ImageView img;
+
+        myDialog.setContentView(R.layout.popup_fotoprofil);
+
+        img = (ImageView) myDialog.findViewById(R.id.potoview);
+
+        byte[] rawImage = Base64.decode(image_pathh, Base64.DEFAULT);
+        Bitmap bmp = BitmapFactory.decodeByteArray(rawImage, 0, rawImage.length);
+        img.setImageBitmap(bmp);
+
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.show();
     }
@@ -226,7 +237,7 @@ public class ProfilActivity extends AppCompatActivity {
                 HashMapParams.put("idUser", idUser);
                 HashMapParams.put(ImageTag, GetImageNameFromEditText);
                 HashMapParams.put(ImageName, ConvertImage);
-                String FinalData = imageProcessClass.ImageHttpRequest("http://www.polinema-pay.online/android/ProfilUser.php", HashMapParams);
+                String FinalData = imageProcessClass.ImageHttpRequest("https://www.polinema-pay.online/android/ProfilUser.php", HashMapParams);
                 return FinalData;
             }
         }
@@ -377,9 +388,10 @@ public class ProfilActivity extends AppCompatActivity {
                         txtnohp.setText(nohpp);
 
                         //        Set nama foto profil
+                        ProfilActivity tgl = new ProfilActivity();
                         nama = txtName.getText().toString();
                         String nm = nama.replaceAll("\\s+", "-");
-                        imageName.setText(idUser + "_" + nm);
+                        imageName.setText(idUser + "_" + nm +  "_" + tgl.getTanggal() +  "_" + tgl.getWaktu());
                         GetImageNameFromEditText = imageName.getText().toString();
                     } else {
                         // Error in login. Get the error message
@@ -540,6 +552,18 @@ public class ProfilActivity extends AppCompatActivity {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    private String getTanggal() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+
+    private String getWaktu() {
+        DateFormat dateFormat = new SimpleDateFormat("HH-mm-ss");
+        Date date = new Date();
+        return dateFormat.format(date);
     }
     /**
      * Logging out the user. Will set isLoggedIn flag to false in shared

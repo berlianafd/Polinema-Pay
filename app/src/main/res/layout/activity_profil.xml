@@ -28,6 +28,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_centerInParent="true"
             android:id="@+id/imageView"
+            android:onClick="ShowPopupPoto"
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:src="@drawable/user" />
