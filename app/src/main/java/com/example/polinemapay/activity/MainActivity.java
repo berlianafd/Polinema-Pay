@@ -177,6 +177,14 @@ public class MainActivity extends AppCompatActivity {
 					case R.id.navigation4:
 						logoutUser();
 						return true;
+					case R.id.navigation5:
+						Intent intent3 = new Intent(MainActivity.this, BantuanAcitivity.class);
+						startActivity(intent3);
+						return true;
+					case R.id.navigation6:
+						Intent intent4 = new Intent(MainActivity.this, PanduanActivity.class);
+						startActivity(intent4);
+						return true;
 					default:
 						Toast.makeText(getApplicationContext(),"Kesalahan Terjadi ", Toast.LENGTH_SHORT).show();
 						return true;

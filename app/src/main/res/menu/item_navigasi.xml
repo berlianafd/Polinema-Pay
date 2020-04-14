@@ -17,6 +17,16 @@
             android:icon="@drawable/ic_account"
             android:title="@string/navigation_view_item_3" />
         <item
+            android:id="@+id/navigation6"
+            android:checked="false"
+            android:icon="@drawable/manuall"
+            android:title="@string/navigation_view_item_6" />
+        <item
+            android:id="@+id/navigation5"
+            android:checked="false"
+            android:icon="@drawable/support"
+            android:title="@string/navigation_view_item_5" />
+        <item
             android:id="@+id/navigation4"
             android:checked="false"
             android:icon="@drawable/ic_logout"
