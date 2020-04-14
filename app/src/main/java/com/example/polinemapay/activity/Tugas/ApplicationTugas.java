@@ -1,11 +1,21 @@
 package com.example.polinemapay.activity.Tugas;
 
 public class ApplicationTugas {
+
+    private String idAcara;
     private String namaAcara;
     private String tanggalJemput;
     private String waktuJemput;
     private String perkiraanBeratSampah;
     private String alamatJemput;
+
+    public String getIdAcara() {
+        return idAcara;
+    }
+
+    public void setIdAcara(String idAcara) {
+        this.idAcara = idAcara;
+    }
 
     public String getNamaAcara() {
         return namaAcara;

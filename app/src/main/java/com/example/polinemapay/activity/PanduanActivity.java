@@ -9,16 +9,27 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.polinemapay.R;
+import com.example.polinemapay.helper.SQLiteHandler;
+
+import java.util.HashMap;
 
 public class PanduanActivity extends AppCompatActivity {
+    private SQLiteHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_panduan);
 
+        // SqLite database handler
+        db = new SQLiteHandler(getApplicationContext());
+
         TextView tt = (TextView) findViewById(R.id.toolbarText);
         tt.setText("Panduan");
+        // Fetching user details from SQLite
+        HashMap<String, String> user = db.getUserDetails();
+
+        String level = user.get("level");
 
         CardView Reg = (CardView) findViewById(R.id.PanReg);
         CardView TS = (CardView) findViewById(R.id.PanBuangSampah);
@@ -31,6 +42,20 @@ public class PanduanActivity extends AppCompatActivity {
         final LinearLayout IsJS = (LinearLayout) findViewById(R.id.isiJemSampah);
         final LinearLayout IsTP = (LinearLayout) findViewById(R.id.isiTukPoin);
         final LinearLayout IsMR = (LinearLayout) findViewById(R.id.isiRlwn);
+
+        if(level.equals("Relawan")){
+            TS.setVisibility(View.GONE);
+            JS.setVisibility(View.GONE);
+            TP.setVisibility(View.GONE);
+            MR.setVisibility(View.GONE);
+
+        } else if (level.equals("User")){
+
+        } else {
+            TS.setVisibility(View.GONE);
+            JS.setVisibility(View.GONE);
+            TP.setVisibility(View.GONE);
+        }
 
         Reg.setOnClickListener(new View.OnClickListener() {
         int buka=0;

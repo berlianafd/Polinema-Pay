@@ -6,13 +6,13 @@ public class AppConfig {
 
 	// Server user register url
 	public static String URL_REGISTER = "https://www.polinema-pay.online/android/register.php";
-	public static String URL_ADDTPUSER = "https://www.polinema-pay.online/android/AddTotalPoint.php";
 
 	// Server user cek poin user url
 	public static String URL_CEKPOINUSER = "https://www.polinema-pay.online/android/CekPoinUser.php";
-
 	// Server user cek id user url
 	public static String URL_CEKIDUSER = "https://www.polinema-pay.online/android/CekIdUser.php";
+
+	public static String URL_UPDATESTATUSJEMPUT = "https://www.polinema-pay.online/android/UpdateStatusJemput.php";
 
 
     public static String URL_CEKUSERPROFILE = "https://www.polinema-pay.online/android/CekUserProfile.php";

@@ -100,15 +100,6 @@
                 android:background="@color/colorPrimaryDark"
                 android:textColor="@color/white"/>
 
-            <Button
-                android:id="@+id/tolakPesanan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="3dp"
-                android:layout_below="@id/alamatJemputPesanan"
-                android:layout_toLeftOf="@id/terimaPesanan"
-                android:background="@color/input_login_hint"
-                android:text="Tolak" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>
