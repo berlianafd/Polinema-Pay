@@ -1,27 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/bg_register"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="10dp" >
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="fill_parent"-->
+<!--    android:layout_height="fill_parent"-->
+<!--    android:background="@color/bg_login"-->
+<!--    android:gravity="center"-->
+<!--    android:orientation="vertical"-->
+<!--    android:padding="10dp" >-->
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+<!--    <LinearLayout-->
+<!--        android:layout_width="fill_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:orientation="vertical"-->
+<!--        android:paddingLeft="20dp"-->
+<!--        android:paddingRight="20dp" >-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/nohp"-->
+<!--            android:layout_width="fill_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:background="@color/white"-->
+<!--            android:hint="@string/hint_nohp"-->
+<!--            android:inputType="phone"-->
+<!--            android:padding="10dp"-->
+<!--            android:singleLine="true"-->
+<!--            android:textColor="@color/input_login"-->
+<!--            android:textColorHint="@color/input_login_hint" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/imei"-->
+<!--            android:layout_width="fill_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:background="@color/white"-->
+<!--            android:text="IMEI"-->
+<!--            android:padding="10dp"-->
+<!--            android:singleLine="true"-->
+<!--            android:textColor="@color/input_login" />-->
+
+<!--        &lt;!&ndash; Login Button &ndash;&gt;-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btnLogin"-->
+<!--            android:layout_width="fill_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="20dip"-->
+<!--            android:background="@color/btn_login_bg"-->
+<!--            android:text="@string/btn_login"-->
+<!--            android:textColor="@color/btn_login" />-->
+
+<!-- Link to Login Screen -->
+
+<!--        <Button-->
+<!--            android:id="@+id/btnLinkToRegisterScreen"-->
+<!--            android:layout_width="fill_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="40dip"-->
+<!--            android:background="@null"-->
+<!--            android:text="@string/btn_link_to_register"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="15dp" />-->
+<!--    </LinearLayout>-->
+
+<!--</LinearLayout>-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.RegisterActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_logo" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_below="@id/relativeLayout"
+        android:layout_marginTop="-50dp"
+        android:background="@drawable/waves" />
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/imageView"
         android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp" >
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:text="DAFTAR"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+            android:textColor="@color/colorPrimary" />
 
         <EditText
             android:id="@+id/name"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="@color/input_register_bg"
+            android:layout_below="@id/textView"
             android:hint="@string/hint_name"
             android:padding="10dp"
             android:singleLine="true"
@@ -29,74 +127,191 @@
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint" />
 
+        <TextView
+            android:id="@+id/pluss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name"
+            android:text="+62"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"/>
         <EditText
             android:id="@+id/nohp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="@color/input_register_bg"
             android:hint="@string/hint_nohp"
+            android:layout_toRightOf="@id/pluss"
+            android:layout_below="@id/name"
             android:inputType="phone"
             android:padding="10dp"
+            android:maxLength="12"
             android:singleLine="true"
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint" />
 
-        <TextView
-            android:id="@+id/imei"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="IMEI"
-            android:background="@color/input_register_bg"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textColor="@color/input_register" />
+
 
         <!-- Login Button -->
 
         <RadioGroup
             android:id="@+id/level"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nohp">
 
             <RadioButton
                 android:id="@+id/user"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="User"
                 android:textColor="@color/input_register"/>
 
             <RadioButton
                 android:id="@+id/sukarelawan"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sukarelawan"
+                android:text="Relawan"
                 android:textColor="@color/input_register"/>
         </RadioGroup>
 
+
+
         <Button
             android:id="@+id/btnRegister"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dip"
-            android:background="#ea4c88"
-            android:text="@string/btn_register"
-            android:textColor="@color/white" />
-
-        <!-- Link to Login Screen -->
+            android:layout_below="@id/level"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:background="@color/colorPrimaryDark"
+            android:text="Selanjutnya"
+            android:textAllCaps="false"
+            android:textColor="#cdd8f1" />
 
         <Button
             android:id="@+id/btnLinkToLoginScreen"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dip"
+            android:layout_below="@id/btnRegister"
             android:background="@null"
             android:text="@string/btn_link_to_login"
             android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="15dp" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/imei"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@id/btnLinkToLoginScreen"
+            android:text="IMEI"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="@color/input_register" />
 
-</LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:tools="http://schemas.android.com/tools"-->
+    <!--    android:layout_width="fill_parent"-->
+    <!--    android:layout_height="fill_parent"-->
+    <!--    android:background="@color/bg_register"-->
+    <!--    android:gravity="center"-->
+    <!--    android:orientation="vertical"-->
+    <!--    android:padding="10dp" >-->
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="fill_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:paddingLeft="20dp"-->
+    <!--        android:paddingRight="20dp" >-->
+
+    <!--        <EditText-->
+    <!--            android:id="@+id/name"-->
+    <!--            android:layout_width="fill_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginBottom="10dp"-->
+    <!--            android:background="@color/input_register_bg"-->
+    <!--            android:hint="@string/hint_name"-->
+    <!--            android:padding="10dp"-->
+    <!--            android:singleLine="true"-->
+    <!--            android:inputType="textCapWords"-->
+    <!--            android:textColor="@color/input_register"-->
+    <!--            android:textColorHint="@color/input_register_hint" />-->
+
+    <!--        <EditText-->
+    <!--            android:id="@+id/nohp"-->
+    <!--            android:layout_width="fill_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginBottom="10dp"-->
+    <!--            android:background="@color/input_register_bg"-->
+    <!--            android:hint="@string/hint_nohp"-->
+    <!--            android:inputType="phone"-->
+    <!--            android:padding="10dp"-->
+    <!--            android:singleLine="true"-->
+    <!--            android:textColor="@color/input_register"-->
+    <!--            android:textColorHint="@color/input_register_hint" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/imei"-->
+    <!--            android:layout_width="fill_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginBottom="10dp"-->
+    <!--            android:text="IMEI"-->
+    <!--            android:background="@color/input_register_bg"-->
+    <!--            android:padding="10dp"-->
+    <!--            android:singleLine="true"-->
+    <!--            android:textColor="@color/input_register" />-->
+
+    <!--        &lt;!&ndash; Login Button &ndash;&gt;-->
+
+    <!--        <RadioGroup-->
+    <!--            android:id="@+id/level"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent" >-->
+
+    <!--            <RadioButton-->
+    <!--                android:id="@+id/user"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="User"-->
+    <!--                android:textColor="@color/input_register"/>-->
+
+    <!--            <RadioButton-->
+    <!--                android:id="@+id/sukarelawan"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="Relawan"-->
+    <!--                android:textColor="@color/input_register"/>-->
+    <!--        </RadioGroup>-->
+
+    <!--        <Button-->
+    <!--            android:id="@+id/btnRegister"-->
+    <!--            android:layout_width="fill_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="20dip"-->
+    <!--            android:background="#ea4c88"-->
+    <!--            android:text="@string/btn_register"-->
+    <!--            android:textColor="@color/white" />-->
+
+    <!--        &lt;!&ndash; Link to Login Screen &ndash;&gt;-->
+
+    <!--        <Button-->
+    <!--            android:id="@+id/btnLinkToLoginScreen"-->
+    <!--            android:layout_width="fill_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="40dip"-->
+    <!--            android:background="@null"-->
+    <!--            android:text="@string/btn_link_to_login"-->
+    <!--            android:textAllCaps="false"-->
+    <!--            android:textColor="@color/white"-->
+    <!--            android:textSize="15dp" />-->
+
+    <!--    </LinearLayout>-->
+
+    <!--</LinearLayout>-->

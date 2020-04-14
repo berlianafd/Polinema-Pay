@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.LoginActivity">
+    tools:context=".activity.VerifyPhoneLoginActivity">
 
     <RelativeLayout
-        android:id="@+id/relativeLayout"
+        android:id="@+id/relativeLayoutLogin"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:background="@color/colorPrimaryDark"
@@ -23,88 +23,62 @@
     </RelativeLayout>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewLogin"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:layout_below="@id/relativeLayout"
+        android:layout_below="@id/relativeLayoutLogin"
         android:layout_marginTop="-50dp"
         android:background="@drawable/waves" />
 
     <RelativeLayout
-        android:id="@+id/container"
+        android:id="@+id/containerLogin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/imageView"
+        android:layout_below="@id/imageViewLogin"
         android:orientation="vertical"
         android:padding="20dp">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textViewLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
-            android:text="LOGIN"
+            android:text="Kode OTP sedang dikirim!"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
             android:textColor="@color/colorPrimary" />
 
-        <TextView
-            android:id="@+id/plus"
+        <ProgressBar
+            android:id="@+id/progressbarLogin"
+            android:layout_below="@id/textViewLogin"
+            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textView"
-            android:layout_marginTop="18dp"
-            android:text="+62"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline" />
+            android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/editTextMobile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textView"
-            android:layout_marginLeft="1dp"
-            android:layout_marginTop="13dp"
-            android:layout_toRightOf="@id/plus"
-            android:digits="0123456789"
-            android:drawablePadding="10dp"
-            android:hint="Nomor Handphone"
-            android:inputType="phone"
-            android:maxLength="12" />
-
-        <TextView
-            android:id="@+id/imei"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@id/btnLinkToRegisterScreen"
-            android:background="@color/white"
-            android:text="IMEI"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textColor="@color/input_login" />
-
-        <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/editTextCodLogine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/editTextMobile"
+            android:layout_below="@id/progressbarLogin"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:digits="0123456789"
+            android:drawablePadding="10dp"
+            android:hint="Masukkan Kode Verifikasi"
+            android:inputType="phone"
+            android:maxLength="10" />
+
+        <Button
+            android:id="@+id/buttonSignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextCodLogine"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:background="@color/colorPrimaryDark"
-            android:text="Selanjutnya"
+            android:text="Masuk"
             android:textAllCaps="false"
             android:textColor="#cdd8f1" />
-
-        <Button
-            android:id="@+id/btnLinkToRegisterScreen"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:layout_below="@id/btnLogin"
-            android:text="@string/btn_link_to_register"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="15dp" />
 
     </RelativeLayout>
 

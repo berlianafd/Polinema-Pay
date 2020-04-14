@@ -7,9 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.polinemapay.R;
+
+import androidx.cardview.widget.CardView;
 
 public class ApplicationAdapterPesanan extends ArrayAdapter<ApplicationPesanan>{
     private List<ApplicationPesanan> items;
@@ -25,7 +30,7 @@ public class ApplicationAdapterPesanan extends ArrayAdapter<ApplicationPesanan>{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
         View v = convertView;
 
         if(v == null) {
@@ -37,11 +42,14 @@ public class ApplicationAdapterPesanan extends ArrayAdapter<ApplicationPesanan>{
 
         if(app != null) {
 //            ImageView icon = (ImageView)v.findViewById(R.id.appIcon);
+            TextView idPesanann = (TextView)v.findViewById(R.id.idPesanan);
             TextView namaacara = (TextView)v.findViewById(R.id.namaAcaraPesanan);
             TextView tglacara = (TextView)v.findViewById(R.id.tanggalJemputPesanan);
             TextView wktacara = (TextView)v.findViewById(R.id.waktuJemputPesanan);
             TextView tmptacara = (TextView)v.findViewById(R.id.alamatJemputPesanan);
             TextView perkiraanBS = (TextView)v.findViewById(R.id.perkiraanBS);
+            Button buttonTerima = (Button) v.findViewById(R.id.terimaPesanan);
+
 
 
 //            if(icon != null) {
@@ -50,15 +58,23 @@ public class ApplicationAdapterPesanan extends ArrayAdapter<ApplicationPesanan>{
 //                icon.setImageDrawable(res.getDrawable(res.getIdentifier(sIcon, null, null)));
 //            }
 
+            if(idPesanann != null) idPesanann.setText(app.getNamaAcara());
             if(namaacara != null) namaacara.setText(app.getNamaAcara());
             if(tglacara != null) tglacara.setText(app.getTanggalJemput());
             if(wktacara != null) wktacara.setText(app.getWaktuJemput());
             if(tmptacara != null) tmptacara.setText(app.getAlamatJemput());
             if(perkiraanBS != null) perkiraanBS.setText(app.getPerkiraanBeratSampah()+" Kg");
 
+            buttonTerima.setOnClickListener((new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getContext(), "Button 1 clicked", Toast.LENGTH_SHORT).show();
+                    ((ListView) parent).performItemClick(convertView, position, 0); // Let the event be handled in onItemClick()
+                }
+            }));
 
 
-//            if(dlText != null) {
+            //            if(dlText != null) {
 //                NumberFormat nf = NumberFormat.getNumberInstance();
 //                dlText.setText(nf.format(app.getTotalDl())+" dl");
 //            }
@@ -86,4 +102,5 @@ public class ApplicationAdapterPesanan extends ArrayAdapter<ApplicationPesanan>{
 
         return v;
     }
+
 }

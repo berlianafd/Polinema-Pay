@@ -79,7 +79,7 @@ public class ProfilActivity extends AppCompatActivity {
     ByteArrayOutputStream byteArrayOutputStream ;
     private int GALLERY = 1, CAMERA = 2;
 
-    ProgressDialog progressDialog;
+    ProgressDialog pDialog, progressDialog;
     byte[] byteArray ;
 
     HttpURLConnection httpURLConnection ;
@@ -107,6 +107,10 @@ public class ProfilActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profil);
         myDialog = new Dialog(this);
 
+        // Progress dialog
+        pDialog = new ProgressDialog(this);
+        pDialog.setCancelable(false);
+
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -131,11 +135,10 @@ public class ProfilActivity extends AppCompatActivity {
 
         byteArrayOutputStream = new ByteArrayOutputStream();
 
-        Intent iin= getIntent();
-        Bundle b = iin.getExtras();
+        // Fetching user details from SQLite
+        HashMap<String, String> user = db.getUserDetails();
 
-        idUser =(String) b.get("idUser");
-
+        idUser = user.get("id");
         checkUserId();
 
         GetImageFromGalleryButton.setOnClickListener(new View.OnClickListener() {
@@ -220,7 +223,7 @@ public class ProfilActivity extends AppCompatActivity {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                progressDialog = ProgressDialog.show(ProfilActivity.this,"Sedang Memproses...","Please Wait",false,false);
+                progressDialog = ProgressDialog.show(ProfilActivity.this,"Sedang Memproses...","Mohon tunggu",false,false);
             }
 
             @Override
@@ -358,12 +361,16 @@ public class ProfilActivity extends AppCompatActivity {
         // Tag used to cancel the request
         String tag_string_req = "req_checkUserProfile";
 
+        pDialog.setMessage("Sedang memuat...");
+		showDialog();
+
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.URL_CEKUSERPROFILE, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Check User Profile Response: " + response.toString());
+                hideDialog();
 
                 try {
                     JSONObject jObj = new JSONObject(response);
@@ -564,6 +571,16 @@ public class ProfilActivity extends AppCompatActivity {
         DateFormat dateFormat = new SimpleDateFormat("HH-mm-ss");
         Date date = new Date();
         return dateFormat.format(date);
+    }
+
+    private void showDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hideDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
     }
     /**
      * Logging out the user. Will set isLoggedIn flag to false in shared

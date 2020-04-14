@@ -33,9 +33,10 @@ import com.example.polinemapay.app.AppConfig;
 import com.example.polinemapay.app.AppController;
 import com.example.polinemapay.helper.SQLiteHandler;
 import com.example.polinemapay.helper.SessionManager;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends Activity {
-    private static final String TAG = RegisterActivity.class.getSimpleName();
+    private static final String TAG = LoginActivity.class.getSimpleName();
     private Button btnLogin;
     private Button btnLinkToRegister;
     private EditText inputnohp;
@@ -53,7 +54,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        inputnohp = (EditText) findViewById(R.id.nohp);
+        inputnohp = (EditText) findViewById(R.id.editTextMobile);
         inputimei = (TextView) findViewById(R.id.imei);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
@@ -70,13 +71,7 @@ public class LoginActivity extends Activity {
         // Session manager
         session = new SessionManager(getApplicationContext());
 
-        // Check if user is already logged in or not
-        if (session.isLoggedIn()) {
-            // User is already logged in. Take him to main activity
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
+
 
         // Login button Click Event
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +86,7 @@ public class LoginActivity extends Activity {
                 IMEINumber = telephonyManager.getDeviceId();
                 inputimei.setText(IMEINumber);
 
-                String nohp = inputnohp.getText().toString().trim();
+                String nohp = "+62"+inputnohp.getText().toString().trim();
                 String imei = inputimei.getText().toString().trim();
 
                 // Check for empty data in the form
@@ -101,7 +96,7 @@ public class LoginActivity extends Activity {
                 } else {
                     // Prompt user to enter credentials
                     Toast.makeText(getApplicationContext(),
-                            "Please enter the credentials!", Toast.LENGTH_LONG)
+                            "Nomor Anda belum terdaftar!", Toast.LENGTH_LONG)
                             .show();
                 }
             }
@@ -122,6 +117,20 @@ public class LoginActivity extends Activity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        if (session.isLoggedIn()) {
+            if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            } else{
+                logoutUser();
+            }
+        }
+    }
+
+    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
             case REQUEST_CODE: {
@@ -133,8 +142,6 @@ public class LoginActivity extends Activity {
             }
         }
     }
-
-
 
     /**
      * function to verify login details in mysql db
@@ -168,6 +175,7 @@ public class LoginActivity extends Activity {
                         String uid = jObj.getString("uid");
 
                         JSONObject user = jObj.getJSONObject("user");
+                        String idUser = user.getString("id");
                         String name = user.getString("name");
                         String nohp = user.getString("nohp");
                         String level = user.getString("level");
@@ -175,11 +183,13 @@ public class LoginActivity extends Activity {
                                 .getString("created_at");
 
                         // Inserting row in users table
-                        db.addUser(name, nohp, uid, level, created_at);
+                        db.addUser(idUser, name, nohp, uid, level, created_at);
 
                         // Launch main activity
                         Intent intent = new Intent(LoginActivity.this,
-                                MainActivity.class);
+                                VerifyPhoneLoginActivity.class);
+                        intent.putExtra("phonenumber", nohp);
+                        intent.putExtra("idUser", idUser);
                         startActivity(intent);
                         finish();
                     } else {
@@ -220,6 +230,11 @@ public class LoginActivity extends Activity {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    private void logoutUser() {
+        session.setLogin(false);
+        db.deleteUsers();
     }
 
     private void showDialog() {

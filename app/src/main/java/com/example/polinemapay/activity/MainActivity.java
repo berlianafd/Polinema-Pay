@@ -1,5 +1,6 @@
 package com.example.polinemapay.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import com.example.polinemapay.app.AppController;
 import com.example.polinemapay.helper.SQLiteHandler;
 import com.example.polinemapay.helper.SessionManager;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,7 +38,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 public class MainActivity extends AppCompatActivity {
 
 	private static final String TAG = MainActivity.class.getSimpleName();
-//	private ProgressDialog pDialog;
+	private ProgressDialog pDialog;
 
 	private Toolbar toolbar;
 	private NavigationView navigationView;
@@ -52,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		// Progress dialog
+		pDialog = new ProgressDialog(this);
+		pDialog.setCancelable(false);
 
 		txtName = (TextView) findViewById(R.id.namaHome);
 		ttlPoin = (TextView) findViewById(R.id.totalPoin);
@@ -90,20 +96,17 @@ public class MainActivity extends AppCompatActivity {
 		// Fetching user details from SQLite
 		HashMap<String, String> user = db.getUserDetails();
 
+		final String idUser = user.get("id");
 		final String name = user.get("name");
 		String level = user.get("level");
 		final String nohp = user.get("nohp");
 
+		Log.e(TAG, "Get Data Error: " + idUser+name+level+nohp);
 
-		// Displaying the user details on the screen
-		txtName.setText("Hai! "+ name);
-
-		checkUserId(nohp, name);
+		checkUserId(nohp);
 		checkHargaKertas("1");
 		checkHargaPlastik("2");
 		checkKoversiPoin("3");
-
-		Toast.makeText(getApplicationContext(), idUser, Toast.LENGTH_LONG).show();
 
 		if(level.equals("User")){
 			jemput.setVisibility(View.VISIBLE);
@@ -113,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
 			tukarPoinMerchant.setVisibility(View.GONE);
 			pesanan.setVisibility(View.GONE);
 			tugas.setVisibility(View.GONE);
-		} else if (level.equals("Sukarelawan")){
+		} else if (level.equals("Relawan")){
 			jemput.setVisibility(View.GONE);
 			tukarSampah.setVisibility(View.GONE);
 			tukarPoinUser.setVisibility(View.GONE);
@@ -208,8 +211,8 @@ public class MainActivity extends AppCompatActivity {
 		// Tag used to cancel the request
 		String tag_string_req = "req_checkPoints";
 
-//		pDialog.setMessage("Checkin in ...");
-//		showDialog();
+		pDialog.setMessage("Sedang memuat...");
+		showDialog();
 
 		StringRequest strReq = new StringRequest(Request.Method.POST,
 				AppConfig.URL_CEKPOINUSER, new Response.Listener<String>() {
@@ -217,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void onResponse(String response) {
 				Log.d(TAG, "Check Points Response: " + response.toString());
-//				hideDialog();
+				hideDialog();
 
 				try {
 					JSONObject jObj = new JSONObject(response);
@@ -278,11 +281,11 @@ public class MainActivity extends AppCompatActivity {
 	/**
 	 * function to check id profile details in mysql db
 	 * */
-	private void checkUserId(final String nohp, final String name) {
+	private void checkUserId(final String nohp) {
 		// Tag used to cancel the request
 		String tag_string_req = "req_checkIdUser";
 
-//		pDialog.setMessage("Checkin in ...");
+//		pDialog.setMessage("Sedang memuat...");
 //		showDialog();
 
 		StringRequest strReq = new StringRequest(Request.Method.POST,
@@ -305,8 +308,10 @@ public class MainActivity extends AppCompatActivity {
 						nohpp = user.getString("nohp");
 						Log.e(TAG, "Get Id : " + idUser);
 
-						checkPoints(idUser, nohp);
+                        // Displaying the user details on the screen
+                        txtName.setText("Hai! "+ namee);
 
+                        checkPoints(idUser, nohpp);
 					} else {
 						// Error in login. Get the error message
 						String errorMsg = jObj.getString("error_msg");
@@ -336,7 +341,6 @@ public class MainActivity extends AppCompatActivity {
 				// Posting parameters to login url
 				Map<String, String> params = new HashMap<String, String>();
 				params.put("nohp", nohp);
-				params.put("name", name);
 
 				return params;
 			}
@@ -536,10 +540,23 @@ public class MainActivity extends AppCompatActivity {
 
 		db.deleteUsers();
 
+		FirebaseAuth.getInstance().signOut();
+
 		// Launching the login activity
 		Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		startActivity(intent);
 		finish();
+	}
+
+	private void showDialog() {
+		if (!pDialog.isShowing())
+			pDialog.show();
+	}
+
+	private void hideDialog() {
+		if (pDialog.isShowing())
+			pDialog.dismiss();
 	}
 
 	public void scanUser(View view) {

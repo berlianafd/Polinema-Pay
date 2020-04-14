@@ -1,6 +1,7 @@
 package com.example.polinemapay.activity.Pesanan;
 
 public class ApplicationPesanan {
+    private String idPesanan;
     private String namaAcara;
     private String tanggalJemput;
     private String waktuJemput;
@@ -9,6 +10,14 @@ public class ApplicationPesanan {
 //    private long totalDl;
 //    private int rating;
 //    private String icon;
+
+    public String getIdPesanan() {
+        return idPesanan;
+    }
+
+    public void setIdPesanan(String idPesanan) {
+        this.idPesanan = idPesanan;
+    }
 
     public String getNamaAcara() {
         return namaAcara;

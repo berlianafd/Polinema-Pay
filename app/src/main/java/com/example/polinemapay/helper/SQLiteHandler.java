@@ -38,8 +38,9 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 	// Creating Tables
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
 		String CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_USER + "("
-				+ KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
+				+ KEY_ID + " TEXT," + KEY_NAME + " TEXT,"
 				+ KEY_nohp + " TEXT UNIQUE," + KEY_UID + " TEXT," + KEY_level + " TEXT,"
 				+ KEY_CREATED_AT + " TEXT" + ")";
 		db.execSQL(CREATE_LOGIN_TABLE);
@@ -60,18 +61,18 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 	/**
 	 * Storing user details in database
 	 * */
-	public void addUser(String name, String nohp, String uid, String level, String created_at) {
+	public void addUser(String id, String name, String nohp, String uid, String level, String created_at) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
+		values.put(KEY_ID, id); // Name
 		values.put(KEY_NAME, name); // Name
 		values.put(KEY_nohp, nohp); // nohp
 		values.put(KEY_UID, uid); // nohp
 		values.put(KEY_level, level); //level user
 		values.put(KEY_CREATED_AT, created_at); // Created At
 
-		// Inserting Row
-		long id = db.insert(TABLE_USER, null, values);
+		db.insert(TABLE_USER, null, values);
 		db.close(); // Closing database connection
 
 		Log.d(TAG, "New user inserted into sqlite: " + id);
