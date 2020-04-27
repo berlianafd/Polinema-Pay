@@ -44,6 +44,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold" />
+                    <ImageView
+                        android:layout_width="30pt"
+                        android:layout_height="30pt"
+                        android:layout_marginTop="10pt"
+                        android:layout_marginLeft="155pt"
+                        android:src="@drawable/ic_logo"
+                        />
 
                     <RelativeLayout
                         android:layout_width="wrap_content"

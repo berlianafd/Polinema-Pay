@@ -37,17 +37,9 @@ public class ApplicationAdapterRiwayat extends ArrayAdapter<ApplicationRiwayat>{
         ApplicationRiwayat app = items.get(position);
 
         if(app != null) {
-//            ImageView icon = (ImageView)v.findViewById(R.id.appIcon);
             TextView fiturRwyt = (TextView)v.findViewById(R.id.namaFitur);
             TextView tglRwyt = (TextView)v.findViewById(R.id.tanggal);
             TextView poinRwyt = (TextView)v.findViewById(R.id.poin);
-
-
-//            if(icon != null) {
-//                Resources res = getContext().getResources();
-//                String sIcon = "com.sj.jsondemo:drawable/" + app.getIcon();
-//                icon.setImageDrawable(res.getDrawable(res.getIdentifier(sIcon, null, null)));
-//            }
 
             if(tglRwyt != null) tglRwyt.setText(app.getTanggal());
 
@@ -62,33 +54,6 @@ public class ApplicationAdapterRiwayat extends ArrayAdapter<ApplicationRiwayat>{
                     poinRwyt.setText("-" + app.getPoin() + "poin");
                 }
             }
-
-
-
-//            if(dlText != null) {
-//                NumberFormat nf = NumberFormat.getNumberInstance();
-//                dlText.setText(nf.format(app.getTotalDl())+" dl");
-//            }
-
-//            if(ratingCntr != null && ratingCntr.getChildCount() == 0) {
-//                /*
-//                 * max rating: 5
-//                 */
-//                for(int i=1; i<=5; i++) {
-//                    ImageView iv = new ImageView(getContext());
-//
-//                    if(i <= app.getRating()) {
-//                        iv.setImageDrawable(getContext().
-//                                getResources().getDrawable(R.drawable.start_checked));
-//                    }
-//                    else {
-//                        iv.setImageDrawable(getContext().
-//                                getResources().getDrawable(R.drawable.start_unchecked));
-//                    }
-//
-//                    ratingCntr.addView(iv);
-//                }
-//            }
         }
         return v;
     }

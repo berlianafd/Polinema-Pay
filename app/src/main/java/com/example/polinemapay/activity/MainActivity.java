@@ -69,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
 		labelkg = (TextView) findViewById(R.id.labelKilogram);
 		hargaKrts = (TextView) findViewById(R.id.hargaKertas);
 		hargaPlstk = (TextView) findViewById(R.id.hargaPlastik);
-		TextView tt = (TextView) findViewById(R.id.toolbarText);
-		tt.setText("Polinema-Pay");
+//		TextView tt = (TextView) findViewById(R.id.toolbarText);
+//		tt.setText("Polinema-Pay");
 
 
 		jemput = (CardView) findViewById(R.id.jemputButton);
