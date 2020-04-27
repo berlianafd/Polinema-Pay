@@ -173,14 +173,14 @@ public class JemputActivity extends AppCompatActivity {
 
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        if (selectedHour > 0 && selectedHour <10 ){
-                            if (selectedMinute>0 && selectedMinute<10){
+                        if (selectedHour >= 0 && selectedHour <10 ){
+                            if (selectedMinute>=0 && selectedMinute<10){
                                 txt_jam.setText("0"+ selectedHour + ":" + "0"+ selectedMinute);
                             } else {
                                 txt_jam.setText("0"+ selectedHour + ":" + selectedMinute);
                             }
                         } else {
-                            if (selectedMinute>0 && selectedMinute<10){
+                            if (selectedMinute>=0 && selectedMinute<10){
                                 txt_jam.setText(selectedHour + ":" + "0"+ selectedMinute);
                             } else {
                                 txt_jam.setText(selectedHour + ":" + selectedMinute);
@@ -275,7 +275,7 @@ public class JemputActivity extends AppCompatActivity {
                 HashMapParams.put("perkiraanBeratSampah", perkiraanBS);
                 HashMapParams.put(ImageTag, GetImageNameFromEditText);
                 HashMapParams.put(ImageName, ConvertImage);
-                String FinalData = imageProcessClass.ImageHttpRequest("https://192.168.43.10:8080/simple_api/jemputSampahUser.php", HashMapParams);
+                String FinalData = imageProcessClass.ImageHttpRequest("https://www.polinema-pay.online/android/jemputSampahUser.php", HashMapParams);
                 return FinalData;
             }
         }
