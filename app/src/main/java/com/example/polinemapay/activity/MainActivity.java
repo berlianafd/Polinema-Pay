@@ -163,8 +163,12 @@ public class MainActivity extends AppCompatActivity {
 						startActivity(intent);
 						return true;
 					case R.id.navigation2:
+						HashMap<String, String> user = db.getUserDetails();
+						String level = user.get("level");
+
 						Intent intent1 = new Intent(MainActivity.this, RiwayatActivity.class);
 						intent1.putExtra("idUser", idUser);
+						intent1.putExtra("level", level);
 						startActivity(intent1);
 						return true;
 					case R.id.navigation3:

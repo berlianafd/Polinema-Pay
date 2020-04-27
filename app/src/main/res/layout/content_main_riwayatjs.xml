@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--    <ImageView-->
+    <!--        android:id="@+id/appIcon"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_alignParentLeft="true"-->
+    <!--        android:layout_alignParentTop="true"-->
+    <!--        android:layout_marginLeft="3dp"-->
+    <!--        android:layout_marginTop="3dp"-->
+    <!--        android:src="@drawable/user" />-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewPesanan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="12dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/namaAcaraJS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:text="Nama Acara"
+                android:textSize="22dp"/>
+            <TextView
+                android:id="@+id/idJS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:text="id"
+                android:visibility="gone"
+                android:textSize="22dp"/>
+
+            <TextView
+                android:id="@+id/tanggalJemputJS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_below="@id/namaAcaraJS"
+                android:text="yyyy-MM-dd"
+                android:textSize="18dp"/>
+
+            <TextView
+                android:id="@+id/separatorJS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/namaAcaraJS"
+                android:layout_toRightOf="@id/tanggalJemputJS"
+                android:layout_marginLeft="3dp"
+                android:text=" - "
+                android:textSize="18dp"/>
+
+            <TextView
+                android:id="@+id/waktuJemputJS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/namaAcaraJS"
+                android:layout_toRightOf="@id/separatorJS"
+                android:layout_marginLeft="3dp"
+                android:text="HH:mm:ss"
+                android:textSize="18dp"/>
+
+            <TextView
+                android:id="@+id/alamatJemputJS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tanggalJemputJS"
+                android:layout_marginLeft="3dp"
+                android:text="alamat"
+                android:textSize="18dp"/>
+
+            <TextView
+                android:id="@+id/perkiraanBSJS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="3dp"
+                android:text="0 kg" />
+
+            <Button
+                android:id="@+id/statusJS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="3dp"
+                android:layout_below="@id/alamatJemputJS"
+                android:text="Status"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/white"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

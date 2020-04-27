@@ -14,8 +14,8 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:background="@drawable/ic_logo" />
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_below="@id/relativeLayout"
-        android:layout_marginTop="-50dp"
+        android:layout_marginTop="-48dp"
         android:background="@drawable/waves" />
 
     <RelativeLayout
@@ -46,7 +46,7 @@
             android:layout_marginTop="25dp"
             android:text="LOGIN"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/plus"

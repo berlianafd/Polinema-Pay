@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,28 @@ public class RiwayatActivity extends ListActivity implements FetchDataListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_riwayat);
+
+        Intent iin = getIntent();
+        Bundle b = iin.getExtras();
+        String level = (String) b.get("level");
+
+        if(level.equals("User")) {
+            Button rwytJS = (Button) findViewById(R.id.riwayatJS);
+            rwytJS.setVisibility(View.VISIBLE);
+
+            rwytJS.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent iin = getIntent();
+                    Bundle b = iin.getExtras();
+                    String idUser = (String) b.get("idUser");
+
+                    Intent intent = new Intent(RiwayatActivity.this, RiwayatJemputSampahActivity.class);
+                    intent.putExtra("idUser", idUser);
+                    startActivity(intent);
+                }
+            });
+        }
         initView();
     }
 
