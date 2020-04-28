@@ -77,9 +77,6 @@ public class DetailTukarPoinActivity extends AppCompatActivity {
         final String h =(String) b.get("harga");
         final String p =(String) b.get("poin");
 
-//        Log.e(TAG, "Cek : " + id + ip + iyd + h + p);
-//        Toast.makeText(getApplicationContext(),
-//                "Cek : " + id + ip + iyd + h + p, Toast.LENGTH_LONG).show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.URL_TRANSAKSITUKAR, new com.android.volley.Response.Listener<String>() {

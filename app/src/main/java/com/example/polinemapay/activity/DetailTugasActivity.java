@@ -12,5 +12,7 @@ public class DetailTugasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_tugas);
+
+        String idTugas = getIntent().getStringExtra("idTugas");
     }
 }

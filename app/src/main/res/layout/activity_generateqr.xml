@@ -3,18 +3,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".activity.GenerateqrActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/layout_toolbar"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="10pt"
+        android:layout_marginLeft="5pt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kategori"
+        android:textStyle="bold"
+        android:textSize="8pt"/>
+
+    <LinearLayout
+        android:layout_marginLeft="5pt"
+        android:layout_marginTop="3pt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner android:id="@+id/spinKategori"
+            android:background="@layout/rounded_border_edittext"
+            android:layout_width="140pt"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10pt"/>
+
+        <Button
+            android:layout_width="48dp"
+            android:onClick="ShowPopupTambahKategori"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:textSize="10pt" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="10pt"
+        android:layout_marginLeft="5pt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Harga"
+        android:textStyle="bold"
+        android:textSize="8pt"/>
+
     <EditText
         android:id="@+id/edt_value"
+        android:background="@layout/rounded_border_edittext"
+        android:paddingLeft="20dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_marginLeft="5pt"
+        android:layout_marginRight="5pt"
+        android:layout_marginTop="3pt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:hint="Enter Text" />
 
     <LinearLayout
+        android:layout_marginLeft="5pt"
+        android:layout_marginRight="5pt"
+        android:layout_marginTop="15pt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -25,14 +82,18 @@
             android:id="@+id/start"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Generate" />
+            android:textColor="@color/white"
+            android:background="@color/colorPrimaryDark"
+            android:text="Buat Transaksi" />
 
     </LinearLayout>
 
     <ImageView
+        android:layout_marginTop="20pt"
         android:id="@+id/QR_Image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:contentDescription="@string/app_name" />
 
 </LinearLayout>

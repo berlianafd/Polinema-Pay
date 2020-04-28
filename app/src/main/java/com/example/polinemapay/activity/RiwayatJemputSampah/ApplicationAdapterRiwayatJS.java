@@ -2,34 +2,17 @@ package com.example.polinemapay.activity.RiwayatJemputSampah;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.example.polinemapay.R;
-import com.example.polinemapay.activity.MainActivity;
-import com.example.polinemapay.app.AppConfig;
-import com.example.polinemapay.app.AppController;
 import com.example.polinemapay.helper.SQLiteHandler;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ApplicationAdapterRiwayatJS extends ArrayAdapter<ApplicationRiwayatJS> {
     private static final String TAG = ApplicationAdapterRiwayatJS.class.getSimpleName();

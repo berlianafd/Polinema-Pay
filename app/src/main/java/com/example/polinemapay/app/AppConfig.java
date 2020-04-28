@@ -1,7 +1,7 @@
 package com.example.polinemapay.app;
 
 public class AppConfig {
-	// Server user login url
+    // Server user login url
 	public static String URL_LOGIN = "https://www.polinema-pay.online/android/login.php";
 
 	// Server user register url
@@ -19,15 +19,10 @@ public class AppConfig {
 	public static String URL_UPDATENAMAPROFIL = "https://www.polinema-pay.online/android/updateNamaProfil.php";
 	public static String URL_UPDATENOHPPROFIL = "https://www.polinema-pay.online/android/updateNohpProfil.php";
 
-	// Server user cek id user url
 	public static String URL_TRANSAKSIBUANG = "https://www.polinema-pay.online/android/transaksiBuangUser.php";
-	// Server user cek id user url
 	public static String URL_TRANSAKSITUKAR = "https://www.polinema-pay.online/android/transaksiTukarUser.php";
 
-	// Server user permintaan jemput sampah
 	public static String URL_CEKHARGAKERTAS = "https://www.polinema-pay.online/android/CekHargaKertas.php";
-	// Server user permintaan jemput sampah
 	public static String URL_CEKHARGAPLASTIK = "https://www.polinema-pay.online/android/CekHargaPlastik.php";
-	// Server user permintaan jemput sampah
 	public static String URL_CEKKONVERSIPOIN = "https://www.polinema-pay.online/android/CekKonversiPoin.php";
 }
