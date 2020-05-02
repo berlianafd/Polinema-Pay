@@ -3,7 +3,6 @@
     <color name="colorPrimary">#3b3bff</color>
     <color name="colorPrimaryDark">#2A3B80</color>
     <color name="colorAccent">#0000FF</color>
-    <color name="bgBottomNavigation">#0000FF</color>
 
     <color name="bg_login">#26ae90</color>
     <color name="bg_register">#2e3237</color>
