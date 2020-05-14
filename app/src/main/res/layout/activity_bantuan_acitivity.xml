@@ -22,7 +22,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="450dp"
+            android:layout_height="400dp"
             android:background="@drawable/help" />
 
         <LinearLayout
@@ -55,6 +55,7 @@
                 android:text="Hubungi kami melalui:"/>
 
         </LinearLayout>
+
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

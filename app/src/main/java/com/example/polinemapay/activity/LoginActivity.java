@@ -39,7 +39,7 @@ public class LoginActivity extends Activity {
     private static final String TAG = LoginActivity.class.getSimpleName();
     private Button btnLogin;
     private Button btnLinkToRegister;
-    private EditText inputnohp;
+    private EditText inputuname, inputpass;
     private TextView inputimei;
     private ProgressDialog pDialog;
     private SessionManager session;
@@ -54,7 +54,8 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        inputnohp = (EditText) findViewById(R.id.editTextMobile);
+        inputuname = (EditText) findViewById(R.id.editTextUsername);
+        inputpass = (EditText) findViewById(R.id.editTextPassword);
         inputimei = (TextView) findViewById(R.id.imei);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
@@ -86,17 +87,18 @@ public class LoginActivity extends Activity {
                 IMEINumber = telephonyManager.getDeviceId();
                 inputimei.setText(IMEINumber);
 
-                String nohp = "+62"+inputnohp.getText().toString().trim();
+                String uname = inputuname.getText().toString().trim();
+                String pass = inputpass.getText().toString().trim();
                 String imei = inputimei.getText().toString().trim();
 
                 // Check for empty data in the form
-                if (!nohp.isEmpty() && !imei.isEmpty()) {
+                if (!uname.isEmpty() && !imei.isEmpty() && !pass.isEmpty()) {
                     // login user
-                    checkLogin(nohp, imei);
+                    checkLogin(uname, pass, imei);
                 } else {
                     // Prompt user to enter credentials
                     Toast.makeText(getApplicationContext(),
-                            "Nomor Anda belum terdaftar!", Toast.LENGTH_LONG)
+                            "Tidak boleh ada yang kosong!", Toast.LENGTH_LONG)
                             .show();
                 }
             }
@@ -146,7 +148,7 @@ public class LoginActivity extends Activity {
     /**
      * function to verify login details in mysql db
      * */
-    private void checkLogin(final String nohp, final String imei) {
+    private void checkLogin(final String username, final  String password, final String imei) {
         // Tag used to cancel the request
         String tag_string_req = "req_login";
 
@@ -186,9 +188,8 @@ public class LoginActivity extends Activity {
                         db.addUser(idUser, name, nohp, uid, level, created_at);
 
                         // Launch main activity
-                        Intent intent = new Intent(LoginActivity.this,
-                                VerifyPhoneLoginActivity.class);
-                        intent.putExtra("phonenumber", nohp);
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         intent.putExtra("idUser", idUser);
                         startActivity(intent);
                         finish();
@@ -220,7 +221,8 @@ public class LoginActivity extends Activity {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("nohp", nohp);
+                params.put("username", username);
+                params.put("password", password);
                 params.put("imei", imei);
 
                 return params;

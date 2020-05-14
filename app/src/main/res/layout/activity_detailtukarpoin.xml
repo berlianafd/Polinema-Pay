@@ -1,0 +1,139 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.DetailTukarPoinActivity">
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Penjual: "
+            android:textColor="@color/lbl_name"/>
+
+        <TextView
+            android:id="@+id/idPenjual"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/lbl_name"
+            android:text="id penjual"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Produk: "
+            android:textColor="@color/lbl_name"/>
+
+        <TextView
+            android:id="@+id/idProduk"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/lbl_name"
+            android:text="id produk"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Harga "
+            android:textColor="@color/lbl_name"/>
+
+        <TextView
+            android:id="@+id/idHarga"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/lbl_name"
+            android:text="Rp."/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Poin yang dibutuhkan "
+            android:textColor="@color/lbl_name"/>
+
+        <TextView
+            android:id="@+id/idPoinTukar"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/lbl_name"
+            android:text="poin"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnBayar"
+            android:layout_width="100pt"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="Bayar"
+            android:onClick="simpanTransaksiTukar"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/batal"
+            android:layout_width="100pt"
+            android:layout_height="wrap_content"
+            android:background="@color/btn_logut_bg"
+            android:text="BATAL"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:onClick="tombolBatal"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+</LinearLayout>

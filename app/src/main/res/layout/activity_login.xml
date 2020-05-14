@@ -42,33 +42,46 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp"
-            android:text="LOGIN"
+            android:layout_marginTop="12dp"
+            android:textSize="8pt"
+            android:text="Username"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
             android:textColor="@color/colorPrimaryDark" />
 
-        <TextView
-            android:id="@+id/plus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textView"
-            android:layout_marginTop="18dp"
-            android:text="+62"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline" />
 
         <EditText
-            android:id="@+id/editTextMobile"
+            android:id="@+id/editTextUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/textView"
             android:layout_marginLeft="1dp"
-            android:layout_marginTop="13dp"
-            android:layout_toRightOf="@id/plus"
-            android:digits="0123456789"
+            android:layout_marginTop="3dp"
             android:drawablePadding="10dp"
-            android:hint="Nomor Handphone"
-            android:inputType="phone"
+            android:hint="Username"
+            android:maxLength="12" />
+
+        <TextView
+            android:id="@+id/textViewPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextUsername"
+            android:layout_marginTop="8dp"
+            android:textSize="8pt"
+            android:text="Password"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewPass"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="3dp"
+            android:drawablePadding="10dp"
+            android:hint="Password"
+
+            android:inputType="textPassword"
             android:maxLength="12" />
 
         <TextView
@@ -87,11 +100,11 @@
             android:id="@+id/btnLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/editTextMobile"
+            android:layout_below="@id/editTextPassword"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:background="@color/colorPrimaryDark"
-            android:text="Selanjutnya"
+            android:text="LOGIN"
             android:textAllCaps="false"
             android:textColor="#cdd8f1" />
 
