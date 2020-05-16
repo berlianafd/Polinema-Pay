@@ -130,13 +130,18 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="PESAN"
-        android:textColor="@color/white"
-        android:background="@color/colorPrimary"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/btnPesan" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="PESAN"
+            android:textColor="@color/white"
+            android:background="@color/colorPrimaryDark"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/btnPesan" />
+    </RelativeLayout>
+
 
 </LinearLayout>
