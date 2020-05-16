@@ -8,10 +8,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -41,13 +44,13 @@ public class RegisterActivity extends Activity {
     private Button btnRegister;
     private Button btnLinkToLogin;
     private EditText inputFullName;
-    private EditText inputNohp;
+    private EditText inputNohp, inputUsername, inputPass, inputUlangiPass;
     private TextView inputImei;
+    private ImageView signWrong;
     private RadioGroup level;
     private RadioButton levelUser, levelSukarelawan;
 
-
-    String IMEINumber, name, kodeLevel, imei, nohp;
+    String IMEINumber, name, kodeLevel, imei, nohp, uname, pass;
     private static final int REQUEST_CODE = 101;
     TelephonyManager telephonyManager;
 
@@ -58,7 +61,11 @@ public class RegisterActivity extends Activity {
 
         inputFullName = (EditText) findViewById(R.id.name);
         inputNohp = (EditText) findViewById(R.id.nohp);
+        inputUsername = (EditText) findViewById(R.id.reg_username);
+        inputPass = (EditText) findViewById(R.id.reg_pass);
+        inputUlangiPass = (EditText) findViewById(R.id.reg_ulangipass);
         inputImei = (TextView) findViewById(R.id.imei);
+        signWrong = (ImageView) findViewById(R.id.wrong_sign);
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
         level = (RadioGroup) findViewById(R.id.level);
@@ -68,7 +75,26 @@ public class RegisterActivity extends Activity {
         inputImei.setVisibility(View.GONE);
 
 
+        inputUlangiPass.addTextChangedListener(new TextWatcher() {
 
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                if(!inputPass.getText().toString().equals(inputUlangiPass.getText().toString())) {
+                    signWrong.setVisibility(View.VISIBLE);
+                } else {
+                    signWrong.setVisibility(View.GONE);
+                }
+            }
+        });
 
         // Register Button Click event
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -94,19 +120,29 @@ public class RegisterActivity extends Activity {
                 }
 
                 name = inputFullName.getText().toString().trim();
+                uname = inputUsername.getText().toString().trim();
+                pass = inputPass.getText().toString().trim();
                 nohp = "+62"+inputNohp.getText().toString().trim();
                 imei = inputImei.getText().toString().trim();
 
-                if (!name.isEmpty() && !nohp.isEmpty() && !imei.isEmpty() && selectedId!=-1) {
-                    // Launch main activity
-                    Intent intent = new Intent(RegisterActivity.this,
-                            VerifyPhoneRegisterActivity.class);
-                    intent.putExtra("mobile", nohp);
-                    intent.putExtra("name", name);
-                    intent.putExtra("imei", imei);
-                    intent.putExtra("kodeLevel", kodeLevel);
-                    startActivity(intent);
-                    finish();
+                if (!name.isEmpty() && !nohp.isEmpty() && !imei.isEmpty() && !uname.isEmpty() && !pass.isEmpty() && selectedId!=-1) {
+                    if(pass.equals(inputUlangiPass.getText().toString())){
+                        // Launch main activity
+                        Intent intent = new Intent(RegisterActivity.this,
+                                VerifyPhoneRegisterActivity.class);
+                        intent.putExtra("mobile", nohp);
+                        intent.putExtra("name", name);
+                        intent.putExtra("uname", uname);
+                        intent.putExtra("pass", pass);
+                        intent.putExtra("imei", imei);
+                        intent.putExtra("kodeLevel", kodeLevel);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(),
+                                "Password tidak sama!", Toast.LENGTH_LONG)
+                                .show();
+                    }
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Tidak boleh ada yang kosong!", Toast.LENGTH_LONG)

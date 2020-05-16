@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.polinemapay">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <application
         android:name=".app.AppController"
         android:allowBackup="true"

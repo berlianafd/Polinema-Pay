@@ -46,7 +46,7 @@
             android:layout_marginTop="25dp"
             android:text="Kode OTP sedang dikirim!"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/colorPrimaryDark" />
 
         <ProgressBar
             android:id="@+id/progressbar"
@@ -65,8 +65,8 @@
             android:digits="0123456789"
             android:drawablePadding="10dp"
             android:hint="Masukkan Kode Verifikasi"
-            android:inputType="phone"
-            android:maxLength="10" />
+            android:inputType="number"
+            android:maxLength="6" />
 
         <Button
             android:id="@+id/buttonSignIn"
@@ -79,6 +79,26 @@
             android:text="Masuk"
             android:textAllCaps="false"
             android:textColor="#cdd8f1" />
+
+        <TextView
+            android:id="@+id/kirimUlangkode"
+            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kirim Ulang Kode"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/buttonSignIn" />
+
+        <TextView
+            android:id="@+id/countdown"
+            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CountDown"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/kirimUlangkode" />
 
     </RelativeLayout>
 

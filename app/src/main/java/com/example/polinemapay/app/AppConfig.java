@@ -25,4 +25,6 @@ public class AppConfig {
 	public static String URL_CEKHARGAKERTAS = "https://www.polinema-pay.online/android/CekHargaKertas.php";
 	public static String URL_CEKHARGAPLASTIK = "https://www.polinema-pay.online/android/CekHargaPlastik.php";
 	public static String URL_CEKKONVERSIPOIN = "https://www.polinema-pay.online/android/CekKonversiPoin.php";
+
+	public static String URL_DETAILJEMPUTSAMPAH = "https://www.polinema-pay.online/android/DetailJemputSampah.php";
 }

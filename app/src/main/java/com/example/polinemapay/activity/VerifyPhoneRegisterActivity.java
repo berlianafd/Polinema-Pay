@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -47,6 +49,7 @@ public class VerifyPhoneRegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
     private EditText editText;
+    private TextView countdown, kodeulang;
     private ProgressDialog pDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +69,20 @@ public class VerifyPhoneRegisterActivity extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progressbar);
         editText = findViewById(R.id.editTextCode);
+        countdown = findViewById(R.id.countdown);
+        kodeulang = findViewById(R.id.kirimUlangkode);
 
-        String phonenumber = getIntent().getStringExtra("mobile");
+        final String phonenumber = getIntent().getStringExtra("mobile");
         sendVerificationCode(phonenumber);
+        countdownn();
+
+        kodeulang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                countdownn();
+                sendVerificationCode(phonenumber);
+            }
+        });
 
         findViewById(R.id.buttonSignIn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +98,24 @@ public class VerifyPhoneRegisterActivity extends AppCompatActivity {
         });
     }
 
+    private void countdownn(){
+        new CountDownTimer(60000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                countdown.setVisibility(View.VISIBLE);
+                kodeulang.setVisibility(View.GONE);
+                countdown.setText("00:00:"+millisUntilFinished / 1000);
+                //here you can have your logic to set text to edittext
+            }
+
+            public void onFinish() {
+                countdown.setVisibility(View.GONE);
+                kodeulang.setVisibility(View.VISIBLE);
+            }
+
+        }.start();
+    }
+
     private void verifyCode(String code) {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
         signInWithCredential(credential);
@@ -97,9 +129,11 @@ public class VerifyPhoneRegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             String phonenumber = getIntent().getStringExtra("mobile");
                             String nama = getIntent().getStringExtra("name");
+                            String uname = getIntent().getStringExtra("uname");
+                            String pass = getIntent().getStringExtra("pass");
                             String imei = getIntent().getStringExtra("imei");
                             String kodelv = getIntent().getStringExtra("kodeLevel");
-                            registerUser(nama,phonenumber,imei,kodelv);
+                            registerUser(nama,phonenumber,uname, pass,imei,kodelv);
                         } else {
                             Toast.makeText(VerifyPhoneRegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
@@ -147,7 +181,7 @@ public class VerifyPhoneRegisterActivity extends AppCompatActivity {
      * Function to store user in MySQL database will post params(tag, name,
      * nohp, imei) to register url
      * */
-    private void registerUser(final String name, final String nohp,
+    private void registerUser(final String name, final String nohp, final String uname, final String pass,
                               final String imei, final String level) {
         // Tag used to cancel the request
         String tag_string_req = "req_register";
@@ -171,8 +205,6 @@ public class VerifyPhoneRegisterActivity extends AppCompatActivity {
                     if (!error) {
                         // User successfully stored in MySQL
                         // Now store the user in sqlite
-                        String uid = jObj.getString("uid");
-
                         JSONObject user = jObj.getJSONObject("user");
                         idUser= user.getString("id");
                         String name = user.getString("name");
@@ -182,7 +214,7 @@ public class VerifyPhoneRegisterActivity extends AppCompatActivity {
                                 .getString("created_at");
 
                         // Inserting row in users table
-                        db.addUser(idUser, name, nohp, uid, level, created_at);
+                        db.addUser(idUser, name, nohp, level, created_at);
 
                         Toast.makeText(getApplicationContext(), "Berhasil terdaftar!", Toast.LENGTH_LONG).show();
 
@@ -190,7 +222,7 @@ public class VerifyPhoneRegisterActivity extends AppCompatActivity {
                         Intent intent = new Intent(
                                 VerifyPhoneRegisterActivity.this,
                                 MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
 
@@ -223,6 +255,8 @@ public class VerifyPhoneRegisterActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("name", name);
                 params.put("nohp", nohp);
+                params.put("uname", uname);
+                params.put("pass", pass);
                 params.put("imei", imei);
                 params.put("level", level);
 

@@ -72,8 +72,6 @@ public class LoginActivity extends Activity {
         // Session manager
         session = new SessionManager(getApplicationContext());
 
-
-
         // Login button Click Event
         btnLogin.setOnClickListener(new View.OnClickListener() {
 
@@ -122,13 +120,19 @@ public class LoginActivity extends Activity {
     protected void onStart() {
         super.onStart();
         if (session.isLoggedIn()) {
-            if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-            } else{
-                logoutUser();
-            }
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+
+//            if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+//                Intent intent = new Intent(this, MainActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(intent);
+//            } else{
+//                logoutUser();
+//            }
+        }
+        else{
+            logoutUser();
         }
     }
 
@@ -174,8 +178,6 @@ public class LoginActivity extends Activity {
                         session.setLogin(true);
 
                         // Now store the user in SQLite
-                        String uid = jObj.getString("uid");
-
                         JSONObject user = jObj.getJSONObject("user");
                         String idUser = user.getString("id");
                         String name = user.getString("name");
@@ -185,11 +187,11 @@ public class LoginActivity extends Activity {
                                 .getString("created_at");
 
                         // Inserting row in users table
-                        db.addUser(idUser, name, nohp, uid, level, created_at);
+                        db.addUser(idUser, name, nohp, level, created_at);
 
                         // Launch main activity
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         intent.putExtra("idUser", idUser);
                         startActivity(intent);
                         finish();
