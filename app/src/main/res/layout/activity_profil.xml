@@ -115,5 +115,60 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/ic_account" />
+
+            <TextView
+                android:id="@+id/usernameProfil"
+                android:layout_width="266dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@layout/rounded_border_edittext"
+                android:paddingLeft="20dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="username"
+                android:textColor="@color/lbl_name"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/lock" />
+
+            <TextView
+                android:id="@+id/passProfil"
+                android:layout_width="266dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@layout/rounded_border_edittext"
+                android:paddingLeft="20dp"
+                android:paddingTop="8dp"
+                android:inputType="textPassword"
+                android:paddingBottom="8dp"
+                android:text="password"
+                android:textColor="@color/lbl_name"
+                android:textStyle="bold"
+                android:onClick="ShowPopupPassword"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

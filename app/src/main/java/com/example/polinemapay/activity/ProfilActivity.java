@@ -92,9 +92,9 @@ public class ProfilActivity extends AppCompatActivity {
     boolean check = true;
     String ConvertImage, idUser ;
 
-    private TextView txtName;
+    private TextView txtName, txtUsername, txtPassword;
     private TextView txtnohp;
-    private String nama;
+    private String nama, username, password;
     private String notelpp;
 
     private SQLiteHandler db;
@@ -120,6 +120,8 @@ public class ProfilActivity extends AppCompatActivity {
 
         txtName = (TextView) findViewById(R.id.namaProfil);
         txtnohp = (TextView) findViewById(R.id.nohpProfil);
+        txtUsername = (TextView) findViewById(R.id.usernameProfil);
+        txtPassword = (TextView) findViewById(R.id.passProfil);
         TextView tt = (TextView) findViewById(R.id.toolbarText);
         tt.setText("Profil");
 
@@ -170,6 +172,27 @@ public class ProfilActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateNamaProfil(updtNama.getText().toString());
+                checkUserId();
+            }
+        });
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+    }
+
+    public void ShowPopupPassword(View v) {
+        final EditText passlm, passbr, ulangpassbr;
+        Button update;
+        myDialog.setContentView(R.layout.popup_passwordprofil);
+
+        passlm = (EditText) myDialog.findViewById(R.id.passLama);
+        passbr = (EditText) myDialog.findViewById(R.id.passBaru);
+        ulangpassbr = (EditText) myDialog.findViewById(R.id.UlangiPassBaru);
+        update = (Button) myDialog.findViewById(R.id.btnUpdatePassProfil);
+
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                updateNamaProfil(updtNama.getText().toString());
                 checkUserId();
             }
         });
@@ -382,6 +405,8 @@ public class ProfilActivity extends AppCompatActivity {
                         idUser = user.getString("id");
                         namee = user.getString("nama");
                         nohpp = user.getString("nohp");
+                        username = user.getString("username");
+                        password = user.getString("password");
                         image_pathh = user.getString("image_path");
                         image_namee = user.getString("image_name");
                         Log.e(TAG, "Get Id : " + idUser);
@@ -393,6 +418,8 @@ public class ProfilActivity extends AppCompatActivity {
                         // Displaying the user details on the screen
                         txtName.setText(namee);
                         txtnohp.setText(nohpp);
+                        txtUsername.setText(username);
+                        txtPassword.setText(password);
 
                         //        Set nama foto profil
                         ProfilActivity tgl = new ProfilActivity();
