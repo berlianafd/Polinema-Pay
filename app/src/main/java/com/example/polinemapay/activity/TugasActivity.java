@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -27,7 +28,11 @@ public class TugasActivity extends ListActivity implements FetchDataListener {
         // show progress dialog
         dialog = ProgressDialog.show(this, "", "Loading...");
 
-        String url = "https://www.polinema-pay.online/android/ListTugas.php";
+        Intent iin= getIntent();
+        Bundle b = iin.getExtras();
+        String idUser =(String) b.get("idUser");
+
+        String url = "https://www.polinema-pay.online/android/ListTugas.php?idUser=" + idUser;
         FetchDataTaskTugas task = new FetchDataTaskTugas(this);
         task.execute(url);
     }

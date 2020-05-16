@@ -93,7 +93,7 @@ public class ApplicationAdapterPesanan extends ArrayAdapter<ApplicationPesanan> 
                 public void onClick(View view) {
 
                     ((ListView) parent).performItemClick(convertView, position, 0); // Let the event be handled in onItemClick()
-                    Toast.makeText(getContext(), items.get(position).getIdPesanan() + "," + idUser, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getContext(), items.get(position).getIdPesanan() + "," + idUser, Toast.LENGTH_LONG).show();
                     updateStatusPesanan(items.get(position).getIdPesanan());
 
                 }

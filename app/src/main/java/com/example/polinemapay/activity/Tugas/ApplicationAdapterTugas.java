@@ -39,7 +39,7 @@ public class ApplicationAdapterTugas extends ArrayAdapter<ApplicationTugas>{
             v = li.inflate(R.layout.content_main_tugas, null);
         }
 
-        ApplicationTugas app = items.get(position);
+        final ApplicationTugas app = items.get(position);
 
         if(app != null) {
 //            ImageView icon = (ImageView)v.findViewById(R.id.appIcon);
@@ -61,7 +61,7 @@ public class ApplicationAdapterTugas extends ArrayAdapter<ApplicationTugas>{
                 public void onClick(View view) {
 
                     ((ListView) parent).performItemClick(convertView, position, 0); // Let the event be handled in onItemClick()
-                    String idTgs = items.get(position).getIdAcara();
+                    String idTgs = app.getIdAcara();
                     Intent intent = new Intent(getContext(), DetailTugasActivity.class);
                     intent.putExtra("idTugas", idTgs);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
