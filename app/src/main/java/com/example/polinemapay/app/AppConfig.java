@@ -13,7 +13,7 @@ public class AppConfig {
 	public static String URL_CEKIDUSER = "https://www.polinema-pay.online/android/CekIdUser.php";
 
 	public static String URL_UPDATESTATUSJEMPUT = "https://www.polinema-pay.online/android/UpdateStatusJemput.php";
-
+	public static String URL_UPDATESELESAIJEMPUT = "https://www.polinema-pay.online/android/UpdateSelesaiJemput.php";
 
     public static String URL_CEKUSERPROFILE = "https://www.polinema-pay.online/android/CekUserProfile.php";
 	public static String URL_UPDATENAMAPROFIL = "https://www.polinema-pay.online/android/updateNamaProfil.php";

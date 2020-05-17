@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ public class DetailTugasActivity extends AppCompatActivity {
     ImageView sms, wa, call;
     TextView nama, nohpp, alamt, kec, kel, tgl, waktuu, perkiraannBS, namaAcr;
     String number="";
+    Button selesai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +49,13 @@ public class DetailTugasActivity extends AppCompatActivity {
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
 
-        String idTugas = getIntent().getStringExtra("idTugas");
+        final String idTugas = getIntent().getStringExtra("idTugas");
         checkDetailJemputSampah(idTugas);
 
         sms = (ImageView) findViewById(R.id.sms_button);
         wa = (ImageView) findViewById(R.id.wa_button);
         call = (ImageView) findViewById(R.id.call_button);
+        selesai = (Button) findViewById(R.id.selesai_button);
         nama = (TextView) findViewById(R.id.namaPJS);
         nohpp = (TextView) findViewById(R.id.notelpPJS);
         alamt = (TextView) findViewById(R.id.almatPJS);
@@ -103,6 +106,13 @@ public class DetailTugasActivity extends AppCompatActivity {
             }
         });
 
+        selesai.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                updateSelesaiPesanan(idTugas);
+            }
+        });
+
     }
 
     private void checkDetailJemputSampah(final String idTugas) {
@@ -135,6 +145,7 @@ public class DetailTugasActivity extends AppCompatActivity {
                         String kecamatan = user.getString("kecamatan");
                         String tanggal = user.getString("tanggal");
                         String waktu = user.getString("waktu");
+                        String status = user.getString("status");
                         String perkiraanBS = user.getString("perkiraanBeratSampah");
 
                         number=nohp;
@@ -147,6 +158,10 @@ public class DetailTugasActivity extends AppCompatActivity {
                         tgl.setText(tanggal);
                         waktuu.setText(waktu + "WIB");
                         perkiraannBS.setText(perkiraanBS +"Kg");
+
+                        if(status.equals("selesai")){
+                            selesai.setVisibility(View.GONE);
+                        }
 
                     } else {
                         // Error in login. Get the error message
@@ -177,6 +192,77 @@ public class DetailTugasActivity extends AppCompatActivity {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("idTugas", idTugas);
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    private void updateSelesaiPesanan(final String idPesanan) {
+        // Tag used to cancel the request
+        String tag_string_req = "req_updatestatuspesanan";
+
+//        pDialog.setMessage("Sedang memuat...");
+//        showDialog();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_UPDATESELESAIJEMPUT, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Check Update Status Pesanan: " + response.toString());
+//                hideDialog();
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+
+                    // Check for error node in json
+                    if (!error) {
+                        JSONObject user = jObj.getJSONObject("user");
+                        String status = user.getString("status");
+
+                        Log.e("Hasil", status + idPesanan);
+
+                        Toast.makeText(getApplicationContext(),
+                                "Pesanan Jemput Sampah telah selesai!", Toast.LENGTH_LONG).show();
+
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getApplicationContext().startActivity(intent);
+                    } else {
+                        // Error in login. Get the error message
+                        String errorMsg = jObj.getString("error_msg");
+                        Toast.makeText(getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Get Id Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+//				hideDialog();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idPesanan", idPesanan);
 
                 return params;
             }

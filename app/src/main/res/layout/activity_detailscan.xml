@@ -152,7 +152,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
-                android:text="Poin Sampah: "
+                android:text="Poin Sampah"
                 android:textColor="@color/colorPrimaryDark"/>
 
             <TextView

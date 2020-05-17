@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
 		final String idUser = user.get("id");
 		final String name = user.get("name");
-		String level = user.get("level");
+		final String level = user.get("level");
 		final String nohp = user.get("nohp");
 
 		Log.e(TAG, "Get Data Error: " + idUser+name+level+nohp);
@@ -163,19 +163,20 @@ public class MainActivity extends AppCompatActivity {
 						startActivity(intent);
 						return true;
 					case R.id.navigation2:
-						HashMap<String, String> user = db.getUserDetails();
-						String level = user.get("level");
 
-						Intent intent1 = new Intent(MainActivity.this, RiwayatActivity.class);
-						intent1.putExtra("idUser", idUser);
-						intent1.putExtra("level", level);
-						startActivity(intent1);
+						if(level.equals("Relawan")){
+							Intent intent1 = new Intent(MainActivity.this, RiwayatRelawanActivity.class);
+							intent1.putExtra("idUser", idUser);
+							startActivity(intent1);
+						}else{
+							Intent intent1 = new Intent(MainActivity.this, RiwayatActivity.class);
+							intent1.putExtra("idUser", idUser);
+							intent1.putExtra("level", level);
+							startActivity(intent1);
+						}
 						return true;
 					case R.id.navigation3:
 						Intent intent2 = new Intent(MainActivity.this, ProfilActivity.class);
-						intent2.putExtra("idUser", idUser);
-						intent2.putExtra("nama", namee);
-						intent2.putExtra("nohp", nohpp);
 						startActivity(intent2);
 						return true;
 					case R.id.navigation4:

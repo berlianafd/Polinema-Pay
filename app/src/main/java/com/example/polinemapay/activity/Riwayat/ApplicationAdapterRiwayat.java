@@ -48,10 +48,14 @@ public class ApplicationAdapterRiwayat extends ArrayAdapter<ApplicationRiwayat>{
                     if(fiturRwyt != null) fiturRwyt.setText("Penukaran Sampah");
                     poinRwyt.setTextColor(Color.BLUE);
                     poinRwyt.setText("+" + app.getPoin() + "poin");
-                }else{
+                }else if ((app.getFitur().equals("tp"))){
                     if(fiturRwyt != null) fiturRwyt.setText("Penukaran Poin");
                     poinRwyt.setTextColor(Color.RED);
                     poinRwyt.setText("-" + app.getPoin() + "poin");
+                } else {
+                    if(fiturRwyt != null) fiturRwyt.setText("Transaksi Jual");
+                    poinRwyt.setTextColor(Color.BLUE);
+                    poinRwyt.setText("+" + app.getPoin() + "poin");
                 }
             }
         }

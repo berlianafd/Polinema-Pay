@@ -68,6 +68,7 @@ public class RiwayatActivity extends ListActivity implements FetchDataListener {
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
         String idUser =(String) b.get("idUser");
+        String level =(String) b.get("level");
 
         String url = "https://www.polinema-pay.online/android/ListRiwayat.php?idUser=" + idUser;
         FetchDataTaskRiwayat task = new FetchDataTaskRiwayat(this);

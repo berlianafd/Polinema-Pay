@@ -61,9 +61,9 @@ public class DetailScannActivity extends AppCompatActivity{
             String ps =(String) b.get("poinSampah");
 
             String hargakg =  Double.toString(Double.parseDouble(hs) * 1000);
-            harga.setText(hargakg + " /kg");
+            harga.setText("Rp "+hargakg + " /kg");
             brtSampah.setText(bs + " g");
-            pSampah.setText(ps);
+            pSampah.setText(ps+" poin");
         }
     }
 
