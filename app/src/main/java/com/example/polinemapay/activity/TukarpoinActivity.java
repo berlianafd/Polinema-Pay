@@ -104,7 +104,7 @@ public class TukarpoinActivity extends AppCompatActivity implements ZXingScanner
 
     @Override
     public void handleResult(Result rawResult) {
-        txtResult.setText(rawResult.getText());
+//        txtResult.setText(rawResult.getText());
         if (rawResult.getText().toString().length() >= 0) {
             String result = rawResult.getText();
             String[] splited = result.split("\\s+");
@@ -118,6 +118,7 @@ public class TukarpoinActivity extends AppCompatActivity implements ZXingScanner
             Bundle b = iin.getExtras();
             String idUser =(String) b.get("idUser");
             String konversi =(String) b.get("konversi");
+            String poinUser =(String) b.get("poinUser");
 
             Double konv = Double.parseDouble(konversi);
 
@@ -126,6 +127,7 @@ public class TukarpoinActivity extends AppCompatActivity implements ZXingScanner
             //            Mengirim data ke Detail
             Intent ii=new Intent(TukarpoinActivity.this, DetailTukarPoinActivity.class);
             ii.putExtra("idUser", idUser);
+            ii.putExtra("poinUser", poinUser);
             ii.putExtra("idPenjual", idPenjual);
             ii.putExtra("idYgDijual", idYgDijual);
             ii.putExtra("harga",harga);

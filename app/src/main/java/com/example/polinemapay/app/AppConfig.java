@@ -27,4 +27,5 @@ public class AppConfig {
 	public static String URL_CEKKONVERSIPOIN = "https://www.polinema-pay.online/android/CekKonversiPoin.php";
 
 	public static String URL_DETAILJEMPUTSAMPAH = "https://www.polinema-pay.online/android/DetailJemputSampah.php";
+	public static String URL_DETAILMERCHANT = "https://www.polinema-pay.online/android/GetDetailMerchant.php";
 }

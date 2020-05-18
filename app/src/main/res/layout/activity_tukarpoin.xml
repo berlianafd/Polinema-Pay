@@ -3,32 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.TukarpoinActivity"
-    android:orientation="vertical">
+    tools:context=".activity.TukarpoinActivity">
 
     <me.dm7.barcodescanner.zxing.ZXingScannerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/zxscan"
-        android:layout_above="@+id/layout_result"/>
+        android:id="@+id/zxscan" />
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/layout_result"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical"
-        android:padding="8dp"
-        android:background="@color/colorPrimaryDark">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/txt_result"
-            android:text="......."
-            android:textColor="@android:color/white"
-            android:textSize="24sp"
-            android:gravity="center"/>
-    </LinearLayout>
+        android:id="@+id/txt_result"
+        android:text="......."
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:gravity="center"/>
 
 </RelativeLayout>

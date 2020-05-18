@@ -37,7 +37,7 @@
             android:id="@+id/poinsaatini"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="7342"
+            android:text="poin"
             android:textStyle="bold"
             android:gravity="center"
             android:textSize="10pt"
@@ -90,6 +90,52 @@
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
             android:paddingLeft="20dp"/>
+
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanggal"
+                android:paddingLeft="20dp"
+                android:textColor="@color/colorPrimaryDark"/>
+
+            <TextView
+                android:id="@+id/tanggalTP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="20dp"
+                android:textStyle="bold"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="2020-05-01"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Waktu"
+                android:paddingLeft="20dp"
+                android:textColor="@color/colorPrimaryDark"/>
+
+            <TextView
+                android:id="@+id/waktuTP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="20dp"
+                android:textStyle="bold"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="10:05 WIB"/>
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_marginTop="20dp"
@@ -154,7 +200,6 @@
             android:layout_alignParentBottom="true"
             android:background="@color/colorPrimaryDark"
             android:text="Konfirmasi"
-            android:onClick="simpanTransaksiTukar"
             android:textColor="@color/white" />
     </RelativeLayout>
 </LinearLayout>

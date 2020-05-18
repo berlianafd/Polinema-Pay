@@ -177,7 +177,7 @@
             android:layout_margin="10dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorPrimaryDark"
             android:text="Konfirmasi"
             android:onClick="simpanTransaksiBuang"
             android:textColor="@color/white" />

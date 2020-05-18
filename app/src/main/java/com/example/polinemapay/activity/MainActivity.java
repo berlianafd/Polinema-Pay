@@ -583,6 +583,7 @@ public class MainActivity extends AppCompatActivity {
 	public void tukarPoinUser(View view) {
 		Intent intent = new Intent(MainActivity.this, TukarpoinActivity.class);
 		intent.putExtra("idUser", idUser);
+		intent.putExtra("poinUser", ttlPoin.getText().toString());
 		intent.putExtra("konversi", KonversiPoin);
 		startActivity(intent);
 	}

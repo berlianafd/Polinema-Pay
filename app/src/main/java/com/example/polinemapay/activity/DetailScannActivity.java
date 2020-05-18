@@ -19,6 +19,10 @@ import com.example.polinemapay.app.AppController;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +32,7 @@ public class DetailScannActivity extends AppCompatActivity{
     private static final String TAG = MainActivity.class.getSimpleName();
     private ProgressDialog pDialog;
 
-    private TextView jnsSampah, brtSampah, harga, pSampah;
+    private TextView jnsSampah, brtSampah, harga, pSampah, tgl, waktu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,15 @@ public class DetailScannActivity extends AppCompatActivity{
         harga = (TextView) findViewById(R.id.hrgSampah);
         brtSampah = (TextView) findViewById(R.id.beratSampah);
         pSampah = (TextView) findViewById(R.id.poinSampah);
+        tgl = (TextView) findViewById(R.id.tanggalTS);
+        waktu = (TextView) findViewById(R.id.waktuTS);
+
+//        set tgl dan waktu
+        Date HariSekarang = new Date( );
+        SimpleDateFormat ft = new SimpleDateFormat ("dd-MM-yyyy");
+        SimpleDateFormat fw = new SimpleDateFormat ("hh:mm:ss");
+        tgl.setText(ft.format(HariSekarang));
+        waktu.setText(fw.format(HariSekarang));
 
         // Progress dialog
 		pDialog = new ProgressDialog(this);
