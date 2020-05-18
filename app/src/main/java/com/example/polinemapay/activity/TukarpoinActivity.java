@@ -64,6 +64,9 @@ public class TukarpoinActivity extends AppCompatActivity implements ZXingScanner
 
     private ZXingScannerView ScannerView;
     private TextView txtResult;
+    private String idPenjual;
+    private String idYgDijual;
+    private String harga;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,30 +112,103 @@ public class TukarpoinActivity extends AppCompatActivity implements ZXingScanner
             String result = rawResult.getText();
             String[] splited = result.split("\\s+");
 
-            String idPenjual = splited[0];
-            String idYgDijual = splited[1];
-            String harga = splited[2];
+            idPenjual = splited[0];
+            idYgDijual = splited[1];
+            harga = splited[2];
+            String fitur = splited[3];
 
-            //            Mengambil data id dan harga sampah dari Main
-            Intent iin= getIntent();
-            Bundle b = iin.getExtras();
-            String idUser =(String) b.get("idUser");
-            String konversi =(String) b.get("konversi");
-            String poinUser =(String) b.get("poinUser");
-
-            Double konv = Double.parseDouble(konversi);
-
-            String poin =  Integer.toString(Integer.parseInt(harga)* (konv.intValue()));
-
-            //            Mengirim data ke Detail
-            Intent ii=new Intent(TukarpoinActivity.this, DetailTukarPoinActivity.class);
-            ii.putExtra("idUser", idUser);
-            ii.putExtra("poinUser", poinUser);
-            ii.putExtra("idPenjual", idPenjual);
-            ii.putExtra("idYgDijual", idYgDijual);
-            ii.putExtra("harga",harga);
-            ii.putExtra("poin",poin);
-            startActivity(ii);
+            if ((fitur.equals("TP"))){
+                getDetailMerchant(idPenjual, idYgDijual);
+            } else {
+                Toast.makeText(getApplicationContext(),
+                        "Kode Transaksi tidak ditemukan", Toast.LENGTH_LONG).show();
+            }
         }
+    }
+
+    public void getDetailMerchant(final String ip, final String iyd) {
+        // Tag used to cancel the request
+        String tag_string_req = "req_detailmerchant";
+
+//        pDialog.setMessage("Memproses ...");
+//        showDialog();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_DETAILMERCHANT, new com.android.volley.Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Check save Response: " + response.toString());
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+
+                    // Check for error node in json
+                    if (!error) {
+                        JSONObject user = jObj.getJSONObject("user");
+                        String namaPenjual = user.getString("namaPenjual");
+                        String namaProduk = user.getString("namaKategori");
+
+                        //            Mengambil data id dan harga sampah dari Main
+                        Intent iin= getIntent();
+                        Bundle b = iin.getExtras();
+                        String idUser =(String) b.get("idUser");
+                        String konversi =(String) b.get("konversi");
+                        String poinUser =(String) b.get("poinUser");
+
+                        Double konv = Double.parseDouble(konversi);
+
+                        String poin =  Integer.toString(Integer.parseInt(harga)* (konv.intValue()));
+
+                        //            Mengirim data ke Detail
+                        Intent ii=new Intent(TukarpoinActivity.this, DetailTukarPoinActivity.class);
+                        ii.putExtra("idUser", idUser);
+                        ii.putExtra("poinUser", poinUser);
+                        ii.putExtra("idPenjual", idPenjual);
+                        ii.putExtra("namaPenjual", namaPenjual);
+                        ii.putExtra("namaProduk", namaProduk);
+                        ii.putExtra("idYgDijual", idYgDijual);
+                        ii.putExtra("harga",harga);
+                        ii.putExtra("poin",poin);
+                        startActivity(ii);
+
+                    } else {
+                        // Error in login. Get the error message
+                        Toast.makeText(getApplicationContext(),
+                                "Kode Transaksi tidak ditemukan", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Get Proccess Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+//                hideDialog();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                HashMap<String, String> params = new HashMap<String, String>();
+                params.put("idPenjual", ip);
+                params.put("idYgDijual", iyd);
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 }

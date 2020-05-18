@@ -96,40 +96,48 @@ public class ScannActivity extends AppCompatActivity implements ZXingScannerView
             noMesin = splited[0];
             jenisSampah = splited[1];
             beratSampah = splited[2];
+            String fitur = splited[3];
+
+            if (fitur.equals("TS")) {
 
 //            Mengambil data id dan harga sampah dari Main
-            Intent iin= getIntent();
-            Bundle b = iin.getExtras();
-            String idUser =(String) b.get("idUser");
+                Intent iin = getIntent();
+                Bundle b = iin.getExtras();
+                String idUser = (String) b.get("idUser");
 
-            if(jenisSampah.equals("1")){
-                 String hargasampah =(String) b.get("hargakertas");
-                 int poinInt = (int)(Double.parseDouble(beratSampah)*Double.parseDouble(hargasampah));
-                 String poin = Integer.toString(poinInt);
+                if (jenisSampah.equals("1")) {
+                    String hargasampah = (String) b.get("hargakertas");
+                    int poinInt = (int) (Double.parseDouble(beratSampah) * Double.parseDouble(hargasampah));
+                    String poin = Integer.toString(poinInt);
 
-                //            Mengirim data ke Detail
-                Intent ii=new Intent(ScannActivity.this, DetailScannActivity.class);
-                ii.putExtra("idUser", idUser);
-                ii.putExtra("hargasampah", hargasampah);
-                ii.putExtra("noMesin",noMesin);
-                ii.putExtra("jenisSampah",jenisSampah);
-                ii.putExtra("beratSampah",beratSampah);
-                ii.putExtra("poinSampah",poin);
-                startActivity(ii);
-            }else{
-                 String hargasampah =(String) b.get("hargaplastik");
-                 String poin = Double.toString(Double.parseDouble(beratSampah)*Double.parseDouble(hargasampah));
-                //            Mengirim data ke Detail
-                Intent ii=new Intent(ScannActivity.this, DetailScannActivity.class);
-                ii.putExtra("idUser", idUser);
-                ii.putExtra("hargasampah", hargasampah);
-                ii.putExtra("noMesin",noMesin);
-                ii.putExtra("jenisSampah",jenisSampah);
-                ii.putExtra("beratSampah",beratSampah);
-                ii.putExtra("poinSampah",poin);
-                startActivity(ii);
+                    //            Mengirim data ke Detail
+                    Intent ii = new Intent(ScannActivity.this, DetailScannActivity.class);
+                    ii.putExtra("idUser", idUser);
+                    ii.putExtra("hargasampah", hargasampah);
+                    ii.putExtra("noMesin", noMesin);
+                    ii.putExtra("jenisSampah", jenisSampah);
+                    ii.putExtra("beratSampah", beratSampah);
+                    ii.putExtra("poinSampah", poin);
+                    startActivity(ii);
+                } else if (jenisSampah.equals("2")) {
+                    String hargasampah = (String) b.get("hargaplastik");
+                    String poin = Double.toString(Double.parseDouble(beratSampah) * Double.parseDouble(hargasampah));
+                    //            Mengirim data ke Detail
+                    Intent ii = new Intent(ScannActivity.this, DetailScannActivity.class);
+                    ii.putExtra("idUser", idUser);
+                    ii.putExtra("hargasampah", hargasampah);
+                    ii.putExtra("noMesin", noMesin);
+                    ii.putExtra("jenisSampah", jenisSampah);
+                    ii.putExtra("beratSampah", beratSampah);
+                    ii.putExtra("poinSampah", poin);
+                    startActivity(ii);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Kode transaksi tidak ditemukan!", Toast.LENGTH_LONG).show();
+                }
+
+            } else{
+                Toast.makeText(getApplicationContext(), "Kode transaksi tidak ditemukan!", Toast.LENGTH_LONG).show();
             }
-
 
         }
     }

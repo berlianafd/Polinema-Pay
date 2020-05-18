@@ -67,10 +67,13 @@ public class DetailTukarPoinActivity extends AppCompatActivity {
             String pu =(String) b.get("poinUser");
             String ip =(String) b.get("idPenjual");
             String iyd =(String) b.get("idYgDijual");
+            String npj =(String) b.get("namaPenjual");
+            String npk =(String) b.get("namaProduk");
             String h =(String) b.get("harga");
             String p =(String) b.get("poin");
 
-            getDetailMerchant(ip,iyd);
+            idPnjual.setText(npj);
+            idPrdk.setText(npk);
             poinUser.setText(pu);
             hrg.setText(h);
             poinn.setText(p);
@@ -170,71 +173,6 @@ public class DetailTukarPoinActivity extends AppCompatActivity {
 
         Intent intent = new Intent(DetailTukarPoinActivity.this, MainActivity.class);
         startActivity(intent);
-    }
-
-    public void getDetailMerchant(final String ip, final String iyd) {
-        // Tag used to cancel the request
-        String tag_string_req = "req_detailmerchant";
-
-        pDialog.setMessage("Memproses ...");
-        showDialog();
-
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_DETAILMERCHANT, new com.android.volley.Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "Check save Response: " + response.toString());
-                hideDialog();
-
-                try {
-                    JSONObject jObj = new JSONObject(response);
-                    boolean error = jObj.getBoolean("error");
-
-                    // Check for error node in json
-                    if (!error) {
-                        JSONObject user = jObj.getJSONObject("user");
-                       idPnjual.setText(user.getString("namaPenjual"));
-                       idPrdk.setText(user.getString("namaKategori"));
-
-                    } else {
-                        // Error in login. Get the error message
-                        String errorMsg = jObj.getString("error_msg");
-                        Toast.makeText(getApplicationContext(),
-                                errorMsg, Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    // JSON error
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                }
-
-            }
-        }, new com.android.volley.Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Get Proccess Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
-//                hideDialog();
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-                // Posting parameters to login url
-                HashMap<String, String> params = new HashMap<String, String>();
-                params.put("idPenjual", ip);
-                params.put("idYgDijual", iyd);
-
-                return params;
-            }
-
-        };
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     private void showDialog() {
