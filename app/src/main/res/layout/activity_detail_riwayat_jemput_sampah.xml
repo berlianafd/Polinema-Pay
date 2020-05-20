@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.DetailRiwayatJemputSampah"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/layout_toolbar"
+            />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/cardViewTolak"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="20dp"
+        android:background="@drawable/rounded_border_tolak">
+    <ImageView
+        android:id="@+id/imgtolak"
+        android:layout_width="25pt"
+        android:layout_height="25pt"
+        android:layout_centerVertical="true"
+        android:src="@drawable/wrong"/>
+        <TextView
+            android:id="@+id/texttolak"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/imgtolak"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:textSize="7pt"
+            android:textColor="@color/black"
+            android:text="Permintaan Jemput Sampah ditolak!\nMasukkan data yang valid!"/>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/infoRelawan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/rounded_border_edittext"
+        android:padding="20dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/namaRelawanPJS"
+            android:text="Nama Relawan"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12pt"
+            android:layout_marginBottom="8pt"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Relawan"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="8pt"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/rounded_border_edittext"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12pt"
+            android:text="Detail Jemput Sampah"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8pt"
+            android:textColor="@color/colorPrimaryDark"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/namaAcaraPJS"
+            android:text="Nama Acara"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="8pt"
+            android:layout_marginBottom="8pt"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/almatPJS"
+            android:text="alamat"
+            android:layout_marginBottom="8pt"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="8pt"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/kelurahanPJS"
+            android:text="kelurahan"
+            android:layout_marginBottom="8pt"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="8pt"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/kecamatanPJS"
+            android:text="kecamatan"
+            android:layout_marginBottom="8pt"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="8pt"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tanggalPJS"
+            android:text="tanggal"
+            android:layout_marginBottom="8pt"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="8pt"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/waktuPJS"
+            android:text="waktu"
+            android:layout_marginBottom="8pt"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="8pt"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/perkiraanPJS"
+            android:text="Kg"
+            android:layout_marginBottom="8pt"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="8pt"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/callUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/rounded_border_edittext"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/sms_button"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/sms"
+            android:layout_margin="10dp"
+            android:padding="5dp"/>
+
+        <ImageView
+            android:id="@+id/wa_button"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/whatsapp"
+            android:layout_margin="10dp"/>
+        <ImageView
+            android:id="@+id/call_button"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/call"
+            android:layout_margin="10dp"
+            android:padding="10dp"/>
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp">
+        <Button
+            android:id="@+id/batal_button"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="BATAL"
+            android:onClick="ShowPopupBatal"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@color/white"
+            android:padding="10dp"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+</LinearLayout>
