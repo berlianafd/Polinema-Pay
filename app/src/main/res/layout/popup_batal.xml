@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="5dp"
+    android:layout_gravity="center">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textStyle="bold"
+        android:padding="20dp"
+        android:text="Yakin ingin membatalkan permintaan jemput sampah ini?"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnYa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_toLeftOf="@id/btnTidak"
+            android:text="Ya"
+            android:background="@color/white"
+            android:textColor="@color/colorPrimaryDark" />
+        <Button
+            android:id="@+id/btnTidak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:layout_gravity="end"
+            android:text="Tidak"
+            android:textColor="@color/white"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+
+
+</LinearLayout>

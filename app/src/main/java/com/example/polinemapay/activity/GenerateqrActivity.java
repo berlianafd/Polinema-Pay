@@ -84,7 +84,7 @@ public class GenerateqrActivity extends AppCompatActivity implements AdapterView
                 Bundle b = iin.getExtras();
                 String idUser = (String) b.get("idUser");
 
-                inputValue = idUser +" "+selectKategori+" "+edtValue.getText().toString().trim();
+                inputValue = idUser +" "+selectKategori+" "+edtValue.getText().toString().trim()+" TP";
                 if (inputValue.length() > 0) {
                     WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);
                     Display display = manager.getDefaultDisplay();

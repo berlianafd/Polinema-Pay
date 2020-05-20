@@ -93,7 +93,6 @@ public class JemputActivity extends AppCompatActivity {
     boolean check = true;
 
     private String namaAcaraa;
-    private String notelpp;
     private String alamatt;
     private String tanggall;
     private String waktuu;
@@ -109,7 +108,6 @@ public class JemputActivity extends AppCompatActivity {
 
         spinnerkec = (Spinner) findViewById(R.id.spinnerkec);
         namaAcara = (EditText) findViewById(R.id.namaAcara);
-        notelp = (EditText) findViewById(R.id.editTextnotelp);
         alamat = (EditText) findViewById(R.id.editTextalamat);
         txt_tgl = (EditText) findViewById(R.id.txt_tgl);
         txt_jam = (EditText) findViewById(R.id.txt_jam);
@@ -198,7 +196,6 @@ public class JemputActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 namaAcaraa = namaAcara.getText().toString().trim();
-                notelpp = notelp.getText().toString().trim();
                 alamatt = alamat.getText().toString().trim();
                 tanggall = txt_tgl.getText().toString().trim();
                 waktuu = txt_jam.getText().toString().trim();
@@ -218,7 +215,7 @@ public class JemputActivity extends AppCompatActivity {
                 imageName.setText(idUser + "_" + tanggall + "_" + nmacr);
                 GetImageNameFromEditText = imageName.getText().toString();
 
-                if (!namaAcaraa.isEmpty() && !notelpp.isEmpty() && !alamatt.isEmpty() && !Kec.isEmpty()
+                if (!namaAcaraa.isEmpty() && !alamatt.isEmpty() && !Kec.isEmpty()
                         && !Kel.isEmpty()&& !tanggall.isEmpty()&& !waktuu.isEmpty()&& !perkiraanBS.isEmpty()) {
                     if(Integer.parseInt(perkiraanBS)<5){
                         Toast.makeText(getApplicationContext(),
@@ -266,7 +263,6 @@ public class JemputActivity extends AppCompatActivity {
                 HashMap<String,String> HashMapParams = new HashMap<String,String>();
                 HashMapParams.put("idUser", idUser);
                 HashMapParams.put("namaAcara", namaAcaraa);
-                HashMapParams.put("nohp", notelpp);
                 HashMapParams.put("alamat", alamatt);
                 HashMapParams.put("kecamatan", Kec);
                 HashMapParams.put("kelurahan", Kel);

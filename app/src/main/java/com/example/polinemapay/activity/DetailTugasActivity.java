@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,9 +37,10 @@ public class DetailTugasActivity extends AppCompatActivity {
     private static final String TAG = DetailTugasActivity.class.getSimpleName();
     private ProgressDialog pDialog;
     ImageView sms, wa, call;
-    TextView nama, nohpp, alamt, kec, kel, tgl, waktuu, perkiraannBS, namaAcr;
+    TextView nama, alamt, kec, kel, tgl, waktuu, perkiraannBS, namaAcr;
     String number="";
     Button selesai;
+    LinearLayout callUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +59,6 @@ public class DetailTugasActivity extends AppCompatActivity {
         call = (ImageView) findViewById(R.id.call_button);
         selesai = (Button) findViewById(R.id.selesai_button);
         nama = (TextView) findViewById(R.id.namaPJS);
-        nohpp = (TextView) findViewById(R.id.notelpPJS);
         alamt = (TextView) findViewById(R.id.almatPJS);
         kec = (TextView) findViewById(R.id.kecamatanPJS);
         kel = (TextView) findViewById(R.id.kelurahanPJS);
@@ -65,6 +66,7 @@ public class DetailTugasActivity extends AppCompatActivity {
         waktuu = (TextView) findViewById(R.id.waktuPJS);
         perkiraannBS = (TextView) findViewById(R.id.perkiraanPJS);
         namaAcr = (TextView) findViewById(R.id.namaAcaraPJS);
+        callUser = (LinearLayout) findViewById(R.id.callUser);
         TextView tt = (TextView) findViewById(R.id.toolbarText);
         tt.setText("Tugas");
 
@@ -150,7 +152,6 @@ public class DetailTugasActivity extends AppCompatActivity {
 
                         number=nohp;
                         nama.setText(name);
-                        nohpp.setText(nohp);
                         namaAcr.setText(namaAcara);
                         alamt.setText(alamat);
                         kec.setText("Kecamatan "+kecamatan);
@@ -161,6 +162,7 @@ public class DetailTugasActivity extends AppCompatActivity {
 
                         if(status.equals("selesai")){
                             selesai.setVisibility(View.GONE);
+                            callUser.setVisibility(View.GONE);
                         }
 
                     } else {

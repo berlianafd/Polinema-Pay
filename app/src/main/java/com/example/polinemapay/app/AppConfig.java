@@ -14,6 +14,7 @@ public class AppConfig {
 
 	public static String URL_UPDATESTATUSJEMPUT = "https://www.polinema-pay.online/android/UpdateStatusJemput.php";
 	public static String URL_UPDATESELESAIJEMPUT = "https://www.polinema-pay.online/android/UpdateSelesaiJemput.php";
+	public static String URL_UPDATEBATALJEMPUT = "https://www.polinema-pay.online/android/UpdateBatalJemput.php";
 
     public static String URL_CEKUSERPROFILE = "https://www.polinema-pay.online/android/CekUserProfile.php";
 	public static String URL_UPDATENAMAPROFIL = "https://www.polinema-pay.online/android/updateNamaProfil.php";
@@ -27,5 +28,6 @@ public class AppConfig {
 	public static String URL_CEKKONVERSIPOIN = "https://www.polinema-pay.online/android/CekKonversiPoin.php";
 
 	public static String URL_DETAILJEMPUTSAMPAH = "https://www.polinema-pay.online/android/DetailJemputSampah.php";
+	public static String URL_DETAILRIWAYATJEMPUTSAMPAH = "https://www.polinema-pay.online/android/DetailRiwayatJemputSampah.php";
 	public static String URL_DETAILMERCHANT = "https://www.polinema-pay.online/android/GetDetailMerchant.php";
 }
