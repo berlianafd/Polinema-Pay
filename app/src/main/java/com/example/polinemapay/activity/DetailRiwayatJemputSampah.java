@@ -81,7 +81,7 @@ public class DetailRiwayatJemputSampah extends AppCompatActivity {
 
         final String idTugas = getIntent().getStringExtra("idTugas");
         final String statuss = getIntent().getStringExtra("status");
-        if (statuss.equals("terima")){
+        if (statuss.equals("proses")){
             checkDetailRiwayatJemputSampah(idTugas);
         }else if(statuss.equals("tolak")){
             checkDetailJemputSampah(idTugas);
@@ -104,7 +104,7 @@ public class DetailRiwayatJemputSampah extends AppCompatActivity {
             tolakSign.setBackground(getResources().getDrawable(R.drawable.rounded_border_terima));
             textPeringatan.setText("Permintaan jemput sampah\nsedang divalidasi");
             signPeringatan.setImageDrawable(getDrawable(R.drawable.time));
-        }  else if (statuss.equals("proses")){
+        }  else if (statuss.equals("terima")){
             checkDetailJemputSampah(idTugas);
             tolakSign.setVisibility(View.VISIBLE);
             infoRlawan.setVisibility(View.GONE);

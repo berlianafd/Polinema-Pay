@@ -1,16 +1,22 @@
 package com.example.polinemapay.activity.Riwayat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.polinemapay.R;
+import com.example.polinemapay.activity.DetailRiwayatTPActivity;
+import com.example.polinemapay.activity.DetailRiwayatTSActivity;
 
 import java.util.List;
+
+import androidx.cardview.widget.CardView;
 
 public class ApplicationAdapterRiwayat extends ArrayAdapter<ApplicationRiwayat>{
     private List<ApplicationRiwayat> items;
@@ -26,7 +32,7 @@ public class ApplicationAdapterRiwayat extends ArrayAdapter<ApplicationRiwayat>{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
         View v = convertView;
 
         if(v == null) {
@@ -34,14 +40,16 @@ public class ApplicationAdapterRiwayat extends ArrayAdapter<ApplicationRiwayat>{
             v = li.inflate(R.layout.content_main_riwayat, null);
         }
 
-        ApplicationRiwayat app = items.get(position);
+        final ApplicationRiwayat app = items.get(position);
 
         if(app != null) {
             TextView fiturRwyt = (TextView)v.findViewById(R.id.namaFitur);
             TextView tglRwyt = (TextView)v.findViewById(R.id.tanggal);
             TextView poinRwyt = (TextView)v.findViewById(R.id.poin);
+            TextView jamRwyt = (TextView)v.findViewById(R.id.jamTP);
 
             if(tglRwyt != null) tglRwyt.setText(app.getTanggal());
+            if(jamRwyt != null) jamRwyt.setText(app.getJam());
 
             if(poinRwyt != null){
                 if ((app.getFitur().equals("ts"))){
@@ -58,6 +66,30 @@ public class ApplicationAdapterRiwayat extends ArrayAdapter<ApplicationRiwayat>{
                     poinRwyt.setText("+" + app.getPoin() + "poin");
                 }
             }
+
+
+            CardView cardViewTugas = (CardView)v.findViewById(R.id.cardViewRiwayat);
+            cardViewTugas.setOnClickListener((new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((ListView) parent).performItemClick(convertView, position, 0); // Let the event be handled in onItemClick()
+                    if(app.getFitur().equals("tp")) {
+                        Intent intent = new Intent(getContext(), DetailRiwayatTPActivity.class);
+                        intent.putExtra("tgl", app.getTanggal());
+                        intent.putExtra("jam", app.getJam());
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getContext().startActivity(intent);
+                    } else if (app.getFitur().equals("ts")){
+                        Intent intent = new Intent(getContext(), DetailRiwayatTSActivity.class);
+                        intent.putExtra("tgl", app.getTanggal());
+                        intent.putExtra("jam", app.getJam());
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getContext().startActivity(intent);
+                    } else if(app.getFitur().equals("tr")){
+
+                    }
+                }
+            }));
         }
         return v;
     }

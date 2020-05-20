@@ -3,69 +3,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.DetailScannActivity" >
-    <!--    tools:context="${relativePackage}.${activityClass}"-->
+    tools:context=".activity.DetailRiwayatTPActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:layout_marginBottom="20dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tinjau dan Konfirmasi"
+            android:text="Detail Riwayat"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:textSize="11pt"/>
+            android:textSize="11pt"
+            />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:padding="20dp"
         android:background="@drawable/rounded_border_edittext"
-        android:layout_margin="10dp"
-        android:padding="20dp">
+        android:layout_margin="10dp">
+
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/idPenjual"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Jenis Sampah"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="12pt"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"
-            android:paddingLeft="20dp"/>
+            android:text="id penjual"/>
 
         <TextView
-            android:id="@+id/jenisSampah"
-            android:layout_width="wrap_content"
+            android:id="@+id/idProduk"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:paddingLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:textStyle="bold"
-            android:layout_alignParentRight="true"
+            android:text="id produk"
             android:textColor="@color/colorPrimaryDark"
-            android:text="Kertas"/>
-
-        <TextView
-            android:id="@+id/hrgSampah"
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimaryDark"
-            android:text="1200 /Kg"/>
-
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@drawable/rounded_border_edittext"
+        android:padding="20dp"
         android:layout_margin="10dp"
-        android:padding="20dp">
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -88,7 +80,7 @@
                 android:textColor="@color/colorPrimaryDark"/>
 
             <TextView
-                android:id="@+id/tanggalTS"
+                android:id="@+id/tanggalTP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="20dp"
@@ -111,7 +103,7 @@
                 android:textColor="@color/colorPrimaryDark"/>
 
             <TextView
-                android:id="@+id/waktuTS"
+                android:id="@+id/waktuTP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="20dp"
@@ -125,24 +117,27 @@
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
+            android:paddingLeft="20dp"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Berat Sampah"
-                android:paddingLeft="20dp"
+                android:layout_gravity="center"
+                android:text="Total Harga"
                 android:textColor="@color/colorPrimaryDark"/>
 
             <TextView
-                android:id="@+id/beratSampah"
+                android:id="@+id/idHarga"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_alignParentRight="true"
                 android:paddingRight="20dp"
                 android:textStyle="bold"
-                android:layout_alignParentRight="true"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="3000 g"/>
+                android:text="Rp.10000"/>
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
@@ -151,36 +146,41 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
-                android:text="Poin Sampah"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:layout_gravity="center"
+                android:text="Total Poin"
+                android:textColor="@color/colorPrimaryDark"
+                android:paddingLeft="20dp"/>
 
             <TextView
-                android:id="@+id/poinSampah"
+                android:id="@+id/idPoinTukar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:paddingRight="20dp"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="3600 poin"/>
+                android:text="10000 poin"/>
         </RelativeLayout>
+
     </LinearLayout>
 
-
     <RelativeLayout
+        android:id="@+id/button_support"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <Button
-            android:id="@+id/button_konfirmTS"
-            android:layout_width="match_parent"
-            android:layout_margin="10dp"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:layout_width="20pt"
+            android:layout_height="20pt"
+            android:src="@drawable/support"
+            android:layout_marginBottom="40dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimaryDark"
-            android:text="Konfirmasi"
-            android:textColor="@color/white" />
-
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bantuan"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"/>
     </RelativeLayout>
 </LinearLayout>

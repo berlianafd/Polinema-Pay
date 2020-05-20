@@ -16,7 +16,7 @@
             android:text="Tinjau dan Konfirmasi"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:textSize="8pt"/>
+            android:textSize="11pt"/>
     </LinearLayout>
 
     <LinearLayout

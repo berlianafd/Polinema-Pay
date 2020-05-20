@@ -4,6 +4,15 @@ public class ApplicationRiwayat {
     private String fitur;
     private String tanggal;
     private String poin;
+    private String jam;
+
+    public String getJam() {
+        return jam;
+    }
+
+    public void setJam(String jam) {
+        this.jam = jam;
+    }
 
     public String getFitur() {
         return fitur;

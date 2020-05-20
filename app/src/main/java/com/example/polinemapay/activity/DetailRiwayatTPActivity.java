@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,38 +21,27 @@ import com.example.polinemapay.app.AppController;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DetailTukarPoinActivity extends AppCompatActivity {
-    private static final String TAG = MainActivity.class.getSimpleName();
+public class DetailRiwayatTPActivity extends AppCompatActivity {
+    private static final String TAG = DetailRiwayatTPActivity.class.getSimpleName();
     private ProgressDialog pDialog;
 
-    private TextView idPnjual, idPrdk, hrg, poinn, tgl, waktu, poinUser;
-    Button bayar;
-
+    private TextView idproduk, namapnjual, harga, poin, tgl, waktu;
+    RelativeLayout support;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detailtukarpoin);
+        setContentView(R.layout.activity_detail_riwayat_tp);
 
-        poinUser = (TextView) findViewById(R.id.poinsaatini);
-        idPnjual = (TextView) findViewById(R.id.idPenjual);
-        idPrdk = (TextView) findViewById(R.id.idProduk);
-        hrg = (TextView) findViewById(R.id.idHarga);
-        poinn = (TextView) findViewById(R.id.idPoinTukar);
+        idproduk = (TextView) findViewById(R.id.idProduk);
+        harga = (TextView) findViewById(R.id.idHarga);
+        namapnjual = (TextView) findViewById(R.id.idPenjual);
+        poin = (TextView) findViewById(R.id.idPoinTukar);
         tgl = (TextView) findViewById(R.id.tanggalTP);
         waktu = (TextView) findViewById(R.id.waktuTP);
-        bayar = (Button) findViewById(R.id.btnBayar);
-
-//        set tgl dan waktu
-        Date HariSekarang = new Date( );
-        SimpleDateFormat ft = new SimpleDateFormat ("dd-MM-yyyy");
-        SimpleDateFormat fw = new SimpleDateFormat ("hh:mm:ss");
-        tgl.setText(ft.format(HariSekarang));
-        waktu.setText(fw.format(HariSekarang));
+        support = (RelativeLayout) findViewById(R.id.button_support);
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -63,55 +52,32 @@ public class DetailTukarPoinActivity extends AppCompatActivity {
 
         if(b!=null)
         {
-            String iu =(String) b.get("idUser");
-            String pu =(String) b.get("poinUser");
-            String ip =(String) b.get("idPenjual");
-            String iyd =(String) b.get("idYgDijual");
-            String npj =(String) b.get("namaPenjual");
-            String npk =(String) b.get("namaProduk");
-            String h =(String) b.get("harga");
-            String p =(String) b.get("poin");
 
-            idPnjual.setText(npj);
-            idPrdk.setText(npk);
-            poinUser.setText(pu);
-            hrg.setText(h);
-            poinn.setText(p);
+            String tgll =(String) b.get("tgl");
+            String jamm =(String) b.get("jam");
+            tgl.setText(tgll);
+            waktu.setText(jamm);
+            checkRiwayat(tgll, jamm);
+
         }
-
-        bayar.setOnClickListener(new View.OnClickListener() {
-
+        support.setOnClickListener((new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
-                if(Integer.parseInt(poinn.getText().toString())>Integer.parseInt(poinUser.getText().toString())){
-                    Toast.makeText(getApplicationContext(),
-                            "Poin Anda tidak mencukupi untuk transaksi ini!", Toast.LENGTH_LONG).show();
-                }else{
-                    simpanTransaksiTukar(waktu.getText().toString());
-                }
+                Intent intent2 = new Intent(DetailRiwayatTPActivity.this, BantuanAcitivity.class);
+                startActivity(intent2);
             }
-
-        });
+        }));
     }
 
-    public void simpanTransaksiTukar(final String waktuu) {
+    public void checkRiwayat(final String tanggal, final String waktu) {
         // Tag used to cancel the request
-        String tag_string_req = "req_saveTransTukar";
+        String tag_string_req = "req_saveTrans";
 
         pDialog.setMessage("Memproses ...");
         showDialog();
 
-        Intent iin= getIntent();
-        Bundle b = iin.getExtras();
-
-        final String id =(String) b.get("idUser");
-        final String ip =(String) b.get("idPenjual");
-        final String iyd =(String) b.get("idYgDijual");
-        final String h =(String) b.get("harga");
-        final String p =(String) b.get("poin");
-
-
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_TRANSAKSITUKAR, new com.android.volley.Response.Listener<String>() {
+                AppConfig.URL_DETAILTUKARPOIN, new com.android.volley.Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -124,11 +90,18 @@ public class DetailTukarPoinActivity extends AppCompatActivity {
 
                     // Check for error node in json
                     if (!error) {
-                        JSONObject user3 = jObj.getJSONObject("user");
-                        String id = user3.getString("id");
-                        Log.e(TAG, "Get Info Transaction: " + id + "Sukses");
-                        Toast.makeText(getApplicationContext(),
-                                "Tukar Poinmu berhasil, Jangan lupa mengumpulkan poin lagi ya!", Toast.LENGTH_LONG).show();
+                        JSONObject user = jObj.getJSONObject("user");
+                        String hr = user.getString("harga");
+                        String p = user.getString("poin");
+                        String np = user.getString("namaPenjual");
+                        String nk = user.getString("namaKategori");
+                        Log.e(TAG, "Get Info Transaction: Sukses");
+
+                        harga.setText(hr);
+                        poin.setText(p);
+                        namapnjual.setText(np);
+                        idproduk.setText(nk);
+
                     } else {
                         // Error in login. Get the error message
                         String errorMsg = jObj.getString("error_msg");
@@ -157,12 +130,8 @@ public class DetailTukarPoinActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 HashMap<String, String> params = new HashMap<String, String>();
-                params.put("idUser", id);
-                params.put("idPenjual", ip);
-                params.put("idYgDijual", iyd);
-                params.put("harga", h);
-                params.put("poin", p);
-                params.put("jam", waktuu);
+                params.put("tgl", tanggal);
+                params.put("jam", waktu);
 
                 return params;
             }
@@ -171,9 +140,6 @@ public class DetailTukarPoinActivity extends AppCompatActivity {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
-
-        Intent intent = new Intent(DetailTukarPoinActivity.this, MainActivity.class);
-        startActivity(intent);
     }
 
     private void showDialog() {

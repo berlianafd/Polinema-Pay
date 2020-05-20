@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.DetailScannActivity" >
-    <!--    tools:context="${relativePackage}.${activityClass}"-->
+    tools:context=".activity.DetailRiwayatTSActivity" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +13,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tinjau dan Konfirmasi"
+            android:text="Detail Riwayat"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="11pt"/>
@@ -169,18 +168,22 @@
 
 
     <RelativeLayout
+        android:id="@+id/button_support"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <Button
-            android:id="@+id/button_konfirmTS"
-            android:layout_width="match_parent"
-            android:layout_margin="10dp"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:layout_width="20pt"
+            android:layout_height="20pt"
+            android:src="@drawable/support"
+            android:layout_marginBottom="40dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimaryDark"
-            android:text="Konfirmasi"
-            android:textColor="@color/white" />
-
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bantuan"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"/>
     </RelativeLayout>
 </LinearLayout>

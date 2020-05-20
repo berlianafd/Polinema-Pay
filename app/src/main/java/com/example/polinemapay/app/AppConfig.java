@@ -30,4 +30,6 @@ public class AppConfig {
 	public static String URL_DETAILJEMPUTSAMPAH = "https://www.polinema-pay.online/android/DetailJemputSampah.php";
 	public static String URL_DETAILRIWAYATJEMPUTSAMPAH = "https://www.polinema-pay.online/android/DetailRiwayatJemputSampah.php";
 	public static String URL_DETAILMERCHANT = "https://www.polinema-pay.online/android/GetDetailMerchant.php";
+	public static String URL_DETAILTUKARPOIN = "https://www.polinema-pay.online/android/GetDetailTukarPoin.php";
+	public static String URL_DETAILTUKARSAMPAH = "https://www.polinema-pay.online/android/GetDetailTukarSampah.php";
 }

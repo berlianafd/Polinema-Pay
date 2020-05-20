@@ -80,6 +80,7 @@ public class FetchDataTaskRiwayat extends AsyncTask<String, Void, String>{
                 app.setFitur(json.getString("fitur"));
                 app.setPoin(json.getString("poin"));
                 app.setTanggal(json.getString("created_at"));
+                app.setJam(json.getString("jam"));
 
                 // add the app to apps list
                 apps.add(app);
