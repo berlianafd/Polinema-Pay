@@ -99,7 +99,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
-                                android:text="Isi data Anda sesuai kolom yang tersedia (Nama, Nomor Handphone),
+                                android:text="Isi data Anda sesuai kolom yang tersedia (Nama, Nomor Handphone, Username, Password),
  dan pilih user.">
                             </TextView>
                         </LinearLayout>
@@ -352,7 +352,7 @@ sampah sebanyak-banyaknya agar mendapat lebih banyak poin.">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Panduan Registrasi"
+                            android:text="Panduan Jemput Sampah"
                             android:textSize="18dp"
                             android:textStyle="bold"
                             android:layout_marginBottom="20dp"/>
@@ -401,7 +401,7 @@ sampah sebanyak-banyaknya agar mendapat lebih banyak poin.">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
-                                android:text="Isi nomor telepon penanggung jawab penukar sampah.">
+                                android:text="Tentukan alamat penjemputan sampah.">
                             </TextView>
                         </LinearLayout>
                         <LinearLayout
@@ -417,7 +417,7 @@ sampah sebanyak-banyaknya agar mendapat lebih banyak poin.">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
-                                android:text="Tentukan alamat penjemputan sampah.">
+                                android:text="Pilih tanggal dan waktu penjemputan.">
                             </TextView>
                         </LinearLayout>
                         <LinearLayout
@@ -433,22 +433,6 @@ sampah sebanyak-banyaknya agar mendapat lebih banyak poin.">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
-                                android:text="Pilih tanggal dan waktu penjemputan.">
-                            </TextView>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingRight="7dp"
-                                android:text="6."/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="10dp"
                                 android:text="Atur perkiraan berat dari sampah yang akan ditukar.">
                             </TextView>
                         </LinearLayout>
@@ -460,7 +444,7 @@ sampah sebanyak-banyaknya agar mendapat lebih banyak poin.">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingRight="7dp"
-                                android:text="7."/>
+                                android:text="6."/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -478,12 +462,12 @@ acara/kegiatan, Surat Undangan acara/kegiatan untuk Dewan Pembina Kemahasiswaan 
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingRight="7dp"
-                                android:text="8."/>
+                                android:text="7."/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
-                                android:text="Selesai! Relawan akan menjemput sesuai dengan alamat
+                                android:text="Selesai! Relawan akan menjemput sampah Anda sesuai dengan alamat.
 dan waktu penjemputan.">
                             </TextView>
                         </LinearLayout>
@@ -623,12 +607,14 @@ transaksi. Tekan Batal jika ingin membatalkan transaksi.">
                         android:padding="8dp"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="130pt"
                             android:layout_height="wrap_content"
+                            android:paddingLeft="45dp"
                             android:text="Transaksi"
-                            android:textSize="18dp"
-                            android:paddingLeft="45dp"/>
+                            android:textSize="18dp" />
+
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
@@ -647,7 +633,7 @@ transaksi. Tekan Batal jika ingin membatalkan transaksi.">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Panduan Tukar Poin"
+                            android:text="Panduan Transaksi"
                             android:textSize="18dp"
                             android:textStyle="bold"
                             android:layout_marginBottom="20dp"/>
@@ -664,8 +650,7 @@ transaksi. Tekan Batal jika ingin membatalkan transaksi.">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
-                                android:text="Datanglah ke merchant tertentu di area Politeknik Negeri Malang.
-Pilihlah makanan, minuman, print, atau yang lainnya.">
+                                android:text="Buka Aplikasi Polinema-Pay, pilih layanan Transaksi">
                             </TextView>
                         </LinearLayout>
                         <LinearLayout
@@ -681,7 +666,7 @@ Pilihlah makanan, minuman, print, atau yang lainnya.">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
-                                android:text="Buka Aplikasi Polinema-Pay, pilih layanan Tukar Poin.">
+                                android:text="Tambahkan kategori produk penjualan dengan memilih icon + di pojok kanan atas">
                             </TextView>
                         </LinearLayout>
                         <LinearLayout
@@ -697,8 +682,7 @@ Pilihlah makanan, minuman, print, atau yang lainnya.">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
-                                android:text="Scan kode QR dari merchant. Tekan OK untuk melanjutkan
-transaksi. Tekan Batal jika ingin membatalkan transaksi.">
+                                android:text="Jika kategori produk telah ditambahkan, pilih salah satu kategori yang terjual">
                             </TextView>
                         </LinearLayout>
                         <LinearLayout
@@ -714,7 +698,39 @@ transaksi. Tekan Batal jika ingin membatalkan transaksi.">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
-                                android:text="Transaksi berhasil. Poin Anda akan otomatis berkurang.">
+                                android:text="Masukkan total harga yang dibeli user.">
+                            </TextView>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingRight="7dp"
+                                android:text="5."/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:text="Tekan tombol Transaksi. Akan muncul kode QR pada layar. tunjukkan pada user untuk menscan kode QR tersebut.">
+                            </TextView>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingRight="7dp"
+                                android:text="6."/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:text="Penukaran poin berhasil, poin Anda akan bertambah.">
                             </TextView>
                         </LinearLayout>
                     </LinearLayout>
@@ -778,57 +794,7 @@ transaksi. Tekan Batal jika ingin membatalkan transaksi.">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
-                                android:text="Datanglah ke merchant tertentu di area Politeknik Negeri Malang.
-Pilihlah makanan, minuman, print, atau yang lainnya.">
-                            </TextView>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingRight="7dp"
-                                android:text="2."/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="10dp"
-                                android:text="Buka Aplikasi Polinema-Pay, pilih layanan Tukar Poin.">
-                            </TextView>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingRight="7dp"
-                                android:text="3."/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="10dp"
-                                android:text="Scan kode QR dari merchant. Tekan OK untuk melanjutkan
-transaksi. Tekan Batal jika ingin membatalkan transaksi.">
-                            </TextView>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingRight="7dp"
-                                android:text="4."/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="10dp"
-                                android:text="Transaksi berhasil. Poin Anda akan otomatis berkurang.">
+                                android:text="Datanglah ke Administrator Politeknik Negeri Malang.">
                             </TextView>
                         </LinearLayout>
                     </LinearLayout>
@@ -910,7 +876,7 @@ transaksi. Tekan Batal jika ingin membatalkan transaksi.">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
-                                android:text="Isi data Anda sesuai kolom yang tersedia (Nama, Nomor Handphone), pilih Relawan. ">
+                                android:text="Isi data Anda sesuai kolom yang tersedia (Nama, Nomor Handphone, Username, Password), pilih Relawan. ">
                             </TextView>
                         </LinearLayout>
                         <LinearLayout
@@ -1023,7 +989,7 @@ transaksi. Tekan Batal jika ingin membatalkan transaksi.">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Panduan Tukar Poin"
+                            android:text="Panduan Pesanan"
                             android:textSize="18dp"
                             android:textStyle="bold"
                             android:layout_marginBottom="20dp"/>
@@ -1040,8 +1006,7 @@ transaksi. Tekan Batal jika ingin membatalkan transaksi.">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
-                                android:text="Datanglah ke merchant tertentu di area Politeknik Negeri Malang.
-Pilihlah makanan, minuman, print, atau yang lainnya.">
+                                android:text="Buka Aplikasi Polinema-Pay. Pilih layanan Pesanan">
                             </TextView>
                         </LinearLayout>
                         <LinearLayout
@@ -1057,7 +1022,7 @@ Pilihlah makanan, minuman, print, atau yang lainnya.">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
-                                android:text="Buka Aplikasi Polinema-Pay, pilih layanan Tukar Poin.">
+                                android:text="List pesanan penjemputan sampah akan muncul. Jika Anda ingin menerima pesanan tersebut maka pilih tombol TERIMA">
                             </TextView>
                         </LinearLayout>
                         <LinearLayout
@@ -1073,24 +1038,7 @@ Pilihlah makanan, minuman, print, atau yang lainnya.">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
-                                android:text="Scan kode QR dari merchant. Tekan OK untuk melanjutkan
-transaksi. Tekan Batal jika ingin membatalkan transaksi.">
-                            </TextView>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingRight="7dp"
-                                android:text="4."/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="10dp"
-                                android:text="Transaksi berhasil. Poin Anda akan otomatis berkurang.">
+                                android:text="Pesanan yang Anda terima akan masuk di layanan Tugas.">
                             </TextView>
                         </LinearLayout>
                     </LinearLayout>
@@ -1138,7 +1086,7 @@ transaksi. Tekan Batal jika ingin membatalkan transaksi.">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Panduan Tukar Poin"
+                            android:text="Panduan Tugas"
                             android:textSize="18dp"
                             android:textStyle="bold"
                             android:layout_marginBottom="20dp"/>
@@ -1155,8 +1103,7 @@ transaksi. Tekan Batal jika ingin membatalkan transaksi.">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
-                                android:text="Datanglah ke merchant tertentu di area Politeknik Negeri Malang.
-Pilihlah makanan, minuman, print, atau yang lainnya.">
+                                android:text="Buka aplikasi Polinema-Pay. Pilih layanan Tugas.">
                             </TextView>
                         </LinearLayout>
                         <LinearLayout
@@ -1172,7 +1119,7 @@ Pilihlah makanan, minuman, print, atau yang lainnya.">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
-                                android:text="Buka Aplikasi Polinema-Pay, pilih layanan Tukar Poin.">
+                                android:text="Semua pesanan penjemputan sampah yang telah Anda terima akan muncul.">
                             </TextView>
                         </LinearLayout>
                         <LinearLayout
@@ -1188,8 +1135,7 @@ Pilihlah makanan, minuman, print, atau yang lainnya.">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
-                                android:text="Scan kode QR dari merchant. Tekan OK untuk melanjutkan
-transaksi. Tekan Batal jika ingin membatalkan transaksi.">
+                                android:text="Pilih salah satu tugas untuk melihat detail penjemputan sampah.">
                             </TextView>
                         </LinearLayout>
                         <LinearLayout
@@ -1205,7 +1151,7 @@ transaksi. Tekan Batal jika ingin membatalkan transaksi.">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
-                                android:text="Transaksi berhasil. Poin Anda akan otomatis berkurang.">
+                                android:text="Pilih icon SMS, Whatsapp, atau Telepon untuk menghubungi user.">
                             </TextView>
                         </LinearLayout>
                     </LinearLayout>
