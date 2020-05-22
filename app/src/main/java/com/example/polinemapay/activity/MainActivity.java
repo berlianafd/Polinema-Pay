@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 	private CardView jemput, tukarSampah, tukarPoinUser, generate, tukarPoinMerchant, pesanan, tugas, kertas, plastik;
 
 	private TextView txtName, ttlPoin, ttlBeratSampah, ttlSampahKertas, ttlSampahPlastik, label, labelttl, labelkg, hargaKrts, hargaPlstk;
-	public String idUser, HargaKertas, HargaPlastik, KonversiPoin, namee, nohpp;
+	public String idUser, HargaKertas, HargaPlastik, KonversiPoin, namee, nohpp, level;
 	private SQLiteHandler db;
 	private SessionManager session;
 
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
 		final String idUser = user.get("id");
 		final String name = user.get("name");
-		final String level = user.get("level");
+		level = user.get("level");
 		final String nohp = user.get("nohp");
 
 		Log.e(TAG, "Get Data Error: " + idUser+name+level+nohp);
@@ -125,6 +126,8 @@ public class MainActivity extends AppCompatActivity {
 			pesanan.setVisibility(View.VISIBLE);
 			tugas.setVisibility(View.VISIBLE);
 		} else {
+			LinearLayout gmbr = (LinearLayout) findViewById(R.id.gambartotalsampah);
+			gmbr.setBackground(getResources().getDrawable(R.drawable.jajan));
 			jemput.setVisibility(View.GONE);
 			tukarSampah.setVisibility(View.GONE);
 			tukarPoinUser.setVisibility(View.GONE);
@@ -247,10 +250,15 @@ public class MainActivity extends AppCompatActivity {
 						String totalBeratPlastik = user.getString("totalBeratPlastik");
 						String totalPoin = user.getString("totalPoin");
 
-						ttlBeratSampah.setText(totalBeratSampah);
-						ttlSampahKertas.setText(totalBeratKertas);
-						ttlSampahPlastik.setText(totalBeratPlastik);
-						ttlPoin.setText(totalPoin);
+						if(level.equals("User")) {
+							ttlBeratSampah.setText(totalBeratSampah);
+							ttlSampahKertas.setText(totalBeratKertas);
+							ttlSampahPlastik.setText(totalBeratPlastik);
+							ttlPoin.setText(totalPoin);
+						} else if(level.equals("Merchant")){
+							ttlPoin.setText(totalPoin);
+							ttlBeratSampah.setText(totalPoin);
+						}
 					} else {
 						// Error in login. Get the error message
 						String errorMsg = jObj.getString("error_msg");
