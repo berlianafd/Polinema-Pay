@@ -117,7 +117,7 @@ public class TukarpoinActivity extends AppCompatActivity implements ZXingScanner
             harga = splited[2];
             String fitur = splited[3];
 
-            if ((fitur.equals("TP"))){
+            if ((fitur.equals("TP")) || (fitur.equals("TPA"))){
                 getDetailMerchant(idPenjual, idYgDijual);
             } else {
                 Toast.makeText(getApplicationContext(),
