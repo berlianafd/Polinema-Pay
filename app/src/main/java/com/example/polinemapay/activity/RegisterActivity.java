@@ -126,22 +126,28 @@ public class RegisterActivity extends Activity {
                 imei = inputImei.getText().toString().trim();
 
                 if (!name.isEmpty() && !nohp.isEmpty() && !imei.isEmpty() && !uname.isEmpty() && !pass.isEmpty() && selectedId!=-1) {
-                    if(pass.equals(inputUlangiPass.getText().toString())){
-                        // Launch main activity
-                        Intent intent = new Intent(RegisterActivity.this,
-                                VerifyPhoneRegisterActivity.class);
-                        intent.putExtra("mobile", nohp);
-                        intent.putExtra("name", name);
-                        intent.putExtra("uname", uname);
-                        intent.putExtra("pass", pass);
-                        intent.putExtra("imei", imei);
-                        intent.putExtra("kodeLevel", kodeLevel);
-                        startActivity(intent);
-                        finish();
-                    } else {
+                    if (pass.length()<8){
                         Toast.makeText(getApplicationContext(),
-                                "Password tidak sama!", Toast.LENGTH_LONG)
+                                "Password minimal 8huruf!", Toast.LENGTH_LONG)
                                 .show();
+                    } else {
+                        if (pass.equals(inputUlangiPass.getText().toString())) {
+                            // Launch main activity
+                            Intent intent = new Intent(RegisterActivity.this,
+                                    VerifyPhoneRegisterActivity.class);
+                            intent.putExtra("mobile", nohp);
+                            intent.putExtra("name", name);
+                            intent.putExtra("uname", uname);
+                            intent.putExtra("pass", pass);
+                            intent.putExtra("imei", imei);
+                            intent.putExtra("kodeLevel", kodeLevel);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(getApplicationContext(),
+                                    "Password tidak sama!", Toast.LENGTH_LONG)
+                                    .show();
+                        }
                     }
                 } else {
                     Toast.makeText(getApplicationContext(),

@@ -102,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_below="@id/reg_username"
-            android:hint="Password"
+            android:hint="Password minimal 8 huruf"
             android:padding="10dp"
             android:singleLine="true"
             android:inputType="textPassword"
