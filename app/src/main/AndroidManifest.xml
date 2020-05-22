@@ -13,7 +13,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.DetailRiwayatTSActivity"></activity>
+        <activity android:name=".activity.DetailRiwayatTRActivity"></activity>
+        <activity android:name=".activity.DetailRiwayatTSActivity" />
         <activity android:name=".activity.DetailRiwayatTPActivity" />
         <activity android:name=".activity.DetailRiwayatJemputSampah" />
         <activity android:name=".activity.RiwayatJemputSampahActivity" />
@@ -101,15 +102,15 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
     </application>
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-
     <uses-feature android:name="android.hardware.camera" />
-    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
 
 </manifest>

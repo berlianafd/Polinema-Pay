@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.polinemapay.R;
 import com.example.polinemapay.activity.DetailRiwayatTPActivity;
+import com.example.polinemapay.activity.DetailRiwayatTRActivity;
 import com.example.polinemapay.activity.DetailRiwayatTSActivity;
 
 import java.util.List;
@@ -86,7 +87,11 @@ public class ApplicationAdapterRiwayat extends ArrayAdapter<ApplicationRiwayat>{
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         getContext().startActivity(intent);
                     } else if(app.getFitur().equals("tr")){
-
+                        Intent intent = new Intent(getContext(), DetailRiwayatTRActivity.class);
+                        intent.putExtra("tgl", app.getTanggal());
+                        intent.putExtra("jam", app.getJam());
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getContext().startActivity(intent);
                     }
                 }
             }));

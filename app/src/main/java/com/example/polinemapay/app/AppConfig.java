@@ -32,4 +32,5 @@ public class AppConfig {
 	public static String URL_DETAILMERCHANT = "https://www.polinema-pay.online/android/GetDetailMerchant.php";
 	public static String URL_DETAILTUKARPOIN = "https://www.polinema-pay.online/android/GetDetailTukarPoin.php";
 	public static String URL_DETAILTUKARSAMPAH = "https://www.polinema-pay.online/android/GetDetailTukarSampah.php";
+	public static String URL_DETAILTRANSAKSITUKAR = "https://www.polinema-pay.online/android/GetDetailTransaksiTukar.php";
 }

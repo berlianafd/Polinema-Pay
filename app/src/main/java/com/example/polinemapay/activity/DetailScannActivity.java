@@ -178,7 +178,6 @@ public class DetailScannActivity extends AppCompatActivity{
         startActivity(intent);
     }
 
-
     private void showDialog() {
         if (!pDialog.isShowing())
             pDialog.show();
