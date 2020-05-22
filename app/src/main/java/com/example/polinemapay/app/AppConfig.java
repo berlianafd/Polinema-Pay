@@ -18,6 +18,7 @@ public class AppConfig {
 
     public static String URL_CEKUSERPROFILE = "https://www.polinema-pay.online/android/CekUserProfile.php";
 	public static String URL_UPDATENAMAPROFIL = "https://www.polinema-pay.online/android/updateNamaProfil.php";
+	public static String URL_UPDATEPASSPROFIL = "https://www.polinema-pay.online/android/updatePassProfil.php";
 	public static String URL_UPDATENOHPPROFIL = "https://www.polinema-pay.online/android/updateNohpProfil.php";
 
 	public static String URL_TRANSAKSIBUANG = "https://www.polinema-pay.online/android/transaksiBuangUser.php";

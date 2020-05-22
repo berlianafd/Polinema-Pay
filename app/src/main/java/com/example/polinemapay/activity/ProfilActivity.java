@@ -184,7 +184,6 @@ public class ProfilActivity extends AppCompatActivity {
         Button update;
         myDialog.setContentView(R.layout.popup_passwordprofil);
 
-        passlm = (EditText) myDialog.findViewById(R.id.passLama);
         passbr = (EditText) myDialog.findViewById(R.id.passBaru);
         ulangpassbr = (EditText) myDialog.findViewById(R.id.UlangiPassBaru);
         update = (Button) myDialog.findViewById(R.id.btnUpdatePassProfil);
@@ -192,9 +191,19 @@ public class ProfilActivity extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                updateNamaProfil(updtNama.getText().toString());
-                checkUserId();
+                if(passbr.length()<8){
+                    Toast.makeText(ProfilActivity.this, "Password minimal 8huruf!", Toast.LENGTH_SHORT).show();
+                } else{
+                    if(ulangpassbr.getText().toString().equals(passbr.getText().toString())){
+                        updatePassProfil(passbr.getText().toString());
+                        checkUserId();
+                        myDialog.dismiss();
+                    }else{
+                        Toast.makeText(ProfilActivity.this, "Ulangi Password tidak sama!", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
+
         });
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.show();
@@ -385,7 +394,7 @@ public class ProfilActivity extends AppCompatActivity {
         String tag_string_req = "req_checkUserProfile";
 
         pDialog.setMessage("Sedang memuat...");
-		showDialog();
+        showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.URL_CEKUSERPROFILE, new Response.Listener<String>() {
@@ -518,6 +527,45 @@ public class ProfilActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("idUser", idUser);
                 params.put("name", nama);
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    private void updatePassProfil(final String pass) {
+        // Tag used to cancel the request
+        String tag_string_req = "req_updatePassProfil";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_UPDATEPASSPROFIL, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Check update password Response: " + response.toString());
+                Toast.makeText(getApplicationContext(),
+                                "Password berhasil diubah!", Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Get Id Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+//				hideDialog();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idUser", idUser);
+                params.put("pass", pass);
                 return params;
             }
 
