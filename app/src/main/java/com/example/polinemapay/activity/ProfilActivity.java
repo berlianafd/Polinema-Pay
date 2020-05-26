@@ -173,6 +173,7 @@ public class ProfilActivity extends AppCompatActivity {
             public void onClick(View v) {
                 updateNamaProfil(updtNama.getText().toString());
                 checkUserId();
+                myDialog.dismiss();
             }
         });
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -486,29 +487,8 @@ public class ProfilActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 Log.d(TAG, "Check update name Response: " + response.toString());
 
-                try {
-                    JSONObject jObj = new JSONObject(response);
-                    boolean error = jObj.getBoolean("error");
-
-                    // Check for error node in json
-                    if (!error) {
-                        JSONObject user = jObj.getJSONObject("user");
-
-                        // Displaying the user details on the screen
-                        txtName.setText(namee);
-
-                    } else {
-                        // Error in login. Get the error message
-                        String errorMsg = jObj.getString("error_msg");
-                        Toast.makeText(getApplicationContext(),
-                                errorMsg, Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    // JSON error
-                    e.printStackTrace();
-//                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                }
-
+                Toast.makeText(getApplicationContext(),
+                        "Nama berhasil diubah!", Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener() {
 
