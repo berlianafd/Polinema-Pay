@@ -373,6 +373,7 @@ public class JemputActivity extends AppCompatActivity {
                 Uri contentURI = data.getData();
                 try {
                     FixBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
+                    ShowSelectedImage.setVisibility(View.VISIBLE);
                     ShowSelectedImage.setImageBitmap(FixBitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -382,6 +383,7 @@ public class JemputActivity extends AppCompatActivity {
 
         } else if (requestCode == CAMERA) {
             FixBitmap = (Bitmap) data.getExtras().get("data");
+            ShowSelectedImage.setVisibility(View.VISIBLE);
             ShowSelectedImage.setImageBitmap(FixBitmap);
         }
     }

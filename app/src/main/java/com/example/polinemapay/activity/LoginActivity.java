@@ -49,6 +49,8 @@ public class LoginActivity extends Activity {
 
     String IMEINumber;
     private static final int REQUEST_CODE = 101;
+    private static final int MY_CAMERA_REQUEST_CODE = 100;
+    private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
     TelephonyManager telephonyManager;
 
     @Override
@@ -74,41 +76,52 @@ public class LoginActivity extends Activity {
         // Session manager
         session = new SessionManager(getApplicationContext());
 
+        //permission read IMEI
+        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+                if (telephonyManager != null) {
+                    try {
+                        IMEINumber = telephonyManager.getImei();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        IMEINumber = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+                    }
+                }
+            } else {
+                ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.READ_PHONE_STATE}, 1010);
+            }
+        } else {
+            if (ActivityCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+                if (telephonyManager != null) {
+                    IMEINumber = telephonyManager.getDeviceId();
+                }
+            } else {
+                ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.READ_PHONE_STATE}, 1010);
+            }
+        }
+
+        inputimei.setText(IMEINumber);
+
+        //permission camera
+        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+        }
+
+        //permission call
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.CALL_PHONE) !=
+                PackageManager.PERMISSION_GRANTED) {
+            // Permission not yet granted. Use requestPermissions().
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CALL_PHONE},
+                    MY_PERMISSIONS_REQUEST_CALL_PHONE);
+        }
+
         // Login button Click Event
         btnLogin.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-                        if (telephonyManager != null) {
-                            try {
-                                IMEINumber = telephonyManager.getImei();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                IMEINumber = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-                            }
-                        }
-                    } else {
-                        ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.READ_PHONE_STATE}, 1010);
-                    }
-                } else {
-                    if (ActivityCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-                        if (telephonyManager != null) {
-                            IMEINumber = telephonyManager.getDeviceId();
-                        }
-                    } else {
-                        ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.READ_PHONE_STATE}, 1010);
-                    }
-                }
-                //ambil IMEI
-//                telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-//                if (ActivityCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-//                    ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_CODE);
-//                    return;
-//                }
-//                IMEINumber = telephonyManager.getDeviceId();
-                inputimei.setText(IMEINumber);
 
                 String uname = inputuname.getText().toString().trim();
                 String pass = inputpass.getText().toString().trim();
@@ -147,18 +160,21 @@ public class LoginActivity extends Activity {
         if (session.isLoggedIn()) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-
-//            if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-//                Intent intent = new Intent(this, MainActivity.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                startActivity(intent);
-//            } else{
-//                logoutUser();
-//            }
         }
         else{
             logoutUser();
         }
+    }
+
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override
@@ -169,6 +185,26 @@ public class LoginActivity extends Activity {
                     Toast.makeText(LoginActivity.this, "Permission granted.", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(LoginActivity.this, "Permission denied.", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case MY_CAMERA_REQUEST_CODE: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+                }
+            }
+            case MY_PERMISSIONS_REQUEST_CALL_PHONE: {
+                if (permissions[0].equalsIgnoreCase
+                        (Manifest.permission.CALL_PHONE)
+                        && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    // Permission was granted.
+                } else {
+                    // Permission denied. Stop the app.
+                    Toast.makeText(this,
+                           "call permission denied",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         }

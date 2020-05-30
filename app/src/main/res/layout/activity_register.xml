@@ -1,203 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.RegisterActivity">
 
     <RelativeLayout
-        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/colorPrimaryDark"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/ic_logo" />
-
-    </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_below="@id/relativeLayout"
-        android:layout_marginTop="-50dp"
-        android:background="@drawable/waves" />
-
-    <RelativeLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/imageView"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="DAFTAR"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-            android:textColor="@color/colorPrimaryDark" />
-
-        <EditText
-            android:id="@+id/name"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@id/textView"
-            android:hint="@string/hint_name"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:inputType="textCapWords"
-            android:textColor="@color/input_register"
-            android:textColorHint="@color/input_register_hint" />
-
-        <TextView
-            android:id="@+id/pluss"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/name"
-            android:text="+62"
-            android:textSize="20dp"
-            android:layout_marginTop="10dp"/>
-        <EditText
-            android:id="@+id/nohp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/hint_nohp"
-            android:layout_toRightOf="@id/pluss"
-            android:layout_below="@id/name"
-            android:inputType="phone"
-            android:padding="10dp"
-            android:maxLength="12"
-            android:singleLine="true"
-            android:textColor="@color/input_register"
-            android:textColorHint="@color/input_register_hint" />
-
-        <EditText
-            android:id="@+id/reg_username"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@id/nohp"
-            android:hint="Username"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:inputType="textCapWords"
-            android:textColor="@color/input_register"
-            android:textColorHint="@color/input_register_hint" />
-
-        <EditText
-            android:id="@+id/reg_pass"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@id/reg_username"
-            android:hint="Password minimal 8 huruf"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:inputType="textPassword"
-            android:textColor="@color/input_register"
-            android:textColorHint="@color/input_register_hint" />
-
-        <EditText
-            android:id="@+id/reg_ulangipass"
-            android:layout_width="140pt"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@id/reg_pass"
-            android:hint="Ulangi Password"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:inputType="textPassword"
-            android:textColor="@color/input_register"
-            android:textColorHint="@color/input_register_hint" />
-
-        <ImageView
-            android:id="@+id/wrong_sign"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_below="@id/reg_pass"
-            android:src="@drawable/xbutton"
-            android:visibility="gone"
-            android:layout_toRightOf="@id/reg_ulangipass"/>
-
-
-
-        <!-- Login Button -->
-
-        <RadioGroup
-            android:id="@+id/level"
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/reg_ulangipass"
+            android:layout_height="200dp"
+            android:background="@color/colorPrimaryDark"
             android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/user"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="User"
-                android:checked="true"
-                android:textColor="@color/input_register"/>
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ic_logo" />
 
-            <RadioButton
-                android:id="@+id/sukarelawan"
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_below="@id/relativeLayout"
+            android:layout_marginTop="-50dp"
+            android:background="@drawable/waves" />
+
+        <RelativeLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/imageView"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:text="Relawan"
-                android:textColor="@color/input_register"/>
-        </RadioGroup>
+                android:layout_centerHorizontal="true"
+                android:text="DAFTAR"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/textView"
+                android:hint="@string/hint_name"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:inputType="textCapWords"
+                android:textColor="@color/input_register"
+                android:textColorHint="@color/input_register_hint" />
+
+            <TextView
+                android:id="@+id/pluss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name"
+                android:text="+62"
+                android:textSize="20dp"
+                android:layout_marginTop="10dp"/>
+            <EditText
+                android:id="@+id/nohp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/hint_nohp"
+                android:layout_toRightOf="@id/pluss"
+                android:layout_below="@id/name"
+                android:inputType="phone"
+                android:padding="10dp"
+                android:maxLength="12"
+                android:singleLine="true"
+                android:textColor="@color/input_register"
+                android:textColorHint="@color/input_register_hint" />
+
+            <EditText
+                android:id="@+id/reg_username"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/nohp"
+                android:hint="Username"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:inputType="textCapWords"
+                android:textColor="@color/input_register"
+                android:textColorHint="@color/input_register_hint" />
+
+            <EditText
+                android:id="@+id/reg_pass"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/reg_username"
+                android:hint="Password minimal 8 huruf"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:inputType="textPassword"
+                android:textColor="@color/input_register"
+                android:textColorHint="@color/input_register_hint" />
+
+            <EditText
+                android:id="@+id/reg_ulangipass"
+                android:layout_width="140pt"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/reg_pass"
+                android:hint="Ulangi Password"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:inputType="textPassword"
+                android:textColor="@color/input_register"
+                android:textColorHint="@color/input_register_hint" />
+
+            <ImageView
+                android:id="@+id/wrong_sign"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/reg_pass"
+                android:src="@drawable/xbutton"
+                android:visibility="gone"
+                android:layout_toRightOf="@id/reg_ulangipass"/>
 
 
 
-        <Button
-            android:id="@+id/btnRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/level"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            android:background="@color/colorPrimaryDark"
-            android:text="Selanjutnya"
-            android:textAllCaps="false"
-            android:textColor="#cdd8f1" />
+            <!-- Login Button -->
 
-        <Button
-            android:id="@+id/btnLinkToLoginScreen"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btnRegister"
-            android:background="@null"
-            android:text="@string/btn_link_to_login"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="15dp" />
+            <RadioGroup
+                android:id="@+id/level"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/reg_ulangipass"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/imei"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@id/btnLinkToLoginScreen"
-            android:text="IMEI"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textColor="@color/input_register" />
+                <RadioButton
+                    android:id="@+id/user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="User"
+                    android:checked="true"
+                    android:textColor="@color/input_register"/>
 
+                <RadioButton
+                    android:id="@+id/sukarelawan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:text="Relawan"
+                    android:textColor="@color/input_register"/>
+            </RadioGroup>
+
+
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/level"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:background="@color/colorPrimaryDark"
+                android:text="Selanjutnya"
+                android:textAllCaps="false"
+                android:textColor="#cdd8f1" />
+
+            <Button
+                android:id="@+id/btnLinkToLoginScreen"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btnRegister"
+                android:background="@null"
+                android:text="@string/btn_link_to_login"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/imei"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/btnLinkToLoginScreen"
+                android:text="IMEI"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="@color/input_register" />
+
+        </RelativeLayout>
     </RelativeLayout>
 
-</RelativeLayout>
+</ScrollView>
     <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
     <!--    xmlns:tools="http://schemas.android.com/tools"-->
     <!--    android:layout_width="fill_parent"-->
