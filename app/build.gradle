@@ -38,7 +38,7 @@ dependencies {
     implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.3'
 
     implementation 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
-    implementation 'com.mcxiaoke.volley:library-aar:1.0.0'
+//    implementation 'com.mcxiaoke.volley:library-aar:1.0.0'
 
     implementation 'com.google.zxing:core:3.3.0'
     implementation 'com.journeyapps:zxing-android-embedded:3.4.0'
@@ -48,4 +48,6 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.1.0'
 
     implementation "commons-logging:commons-logging-api:1.1"
+
+    implementation 'com.android.volley:volley:1.1.1'
 }

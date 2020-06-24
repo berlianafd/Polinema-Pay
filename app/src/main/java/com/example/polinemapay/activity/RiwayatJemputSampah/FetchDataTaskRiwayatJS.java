@@ -92,7 +92,7 @@ public class FetchDataTaskRiwayatJS extends AsyncTask<String, Void, String>{
             //notify the activity that fetch data has been complete
             if(listener != null) listener.onFetchComplete(apps);
         } catch (JSONException e) {
-            msg = "Invalid response";
+            msg = "Invalid response from server";
             if(listener != null) listener.onFetchFailure(msg);
             return;
         }

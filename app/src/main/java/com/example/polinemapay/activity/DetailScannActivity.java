@@ -16,6 +16,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.polinemapay.R;
 import com.example.polinemapay.app.AppConfig;
 import com.example.polinemapay.app.AppController;
+import com.example.polinemapay.helper.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -159,12 +160,15 @@ public class DetailScannActivity extends AppCompatActivity{
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 HashMap<String, String> params = new HashMap<String, String>();
+                SessionManager sesion  = new SessionManager(getApplicationContext());
+
                 params.put("idUser", id);
                 params.put("noMesin", noMesin);
                 params.put("jenisSampah", jenisSampah);
                 params.put("beratSampah", beratSampah);
                 params.put("poinSampah", poinSampah);
                 params.put("jam", waktuu);
+                params.put("jwtToken", sesion.getSessionJwtToken());
 
                 return params;
             }

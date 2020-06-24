@@ -19,9 +19,10 @@ public class SessionManager {
 	int PRIVATE_MODE = 0;
 
 	// Shared preferences file name
-	private static final String PREF_NAME = "PolinemaPay";
+	public static final String PREF_NAME = "PolinemaPay";
 	
 	private static final String KEY_IS_LOGGED_IN = "isLoggedIn";
+	private static final String KEY_JWT_TOKEN = "supersuper";
 
 	public SessionManager(Context context) {
 		this._context = context;
@@ -38,8 +39,17 @@ public class SessionManager {
 
 		Log.d(TAG, "User login session modified!");
 	}
+
+	public void setSessionJwtToken(String jwtToken) {
+		editor.putString(KEY_JWT_TOKEN, jwtToken);
+		editor.commit();
+		Log.d(TAG, "User login session modified!");
+	}
 	
 	public boolean isLoggedIn(){
 		return pref.getBoolean(KEY_IS_LOGGED_IN, false);
+	}
+	public String getSessionJwtToken(){
+		return pref.getString(KEY_JWT_TOKEN, "");
 	}
 }

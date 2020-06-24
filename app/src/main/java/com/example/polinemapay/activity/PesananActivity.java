@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ import com.example.polinemapay.activity.Pesanan.ApplicationAdapterPesanan;
 import com.example.polinemapay.activity.Pesanan.ApplicationPesanan;
 import com.example.polinemapay.activity.Pesanan.FetchDataListener;
 import com.example.polinemapay.activity.Pesanan.FetchDataTaskPesanan;
+import com.example.polinemapay.helper.SessionManager;
 
 public class PesananActivity extends ListActivity implements FetchDataListener {
     private ProgressDialog dialog;
@@ -26,8 +28,13 @@ public class PesananActivity extends ListActivity implements FetchDataListener {
     private void initView() {
         // show progress dialog
         dialog = ProgressDialog.show(this, "", "Loading...");
+        Intent iin= getIntent();
+        Bundle b = iin.getExtras();
+        String idUser =(String) b.get("idUser");
+        SessionManager session = new SessionManager(getApplicationContext());
 
-        String url = "https://www.polinema-pay.online/android/ListPesanan.php";
+        System.out.println("jwt_token session "+session.getSessionJwtToken());
+        String url = "https://www.polinema-pay.online/android/ListPesanan.php?idUser=" + idUser+"&jwtToken="+session.getSessionJwtToken();
         FetchDataTaskPesanan task = new FetchDataTaskPesanan(this);
         task.execute(url);
     }

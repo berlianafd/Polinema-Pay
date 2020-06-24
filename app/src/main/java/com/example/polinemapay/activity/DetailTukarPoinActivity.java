@@ -17,6 +17,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.polinemapay.R;
 import com.example.polinemapay.app.AppConfig;
 import com.example.polinemapay.app.AppController;
+import com.example.polinemapay.helper.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -82,7 +83,7 @@ public class DetailTukarPoinActivity extends AppCompatActivity {
         bayar.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                if(Integer.parseInt(poinn.getText().toString())>Integer.parseInt(poinUser.getText().toString())){
+               if (Integer.parseInt(poinn.getText().toString())>Integer.parseInt(poinUser.getText().toString())){
                     Toast.makeText(getApplicationContext(),
                             "Poin Anda tidak mencukupi untuk transaksi ini!", Toast.LENGTH_LONG).show();
                 }else{
@@ -157,12 +158,15 @@ public class DetailTukarPoinActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 HashMap<String, String> params = new HashMap<String, String>();
+
+                SessionManager sesion  = new SessionManager(getApplicationContext());
                 params.put("idUser", id);
                 params.put("idPenjual", ip);
                 params.put("idYgDijual", iyd);
                 params.put("harga", h);
                 params.put("poin", p);
                 params.put("jam", waktuu);
+                params.put("jwtToken", sesion.getSessionJwtToken());
 
                 return params;
             }

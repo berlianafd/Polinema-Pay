@@ -13,6 +13,7 @@ import com.example.polinemapay.activity.Tugas.ApplicationAdapterTugas;
 import com.example.polinemapay.activity.Tugas.ApplicationTugas;
 import com.example.polinemapay.activity.Tugas.FetchDataListener;
 import com.example.polinemapay.activity.Tugas.FetchDataTaskTugas;
+import com.example.polinemapay.helper.SessionManager;
 
 public class TugasActivity extends ListActivity implements FetchDataListener {
     private ProgressDialog dialog;
@@ -31,8 +32,10 @@ public class TugasActivity extends ListActivity implements FetchDataListener {
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
         String idUser =(String) b.get("idUser");
+        SessionManager session = new SessionManager(getApplicationContext());
 
-        String url = "https://www.polinema-pay.online/android/ListTugas.php?idUser=" + idUser;
+        System.out.println("jwt_token session "+session.getSessionJwtToken());
+        String url = "https://www.polinema-pay.online/android/ListTugas.php?idUser=" + idUser+"&jwtToken="+session.getSessionJwtToken();
         FetchDataTaskTugas task = new FetchDataTaskTugas(this);
         task.execute(url);
     }

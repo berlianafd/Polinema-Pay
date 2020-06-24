@@ -17,6 +17,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.polinemapay.R;
 import com.example.polinemapay.app.AppConfig;
 import com.example.polinemapay.app.AppController;
+import com.example.polinemapay.helper.SQLiteHandler;
+import com.example.polinemapay.helper.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,6 +29,8 @@ import java.util.Map;
 public class DetailRiwayatTSActivity extends AppCompatActivity {
     private static final String TAG = DetailRiwayatTSActivity.class.getSimpleName();
     private ProgressDialog pDialog;
+    private SQLiteHandler db;
+    String idUser="";
 
     private TextView jnsSampah, brtSampah, harga, pSampah, tgl, waktu;
     RelativeLayout support;
@@ -43,6 +47,11 @@ public class DetailRiwayatTSActivity extends AppCompatActivity {
         tgl = (TextView) findViewById(R.id.tanggalTS);
         waktu = (TextView) findViewById(R.id.waktuTS);
         support = (RelativeLayout) findViewById(R.id.button_support);
+
+        // SqLite database handler
+        db = new SQLiteHandler(getApplicationContext());
+        HashMap<String, String> user = db.getUserDetails();
+        idUser = user.get("id");
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -131,6 +140,10 @@ public class DetailRiwayatTSActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 HashMap<String, String> params = new HashMap<String, String>();
+                SessionManager sesion  = new SessionManager(getApplicationContext());
+
+                params.put("jwtToken", sesion.getSessionJwtToken());
+                params.put("idUser", idUser);
                 params.put("tgl", tanggal);
                 params.put("jam", waktu);
 

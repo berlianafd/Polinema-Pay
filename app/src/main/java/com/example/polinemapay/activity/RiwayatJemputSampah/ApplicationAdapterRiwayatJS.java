@@ -24,9 +24,6 @@ import androidx.cardview.widget.CardView;
 public class ApplicationAdapterRiwayatJS extends ArrayAdapter<ApplicationRiwayatJS> {
     private static final String TAG = ApplicationAdapterRiwayatJS.class.getSimpleName();
     private List<ApplicationRiwayatJS> items;
-    private SQLiteHandler db;
-    String idUser;
-    private ProgressDialog dialog;
 
     public ApplicationAdapterRiwayatJS(Context context, List<ApplicationRiwayatJS> items) {
         super(context, R.layout.content_main_riwayatjs, items);

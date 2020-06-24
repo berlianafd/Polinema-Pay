@@ -17,6 +17,7 @@ import com.example.polinemapay.activity.Riwayat.ApplicationAdapterRiwayat;
 import com.example.polinemapay.activity.Riwayat.ApplicationRiwayat;
 import com.example.polinemapay.activity.Riwayat.FetchDataListener;
 import com.example.polinemapay.activity.Riwayat.FetchDataTaskRiwayat;
+import com.example.polinemapay.helper.SessionManager;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -69,8 +70,10 @@ public class RiwayatActivity extends ListActivity implements FetchDataListener {
         Bundle b = iin.getExtras();
         String idUser =(String) b.get("idUser");
         String level =(String) b.get("level");
-
-        String url = "https://www.polinema-pay.online/android/ListRiwayat.php?idUser=" + idUser;
+        SessionManager session = new SessionManager(getApplicationContext());
+        System.out.println("id user" +idUser);
+        System.out.println("jwt_token session "+session.getSessionJwtToken());
+        String url = "https://www.polinema-pay.online/android/ListRiwayat.php?idUser=" + idUser+"&jwtToken="+session.getSessionJwtToken();
         FetchDataTaskRiwayat task = new FetchDataTaskRiwayat(this);
         task.execute(url);
     }

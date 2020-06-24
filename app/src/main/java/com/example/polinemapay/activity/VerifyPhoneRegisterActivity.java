@@ -213,6 +213,10 @@ public class VerifyPhoneRegisterActivity extends AppCompatActivity {
                         String created_at = user
                                 .getString("created_at");
 
+                        String jwt_token = user.getString("jwt_token");
+                        System.out.println("jwt_token login "+jwt_token);
+                        session.setSessionJwtToken(jwt_token);
+
                         // Inserting row in users table
                         db.addUser(idUser, name, nohp, level, created_at);
 

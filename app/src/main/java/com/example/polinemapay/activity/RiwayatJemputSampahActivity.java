@@ -12,6 +12,7 @@ import com.example.polinemapay.activity.RiwayatJemputSampah.ApplicationAdapterRi
 import com.example.polinemapay.activity.RiwayatJemputSampah.ApplicationRiwayatJS;
 import com.example.polinemapay.activity.RiwayatJemputSampah.FetchDataListener;
 import com.example.polinemapay.activity.RiwayatJemputSampah.FetchDataTaskRiwayatJS;
+import com.example.polinemapay.helper.SessionManager;
 
 import java.util.List;
 
@@ -35,7 +36,10 @@ public class RiwayatJemputSampahActivity extends ListActivity implements FetchDa
         Bundle b = iin.getExtras();
         String idUser =(String) b.get("idUser");
 
-        String url = "https://www.polinema-pay.online/android/ListRiwayatJemputSampah.php?idUser=" + idUser;
+        SessionManager  session = new SessionManager(getApplicationContext());
+
+        System.out.println("jwt_token session "+session.getSessionJwtToken());
+        String url = "https://www.polinema-pay.online/android/ListRiwayatJemputSampah.php?idUser=" + idUser+"&jwtToken="+session.getSessionJwtToken();
         FetchDataTaskRiwayatJS task = new FetchDataTaskRiwayatJS(this);
         task.execute(url);
     }

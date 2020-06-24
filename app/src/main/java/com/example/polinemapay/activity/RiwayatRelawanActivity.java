@@ -14,6 +14,7 @@ import com.example.polinemapay.activity.RiwayatRelawan.ApplicationAdapterRiwayat
 import com.example.polinemapay.activity.RiwayatRelawan.ApplicationRiwayatR;
 import com.example.polinemapay.activity.RiwayatRelawan.FetchDataListener;
 import com.example.polinemapay.activity.RiwayatRelawan.FetchDataTaskRiwayatR;
+import com.example.polinemapay.helper.SessionManager;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
@@ -42,8 +43,10 @@ public class RiwayatRelawanActivity extends ListActivity implements FetchDataLis
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
         String idUser =(String) b.get("idUser");
+        SessionManager session = new SessionManager(getApplicationContext());
 
-        String url = "https://www.polinema-pay.online/android/ListRiwayatRelawan.php?idUser=" + idUser;
+        System.out.println("jwt_token session "+session.getSessionJwtToken());
+        String url = "https://www.polinema-pay.online/android/ListRiwayatRelawan.php?idUser=" + idUser+"&jwtToken="+session.getSessionJwtToken();
         FetchDataTaskRiwayatR task = new FetchDataTaskRiwayatR(this);
         task.execute(url);
     }

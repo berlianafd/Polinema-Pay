@@ -26,6 +26,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.polinemapay.R;
 import com.example.polinemapay.app.AppConfig;
 import com.example.polinemapay.app.AppController;
+import com.example.polinemapay.helper.SQLiteHandler;
+import com.example.polinemapay.helper.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +38,9 @@ import java.util.Map;
 public class DetailTugasActivity extends AppCompatActivity {
     private static final String TAG = DetailTugasActivity.class.getSimpleName();
     private ProgressDialog pDialog;
+    private SQLiteHandler db;
+    String idUser="";
+
     ImageView sms, wa, call;
     TextView nama, alamt, kec, kel, tgl, waktuu, perkiraannBS, namaAcr;
     String number="";
@@ -50,6 +55,11 @@ public class DetailTugasActivity extends AppCompatActivity {
         // Progress dialog
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
+
+        // SqLite database handler
+        db = new SQLiteHandler(getApplicationContext());
+        HashMap<String, String> user = db.getUserDetails();
+        idUser = user.get("id");
 
         final String idTugas = getIntent().getStringExtra("idTugas");
         checkDetailJemputSampah(idTugas);
@@ -193,8 +203,11 @@ public class DetailTugasActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("idTugas", idTugas);
+                SessionManager sesion  = new SessionManager(getApplicationContext());
 
+                params.put("idUser", idUser);
+                params.put("idTugas", idTugas);
+                params.put("jwtToken", sesion.getSessionJwtToken());
                 return params;
             }
 
@@ -264,8 +277,11 @@ public class DetailTugasActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("idPesanan", idPesanan);
+                SessionManager sesion  = new SessionManager(getApplicationContext());
 
+                params.put("idUser", idUser);
+                params.put("idPesanan", idPesanan);
+                params.put("jwtToken", sesion.getSessionJwtToken());
                 return params;
             }
 

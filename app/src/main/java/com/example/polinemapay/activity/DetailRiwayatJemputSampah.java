@@ -28,6 +28,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.polinemapay.R;
 import com.example.polinemapay.app.AppConfig;
 import com.example.polinemapay.app.AppController;
+import com.example.polinemapay.helper.SQLiteHandler;
+import com.example.polinemapay.helper.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,6 +40,9 @@ import java.util.Map;
 public class DetailRiwayatJemputSampah extends AppCompatActivity {
     private static final String TAG = DetailRiwayatJemputSampah.class.getSimpleName();
     private ProgressDialog pDialog;
+    private SQLiteHandler db;
+    String idUser="";
+
     ImageView sms, wa, call;
     TextView nama, alamt, kec, kel, tgl, waktuu, perkiraannBS, namaAcr, textPeringatan;
     ImageView signPeringatan;
@@ -56,6 +61,12 @@ public class DetailRiwayatJemputSampah extends AppCompatActivity {
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
         myDialog = new Dialog(this);
+
+        // SqLite database handler
+        db = new SQLiteHandler(getApplicationContext());
+        HashMap<String, String> user = db.getUserDetails();
+        idUser = user.get("id");
+
 
         sms = (ImageView) findViewById(R.id.sms_button);
         wa = (ImageView) findViewById(R.id.wa_button);
@@ -260,7 +271,11 @@ public class DetailRiwayatJemputSampah extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
+                SessionManager sesion  = new SessionManager(getApplicationContext());
+
+                params.put("jwtToken", sesion.getSessionJwtToken());
                 params.put("idTugas", idTugas);
+                params.put("idUser", idUser);
 
                 return params;
             }

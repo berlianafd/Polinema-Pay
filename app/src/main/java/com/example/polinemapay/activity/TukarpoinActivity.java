@@ -130,9 +130,6 @@ public class TukarpoinActivity extends AppCompatActivity implements ZXingScanner
         // Tag used to cancel the request
         String tag_string_req = "req_detailmerchant";
 
-//        pDialog.setMessage("Memproses ...");
-//        showDialog();
-
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.URL_DETAILMERCHANT, new com.android.volley.Response.Listener<String>() {
 

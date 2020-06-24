@@ -465,6 +465,9 @@ public class ProfilActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
+                SessionManager sesion  = new SessionManager(getApplicationContext());
+
+                params.put("jwtToken", sesion.getSessionJwtToken());
                 params.put("idUser", idUser);
 
                 return params;
